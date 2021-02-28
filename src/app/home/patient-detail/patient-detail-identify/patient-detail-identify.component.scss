@@ -1,0 +1,15 @@
+
+
+.mat-card-identity {
+    padding: 10px 10px 0px 10px !important;
+    border: solid #003c5b;
+    margin: 4px;
+}
+
+mat-form-field {
+    margin-right: 16px;
+
+    ::ng-deep .mat-form-field-wrapper {
+        padding-bottom: 0px
+    }
+}

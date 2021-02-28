@@ -1,0 +1,20 @@
+<ng-template #divider>&nbsp;|&nbsp;</ng-template>
+
+<div class="footer-container flexColumn flexAlignCenter">
+  <div class="footer-link-container flexRow flexAlignCenter" >
+    <a routerLink="/">Home</a>
+    <ng-container *ngTemplateOutlet="divider"></ng-container>
+    <a href="https://cardihab.com/terms" target="_blank">Terms of Service</a>
+    <ng-container *ngTemplateOutlet="divider"></ng-container>
+    <a href="https://cardihab.com/privacy" target="_blank">Privacy Policy</a>
+    <ng-container *ngTemplateOutlet="divider"></ng-container>
+    <a href="https://cardihab.com/contact" target="_blank">Send Feedback</a>
+  </div>
+  <div class="footer-text build-number flexAlignCenter">Patient Management Portal (V <strong>{{packageVersion || 'N/A'}}</strong> B
+    <strong>{{buildNumber || 'N/A'}}</strong>)
+  </div>
+  <div class="footer-text copyright flexAlignCenter">Cardihab Pty Ltd © {{currentYear}} <span class="cardihab-heart">♥</span> All Rights
+    Reserved
+  </div>
+</div>
+

@@ -1,0 +1,21 @@
+<mat-progress-bar *ngIf="loading" color="primary" mode="indeterminate"></mat-progress-bar>
+<ng-container *ngFor="let key of goalTypes | async">
+    <h3 mat-subheader>{{key | titlecase}}</h3>
+    <mat-grid-list cols="12" rowHeight="3.5em">
+      <!-- TODO:: Show consolidated status somehow -->
+      <ng-container *ngFor="let record of goals[key]">
+        <mat-grid-tile colspan="1">
+          <app-goal-status [status]="record.goal.status"></app-goal-status>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="9" (click)="editGoal(record)">
+          <p mat-line> {{record.goal?.description?.text || record.description}} </p>
+          <button mat-button *ngIf="isGoalActive(record)" class="goal-edit">
+            <mat-icon>edit</mat-icon>
+          </button>
+        </mat-grid-tile>
+        <mat-grid-tile colspan="2">
+          <p>{{ carePlan.activity[record.activity] ? carePlan.activity[record.activity].detail.description : 'Plan' }}</p>
+        </mat-grid-tile>
+      </ng-container>
+    </mat-grid-list>
+</ng-container>

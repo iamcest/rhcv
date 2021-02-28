@@ -1,0 +1,2361 @@
+{
+	"entry": [
+		{
+      "resource": {
+        "resourceType": "Patient",
+        "id": "cardihab-patient-12345",
+        "identifier": [
+          {
+            "system": "urn:uuid",
+            "value": "f68e06c0-1cd5-4bef-ad41-9cb9942b483a"
+          }
+        ],
+        "name": [
+          {
+            "use": "official",
+            "family": "Jones",
+            "given": [
+              "Sam"
+            ]
+          }
+        ],
+        "gender": "male",
+        "birthDate": "1958-02-18",
+        "contact": [
+          {
+            "telecom": [
+              {
+                "system": "phone",
+                "value": "+0400000000",
+                "use": "mobile"
+              }
+            ]
+          }
+        ],
+        "managingOrganization": {
+          "reference": "Organization/cardihab-hhs-12345"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Patient/cardihab-patient-12345"
+      }
+    },
+    {
+      "resource": {
+        "extension": [
+          {
+            "url": "https://fhir-registry.cardihab.com/StructureDefiniton/Adherence",
+            "extension": [
+              {
+                "url": "goalType",
+                "valueString": "education"
+              }
+            ]
+          },
+          {
+            "url": "https://fhir-registry.cardihab.com/StructureDefiniton/EducationTask",
+            "extension": [
+              {
+                "url": "title",
+                "valueString": "What is a heart attack?"
+              },
+              {
+                "url": "description",
+                "valueString": "Learn more about heart attacks"
+              },
+              {
+                "url": "taskType",
+                "valueString": "read"
+              },
+              {
+                "url": "entryType",
+                "valueString": "url"
+              },
+              {
+                "url": "url",
+                "valueString": "myocardialInfarction"
+              },
+              {
+                "url": "updatedAt",
+                "valueDateTime": "2018-09-30T12:13:47+10:00"
+              }
+            ]
+          },
+          {
+            "url": "https://fhir-registry.cardihab.com/StructureDefiniton/TaskEnableWhen",
+            "extension": [
+              {
+                "url": "questionnaire",
+                "valueReference": {
+                  "reference": "varnfield2014-initialassessment"
+                }
+              },
+              {
+                "url": "question",
+                "valueString": "cardiovascular-history/current-event-procedure-diagnosis"
+              },
+              {
+                "url": "answerChoice",
+                "extension": [
+                  {
+                    "url": "0",
+                    "valueCoding": {
+                      "system": "http://snomed.info/sct",
+                      "code": "401303003",
+                      "display": "STEMI"
+                    }
+                  },
+                  {
+                    "url": "1",
+                    "valueCoding": {
+                      "system": "http://snomed.info/sct",
+                      "code": "401314000",
+                      "display": "NSTEMI"
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ],
+        "identifier": [
+          {
+            "system": "urn:uuid",
+            "value": "d590033e-e665-4343-9f34-357474ef5d38"
+          }
+        ],
+        "resourceType": "Goal",
+        "id": "cardihab-patient-12345-1",
+        "status": "proposed",
+        "description": {
+          "text": "What is a Heart Attack?"
+        },
+        "subject": {
+          "reference": "Patient/cardihab-patient-12345"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Goal/cardihab-patient-12345-1"
+      }
+    },
+		{
+			"request": {
+				"method": "PUT",
+				"url": "EpisodeOfCare/eoc-1234"
+			},
+			"resource": {
+				"resourceType": "EpisodeOfCare",
+				"id": "eoc-1234",
+				"status": "active",
+				"type": [
+					{
+						"coding": [
+							{
+								"system": "http://hl7.org/fhir/episodeofcare-type",
+								"code": "hacc",
+								"display": "Home and Community Care"
+							}
+						]
+					}
+				],
+				"patient": {
+					"reference": "Patient/cardihab-patient-12345"
+				},
+				"period": {
+					"start": "2018-08-24",
+					"end": "2018-10-12"
+				},
+				"team": [
+					{
+						"reference": "CareTeam/ct-1234"
+					}
+				],
+				"managingOrganization": {
+					"reference": "Organization/cardihab-hhs-crservice-12345"
+				}
+			}
+		},
+		{
+			"request": {
+				"method": "PUT",
+				"url": "Encounter/encounter-1234-ia"
+			},
+			"resource": {
+				"resourceType": "Encounter",
+				"id": "encounter-1234",
+				"status": "finished",
+				"class": {
+					"system": "http://hl7.org/fhir/episodeofcare-type",
+					"code": "AMB",
+					"display": "ambulatory"
+				},
+				"subject": {
+					"reference": "Patient/cardihab-patient-12345"
+				},
+				"episodeOfCare": [
+					{
+						"reference": "EpisodeOfCare/eoc-1234"
+					}
+				],
+				"participant": [
+					{
+						"individual": {
+							"reference": "Practitioner/cardihab-practitioner-67890"
+						}
+					}
+				],
+				"reason": [
+					{
+						"coding": [
+							{
+								"system": "http://snomed.info/sct",
+								"code": "170571002",
+								"display": "Initial cardiac assessment"
+							}
+						]
+					}
+				],
+				"length": {
+					"value": 60,
+					"unit": "min",
+					"system": "http://unitsofmeasure.org",
+					"code": "min"
+				},
+				"serviceProvider": {
+					"reference": "Organization/cardihab-hhs-12345"
+				}
+			}
+		},
+		{
+			"request": {
+				"method": "PUT",
+				"url": "CarePlan/cp-12345"
+			},
+			"resource": {
+				"resourceType": "CarePlan",
+				"id": "cp-12345",
+				"basedOn": [
+					{
+						"reference": "CarePlan/varnfield2014"
+					}
+				],
+				"status": "active",
+				"intent": "order",
+				"title": "Phase 2 Cardiac Rehabilitation",
+				"description": "6 week, phase 2 cardiac rehabilitation program",
+				"subject": [
+					{
+						"reference": "Patient/cardihab-patient-12345"
+					}
+				],
+				"context": [
+					{
+						"reference": "EpisodeOfCare/eoc-1234"
+					}
+				],
+				"period": {
+					"start": "2018-08-03",
+					"end": "2018-09-18"
+				},
+				"author": [
+					{
+						"reference": "Practitioner/cardihab-practitioner-67890"
+					}
+				],
+				"careTeam": [
+					{
+						"reference": "CareTeam/ct-1234"
+					}
+				],
+				"TODO5": "Want to populate addresses here but to do so requires a Reference to a Condition, but we only have a QuestionnaireResponse answer",
+				"activity": [
+					{
+						"outcomeReference": [
+							{
+								"reference": [
+									"QuestionnaireResponse/qr-1234-ia"
+								]
+							},
+							{
+								"reference": [
+									"Episode/episode-1234-ia"
+								]
+							}
+						],
+						"progress": [
+							{
+								"authorReference": [
+									{
+										"reference": "Practitioner/cardihab-practitioner-67890"
+									}
+								],
+								"time": "2018-08-03T04:44:16Z",
+								"text": "Sam had history of feeling more tired in the last couple of months and experienced SOB and tightness in his chest going up stairs and walking. He presented to his GP when he was complaining of indigestion. He was referred to Cardiologist and undertook a stress test, angiogram and was found to have disease in LAD, RCA and Diag. He works as a sales consultant and has a family history of heart disease with his father and uncle having had high cholesterol and stent."
+							}
+						],
+						"detail": {
+							"description": "Initial Assessment",
+							"category": {
+								"coding": [
+									{
+										"system": "http://hl7.org/fhir/care-plan-activity-category",
+										"code": "encounter",
+										"display": "Encounter"
+									}
+								]
+							},
+							"definition": {
+								"reference": [
+									"Questionnaire/varnfield2014-initialassessment"
+								]
+							},
+							"code": {
+								"coding": [
+									{
+										"system": "http://snomed.info/sct",
+										"code": "170571002",
+										"display": "Initial cardiac assessment"
+									}
+								]
+							},
+							"goal": [
+								{
+									"reference": [
+										"Goal/goal-12345-ia"
+									]
+								}
+							],
+							"status": "completed",
+							"statusReason": "Completed initial assessment",
+							"scheduledPeriod": {
+								"start": "2018-08-03T00:00:00Z",
+								"end": "2018-08-03T01:00:00Z"
+							},
+							"location": {
+								"reference": [
+									"Location/cardihab-hhs-crservice-gym-12345"
+								]
+							}
+						}
+					},
+					{
+						"outcomeReference": [
+							{
+								"reference": [
+									"QuestionnaireResponse/qr-1234-1"
+								]
+							},
+							{
+								"reference": [
+									"Episode/episode-1234-1"
+								]
+							}
+						],
+						"progress": [
+							{
+								"authorReference": [
+									{
+										"reference": "Practitioner/cardihab-practitioner-67890"
+									}
+								],
+								"time": "2018-08-10T06:20:00Z",
+								"text": "Mr Jones has not had any chest pain symptoms. Discussed Chest pain action plan if he does have any symptoms. Driving restrictions reinforced and he has a friend who can help as well as using online shopping. Sternal precautions reinforced regarding weight lifting restrictions and Mr Jones states that his wound is healing well. No signs of infection. He has seen his GP since discharge and has made follow up appointments with his Surgeon and cardiologist. "
+							}
+						],
+						"detail": {
+							"description": "Week 1 Review",
+							"category": {
+								"coding": [
+									{
+										"system": "http://hl7.org/fhir/care-plan-activity-category",
+										"code": "encounter",
+										"display": "Encounter"
+									}
+								]
+							},
+							"definition": {
+								"reference": "Questionnaire/varnfield2014-week1"
+							},
+							"code": {
+								"coding": [
+									{
+										"system": "http://snomed.info/sct",
+										"code": "170572009",
+										"display": "Follow-up cardiac assessment"
+									}
+								]
+							},
+							"goal": [
+								{
+									"reference": "Goal/goal-12345-ia"
+								},
+								{
+									"reference": "Goal/goal-12345-1-1"
+								},
+								{
+									"reference": "Goal/goal-12345-1-2"
+								},
+								{
+									"reference": "Goal/goal-12345-1-3"
+								},
+								{
+									"reference": "Goal/goal-12345-1-4"
+								},
+								{
+									"reference": "Goal/goal-12345-1-5"
+								},
+								{
+									"reference": "Goal/goal-12345-1-6"
+								},
+								{
+									"reference": "Goal/goal-12345-1-7"
+								}
+							],
+							"status": "completed",
+							"statusReason": "Review completed",
+							"scheduledPeriod": {
+								"start": "2018-08-10T06:00:00Z",
+								"end": "2018-08-10T06:20:00Z"
+							},
+							"location": {
+								"reference": [
+									"Location/location-678910"
+								]
+							}
+						}
+					},
+					{
+						"outcomeReference": [
+							{
+								"reference": [
+									"QuestionnaireResponse/qr-1234-2"
+								]
+							},
+							{
+								"reference": [
+									"Encounter/encounter-1234-2"
+								]
+							}
+						],
+						"progress": [
+							{
+								"authorReference": [
+									{
+										"reference": "Practitioner/cardihab-practitioner-67890"
+									}
+								],
+								"time": "2018-08-17T06:20:00Z",
+								"text": "Discussed with Mr Jones his sternal precautions and limits with regard to housework such as vacuuming, sweeping, laundry. He is going for walks when he is at the shops and around his house. He is finding he is getting some SOB and reinforced Chest pain action plan and encouraged him to walk slowly  and rest when needed. Discussed doing talk test during physical activity. His goal this week is to walk for 10 mins in the morning and the afternoon. Mr Jones has been taking his medications and discussed importance of taking them regularly and to ensure have enough supply. He has a local pharmacist and has been educated on his medications with a pharmacy profile. "
+							}
+						],
+						"detail": {
+							"description": "Week 2 Review",
+							"category": {
+								"coding": [
+									{
+										"system": "http://hl7.org/fhir/care-plan-activity-category",
+										"code": "encounter",
+										"display": "Encounter"
+									}
+								]
+							},
+							"definition": {
+								"reference": "Questionnaire/varnfield2014-week2"
+							},
+							"code": {
+								"coding": [
+									{
+										"system": "http://snomed.info/sct",
+										"code": "170572009",
+										"display": "Follow-up cardiac assessment"
+									}
+								]
+							},
+							"goal": [
+								{
+									"reference": [
+										"Goal/goal-12345-2"
+									]
+								}
+							],
+							"status": "completed",
+							"statusReason": "Review completed",
+							"scheduledPeriod": {
+								"start": "2018-08-17T06:00:00Z",
+								"end": "2018-08-17T06:20:00Z"
+							},
+							"location": {
+								"reference": [
+									"Location/location-678910"
+								]
+							}
+						}
+					},
+					{
+						"outcomeReference": [
+							{
+								"reference": [
+									"QuestionnaireResponse/qr-1234-3"
+								]
+							},
+							{
+								"reference": [
+									"Encounter/encounter-1234-3"
+								]
+							}
+						],
+						"progress": [
+							{
+								"authorReference": [
+									{
+										"reference": "Practitioner/cardihab-practitioner-67890"
+									}
+								],
+								"time": "2018-08-24T06:20:00Z",
+								"text": "Mr Jones stated he is feeling a bit low this week due to not being able to drive. He has a friend who visits and also his son has been able to help with housework on the weekends. Discussed with Mr Jones that it is normal to have down days. Be good to keep checking on this as if he feels that every day is a down day he may need to share his feelings with a close friend, his son or his Dr"
+							}
+						],
+						"detail": {
+							"description": "Week 3 Review",
+							"category": {
+								"coding": [
+									{
+										"system": "http://hl7.org/fhir/care-plan-activity-category",
+										"code": "encounter",
+										"display": "Encounter"
+									}
+								]
+							},
+							"definition": {
+								"reference": "Questionnaire/varnfield2014-week3"
+							},
+							"code": {
+								"coding": [
+									{
+										"system": "http://snomed.info/sct",
+										"code": "170572009",
+										"display": "Follow-up cardiac assessment"
+									}
+								]
+							},
+							"goal": [
+								{
+									"reference": [
+										"Goal/goal-12345-3-1"
+									]
+								}
+							],
+							"status": "completed",
+							"statusReason": "Review completed",
+							"scheduledPeriod": {
+								"start": "2018-08-24T06:00:00Z",
+								"end": "2018-08-24T06:20:00Z"
+							},
+							"location": {
+								"reference": [
+									"Location/location-678910"
+								]
+							}
+						}
+					},
+					{
+						"outcomeReference": [
+							{
+								"reference": [
+									"QuestionnaireResponse/qr-1234-4"
+								]
+							},
+							{
+								"reference": [
+									"Encounter/encounter-1234-4"
+								]
+							}
+						],
+						"progress": [
+							{
+								"authorReference": [
+									{
+										"reference": "Practitioner/cardihab-practitioner-67890"
+									}
+								],
+								"time": "2018-08-31T06:20:00Z",
+								"text": "Mr Jones has had a review with his surgeon and reduced his BP medications. Advised Mr Jones to discuss with his cardiologist his BP readings and BP medications.  Mr Jones is feeling better this week as he has been walking more and not as short of breath. Discussed importance of having a healthy heart diet and information can be found in Heart Foundation website or he can ask GP for dietician review. Alcohol recommendations discussed and Mr Jones said he has not been drinking much since his operation. Usually he will have a couple of beers on the weekend. "
+							}
+						],
+						"detail": {
+							"description": "Week 4 Review",
+							"category": {
+								"coding": [
+									{
+										"system": "http://hl7.org/fhir/care-plan-activity-category",
+										"code": "encounter",
+										"display": "Encounter"
+									}
+								]
+							},
+							"definition": {
+								"reference": "Questionnaire/varnfield2014-week4"
+							},
+							"code": {
+								"coding": [
+									{
+										"system": "http://snomed.info/sct",
+										"code": "170572009",
+										"display": "Follow-up cardiac assessment"
+									}
+								]
+							},
+							"goal": [
+								{
+									"reference": [
+										"Goal/goal-12345-4-1"
+									]
+								}
+							],
+							"status": "completed",
+							"statusReason": "Review completed",
+							"scheduledPeriod": {
+								"start": "2018-08-31T06:00:00Z",
+								"end": "2018-08-31T06:20:00Z"
+							},
+							"location": {
+								"reference": [
+									"Location/location-678910"
+								]
+							}
+						}
+					},
+					{
+						"reference": [
+							{
+								"reference": "Appointment/appointment-1234-5"
+							}
+						],
+						"detail": {
+							"description": "Week 5 Review",
+							"scheduledPeriod": {
+								"start": "2018-09-07T06:00:00Z",
+								"end": "2018-09-07T06:20:00Z"
+							},
+							"code": {
+								"coding": [
+									{
+										"system": "http://snomed.info/sct",
+										"code": "170572009",
+										"display": "Follow-up cardiac assessment"
+									}
+								]
+							},
+							"definition": {
+								"reference": "Questionnaire/varnfield2014-week5"
+							}
+						}
+					},
+					{
+						"reference": [
+							{
+								"reference": "Appointment/appointment-1234-6"
+							}
+						],
+						"detail": {
+							"description": "Week 6 Review",
+							"scheduledPeriod": {
+								"start": "2018-09-14T06:00:00Z",
+								"end": "2018-09-14T06:20:00Z"
+							},
+							"code": {
+								"coding": [
+									{
+										"system": "http://snomed.info/sct",
+										"code": "170572009",
+										"display": "Follow-up cardiac assessment"
+									}
+								]
+							},
+							"definition": {
+								"reference": "Questionnaire/varnfield2014-week6"
+							}
+						}
+					},
+					{
+						"reference": [
+							{
+								"reference": "Appointment/appointment-1234-fa"
+							}
+						],
+						"TODO": "How useful to duplicate start/end from Appointment here?",
+						"detail": {
+							"description": "Final Assessment",
+							"scheduledPeriod": {
+								"start": "2018-09-18T00:00:00Z",
+								"end": "2018-09-18T01:00:00Z"
+							},
+							"code": {
+								"coding": [
+									{
+										"system": "http://snomed.info/sct",
+										"code": "306496000",
+										"display": "Discharge by cardiac rehabilitation nurse"
+									}
+								]
+							},
+							"definition": {
+								"reference": "Questionnaire/varnfield2014-finalassessment"
+							}
+						}
+					}
+				]
+			}
+		},
+		{
+			"request": {
+				"method": "PUT",
+				"url": "QuestionnaireResponse/qr-1234-ia"
+			},
+			"resource": {
+				"resourceType": "QuestionnaireResponse",
+				"id": "qr-1234-ia",
+				"questionnaire": {
+					"reference": "Questionnaire/varnfield2014-initialassessment"
+				},
+				"status": "completed",
+				"subject": {
+					"reference": "Patient/cardihab-patient-12345"
+				},
+				"context": {
+					"reference": "Encounter/encounter-1234-ia"
+				},
+				"authored": "2018-08-03T04:44:16Z",
+				"source": {
+					"reference": "Practitioner/cardihab-practitioner-67890"
+				},
+				"item": [
+					{
+						"linkId": "demographics",
+						"item": [
+							{
+								"linkId": "residential-postcode",
+								"answer": [
+									{
+										"valueString": "4006"
+									}
+								]
+							},
+							{
+								"linkId": "employment-status",
+								"answer": [
+									{
+										"valueString": "Working"
+									}
+								]
+							},
+							{
+								"linkId": "living-circumstances",
+								"answer": [
+									{
+										"valueString": "Alone"
+									}
+								]
+							},
+							{
+								"linkId": "indigenous-status",
+								"answer": [
+									{
+										"valueString": "None"
+									}
+								]
+							}
+						]
+					},
+					{
+						"linkId": "cardiovascular-history",
+						"item": [
+							{
+								"linkId": "current-event-procedure-diagnosis",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "http://snomed.info/sct",
+											"code": "233819005",
+											"display": "Stable angina"
+										}
+									},
+									{
+										"valueCoding": {
+											"system": "http://snomed.info/sct",
+											"code": "232717009",
+											"display": "CABG"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "current-event-procedure-diagnosis-date",
+								"answer": [
+									{
+										"valueDate": "2018-07-31"
+									}
+								]
+							},
+							{
+								"linkId": "current-event-procedure-diagnosis-discharge-date",
+								"answer": [
+									{
+										"valueDate": "2018-08-01"
+									}
+								]
+							},
+							{
+								"linkId": "previous-events-procedures-diagnoses",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "http://snomed.info/sct",
+											"code": "233819005",
+											"display": "Stable angina"
+										}
+									}
+								]
+							}
+						]
+					},
+					{
+						"linkId": "vital-signs",
+						"item": [
+							{
+								"linkId": "weight",
+								"answer": [
+									{
+										"valueDecimal": "95"
+									}
+								]
+							},
+							{
+								"linkId": "standing-height",
+								"answer": [
+									{
+										"valueDecimal": "179"
+									}
+								]
+							},
+							{
+								"linkId": "waist-circumference",
+								"answer": [
+									{
+										"valueDecimal": "92"
+									}
+								]
+							},
+							{
+								"linkId": "blood-pressure",
+								"item": [
+									{
+										"linkId": "systolic",
+										"answer": [
+											{
+												"valueInteger": "138"
+											}
+										]
+									},
+									{
+										"linkId": "diastolic",
+										"answer": [
+											{
+												"valueInteger": "102"
+											}
+										]
+									}
+								]
+							},
+							{
+								"linkId": "heart-rate",
+								"answer": [
+									{
+										"valueDecimal": "81"
+									}
+								]
+							}
+						]
+					},
+					{
+						"linkId": "current-cardiovascular-risk-factors",
+						"item": [
+							{
+								"linkId": "alcohol-intake",
+								"answer": [
+									{
+										"valueBoolean": "true"
+									}
+								]
+							},
+							{
+								"linkId": "unbalanced-diet",
+								"answer": [
+									{
+										"valueBoolean": "true"
+									}
+								]
+							},
+							{
+								"linkId": "medication-non-adherence",
+								"answer": [
+									{
+										"valueBoolean": "true"
+									}
+								]
+							},
+							{
+								"linkId": "risk-weight",
+								"TODO": "App would calculate BMI and select appropriate valueCoding",
+								"answer": [
+									{
+										"valueCoding": {
+											"display": "Overweight",
+											"system": "http://snomed.info/sct",
+											"code": "722595002"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "risk-blood-pressure",
+								"answer": [
+									{
+										"valueCoding": {
+											"display": "Hypertension",
+											"system": "http://snomed.info/sct",
+											"code": "45007003"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "health-literacy",
+								"answer": [
+									{
+										"valueBoolean": "true"
+									}
+								]
+							},
+							{
+								"linkId": "psychosocial",
+								"answer": [
+									{
+										"valueBoolean": "true"
+									}
+								]
+							},
+							{
+								"linkId": "wound-healing",
+								"answer": [
+									{
+										"valueBoolean": "true"
+									}
+								]
+							},
+							{
+								"linkId": "diabetes",
+								"answer": [
+									{
+										"valueCoding": {
+											"display": "Not diabetic",
+											"code": "999999",
+											"TODO": "Update when coding available"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "sedentary-lifestyle",
+								"answer": [
+									{
+										"valueBoolean": "true"
+									}
+								]
+							},
+							{
+								"linkId": "smoker",
+								"answer": [
+									{
+										"valueCoding": {
+											"display": "Non-smoker",
+											"system": "http://snomed.info/sct",
+											"code": "8392000"
+										}
+									}
+								]
+							}
+						]
+					},
+					{
+						"linkId": "functional-assessment",
+						"item": [
+							{
+								"linkId": "six-minute-walk-test",
+								"answer": [
+									{
+										"valueInteger": "359"
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		},
+		{
+			"request": {
+				"method": "PUT",
+				"url": "Encounter/encounter-1234-1"
+			},
+			"resource": {
+				"resourceType": "Encounter",
+				"id": "encounter-1234-1",
+				"status": "finished",
+				"class": {
+					"system": "http://hl7.org/fhir/episodeofcare-type",
+					"code": "AMB",
+					"display": "ambulatory"
+				},
+				"subject": {
+					"reference": "Patient/cardihab-patient-12345"
+				},
+				"episodeOfCare": [
+					{
+						"reference": "EpisodeOfCare/eoc-1234"
+					}
+				],
+				"participant": [
+					{
+						"individual": {
+							"reference": "Practitioner/cardihab-practitioner-67890"
+						}
+					}
+				],
+				"appointment": {
+					"reference": "Appointment/appointment-1234-1"
+				},
+				"reason": [
+					{
+						"coding": [
+							{
+								"system": "http://snomed.info/sct",
+								"code": "306496000",
+								"display": "Follow-up cardiac assessment"
+							}
+						]
+					}
+				],
+				"length": {
+					"value": 20,
+					"unit": "min",
+					"system": "http://unitsofmeasure.org",
+					"code": "min"
+				},
+				"serviceProvider": {
+					"reference": "Organization/cardihab-hhs-12345"
+				}
+			}
+		},
+		{
+			"request": {
+				"method": "PUT",
+				"url": "QuestionnaireResponse/qr-1234-1"
+			},
+			"resource": {
+				"resourceType": "QuestionnaireResponse",
+				"id": "qr-1234-1",
+				"questionnaire": {
+					"reference": "Questionnaire/varnfield2014-week1"
+				},
+				"status": "completed",
+				"subject": {
+					"reference": "Patient/cardihab-patient-12345"
+				},
+				"context": {
+					"reference": "Encounter/encounter-1234-1"
+				},
+				"authored": "2018-08-10T06:20:00Z",
+				"source": {
+					"reference": "Practitioner/cardihab-practitioner-67890"
+				},
+				"item": [
+					{
+						"linkId": "safety-issues",
+						"item": [
+							{
+								"linkId": "symptoms",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "43664005",
+											"display": "No"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "chest-pain-action-plan",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "43664005",
+											"display": "No"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "rehab-weekly-reviews-only",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							}
+						]
+					},
+					{
+						"linkId": "care-team-followup",
+						"item": [
+							{
+								"linkId": "gp",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "43664005",
+											"display": "No"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "cardiologist",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "surgeon",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							}
+						]
+					},
+					{
+						"linkId": "medications",
+						"item": [
+							{
+								"linkId": "importance",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "supply",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "app-support",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "questions",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "43664005",
+											"display": "No"
+										}
+									}
+								]
+							}
+						]
+					},
+					{
+						"linkId": "adls-and-exercise",
+						"item": [
+							{
+								"linkId": "adls",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "importance",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "safety",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "app-support",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							}
+						]
+					},
+					{
+						"linkId": "goal-setting",
+						"item": [
+							{
+								"linkId": "patient-goals",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "722595002",
+											"display": "Not Discussed"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "program-tasks",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "app-support",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							}
+						]
+					},
+					{
+						"linkId": "cr-program",
+						"item": [
+							{
+								"linkId": "questions-about-program",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "questions-about-app",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "initial-assessment-followup",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "confirm-next-appointment",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		},
+		{
+			"request": {
+				"method": "PUT",
+				"url": "Encounter/encounter-1234-2"
+			},
+			"resource": {
+				"resourceType": "Encounter",
+				"id": "encounter-1234-2",
+				"status": "finished",
+				"class": {
+					"system": "http://hl7.org/fhir/episodeofcare-type",
+					"code": "AMB",
+					"display": "ambulatory"
+				},
+				"subject": {
+					"reference": "Patient/cardihab-patient-12345"
+				},
+				"episodeOfCare": [
+					{
+						"reference": "EpisodeOfCare/eoc-1234"
+					}
+				],
+				"participant": [
+					{
+						"individual": {
+							"reference": "Practitioner/cardihab-practitioner-67890"
+						}
+					}
+				],
+				"appointment": {
+					"reference": "Appointment/appointment-1234-2"
+				},
+				"reason": [
+					{
+						"coding": [
+							{
+								"system": "http://snomed.info/sct",
+								"code": "306496000",
+								"display": "Follow-up cardiac assessment"
+							}
+						]
+					}
+				],
+				"length": {
+					"value": 20,
+					"unit": "min",
+					"system": "http://unitsofmeasure.org",
+					"code": "min"
+				},
+				"serviceProvider": {
+					"reference": "Organization/cardihab-hhs-12345"
+				}
+			}
+		},
+		{
+			"request": {
+				"method": "PUT",
+				"url": "QuestionnaireResponse/qr-1234-2"
+			},
+			"resource": {
+				"resourceType": "QuestionnaireResponse",
+				"id": "qr-1234-2",
+				"questionnaire": {
+					"reference": "Questionnaire/varnfield2014-week2"
+				},
+				"status": "completed",
+				"subject": {
+					"reference": "Patient/cardihab-patient-12345"
+				},
+				"context": {
+					"reference": "Encounter/encounter-1234-2"
+				},
+				"authored": "2018-08-17T06:20:00Z",
+				"source": {
+					"reference": "Practitioner/cardihab-practitioner-67890"
+				},
+				"item": [
+					{
+						"linkId": "safety-issues",
+						"item": [
+							{
+								"linkId": "symptoms",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "43664005",
+											"display": "No"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "chest-pain-action-plan",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "43664005",
+											"display": "No"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "rehab-weekly-reviews-only",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							}
+						]
+					},
+					{
+						"linkId": "medications",
+						"item": [
+							{
+								"linkId": "adherence",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "identification",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "understanding",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "app-support",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "43664005",
+											"display": "No"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "questions",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "43664005",
+											"display": "No"
+										}
+									}
+								]
+							}
+						]
+					},
+					{
+						"linkId": "adls-and-exercise",
+						"item": [
+							{
+								"linkId": "understanding",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "safety",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "exercise-effort",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "app-support",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							}
+						]
+					},
+					{
+						"linkId": "goal-setting",
+						"item": [
+							{
+								"linkId": "patient-goals",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "722595002",
+											"display": "Not Discussed"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "program-tasks",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "app-support",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							}
+						]
+					},
+					{
+						"linkId": "cr-program",
+						"item": [
+							{
+								"linkId": "questions-about-program",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "43664005",
+											"display": "No"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "questions-about-app",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "43664005",
+											"display": "No"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "initial-assessment-followup",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "43664005",
+											"display": "No"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "confirm-next-appointment",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		},
+		{
+			"request": {
+				"method": "PUT",
+				"url": "Encounter/encounter-1234-3"
+			},
+			"resource": {
+				"resourceType": "Encounter",
+				"id": "encounter-1234-3",
+				"status": "finished",
+				"class": {
+					"system": "http://hl7.org/fhir/episodeofcare-type",
+					"code": "AMB",
+					"display": "ambulatory"
+				},
+				"subject": {
+					"reference": "Patient/cardihab-patient-12345"
+				},
+				"episodeOfCare": [
+					{
+						"reference": "EpisodeOfCare/eoc-1234"
+					}
+				],
+				"participant": [
+					{
+						"individual": {
+							"reference": "Practitioner/cardihab-practitioner-67890"
+						}
+					}
+				],
+				"appointment": {
+					"reference": "Appointment/appointment-1234-3"
+				},
+				"reason": [
+					{
+						"coding": [
+							{
+								"system": "http://snomed.info/sct",
+								"code": "306496000",
+								"display": "Follow-up cardiac assessment"
+							}
+						]
+					}
+				],
+				"length": {
+					"value": 20,
+					"unit": "min",
+					"system": "http://unitsofmeasure.org",
+					"code": "min"
+				},
+				"serviceProvider": {
+					"reference": "Organization/cardihab-hhs-12345"
+				}
+			}
+		},
+		{
+			"request": {
+				"method": "PUT",
+				"url": "QuestionnaireResponse/qr-1234-3"
+			},
+			"resource": {
+				"resourceType": "QuestionnaireResponse",
+				"id": "qr-1234-3",
+				"questionnaire": {
+					"reference": "Questionnaire/varnfield2014-week3"
+				},
+				"status": "completed",
+				"subject": {
+					"reference": "Patient/cardihab-patient-12345"
+				},
+				"context": {
+					"reference": "Encounter/encounter-1234-3"
+				},
+				"authored": "2018-08-24T06:20:00Z",
+				"source": {
+					"reference": "Practitioner/cardihab-practitioner-67890"
+				},
+				"item": [
+					{
+						"linkId": "safety-issues",
+						"item": [
+							{
+								"linkId": "symptoms",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "43664005",
+											"display": "No"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "rehab-weekly-reviews-only",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							}
+						]
+					},
+					{
+						"linkId": "medications",
+						"item": [
+							{
+								"linkId": "adherence",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "questions",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "43664005",
+											"display": "No"
+										}
+									}
+								]
+							}
+						]
+					},
+					{
+						"linkId": "adls-and-exercise",
+						"item": [
+							{
+								"linkId": "understanding",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "app-support",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							}
+						]
+					},
+					{
+						"linkId": "relationships",
+						"item": [
+							{
+								"linkId": "support",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "sexual-activity",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							}
+						]
+					},
+					{
+						"linkId": "mindfulness",
+						"item": [
+							{
+								"linkId": "stress-management",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "mood-tracking",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "getting-help",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							}
+						]
+					},
+					{
+						"linkId": "smoking",
+						"item": [
+							{
+								"linkId": "status",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "assess",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "advise",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "assist",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "43664005",
+											"display": "No"
+										}
+									}
+								]
+							}
+						]
+					},
+					{
+						"linkId": "cr-program",
+						"item": [
+							{
+								"linkId": "questions-about-program",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "43664005",
+											"display": "No"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "questions-about-app",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "43664005",
+											"display": "No"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "initial-assessment-followup",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "43664005",
+											"display": "No"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "confirm-next-appointment",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		},
+		{
+			"request": {
+				"method": "PUT",
+				"url": "Encounter/encounter-1234-4"
+			},
+			"resource": {
+				"resourceType": "Encounter",
+				"id": "encounter-1234-4",
+				"status": "finished",
+				"class": {
+					"system": "http://hl7.org/fhir/episodeofcare-type",
+					"code": "AMB",
+					"display": "ambulatory"
+				},
+				"subject": {
+					"reference": "Patient/cardihab-patient-12345"
+				},
+				"episodeOfCare": [
+					{
+						"reference": "EpisodeOfCare/eoc-1234"
+					}
+				],
+				"participant": [
+					{
+						"individual": {
+							"reference": "Practitioner/cardihab-practitioner-67890"
+						}
+					}
+				],
+				"appointment": {
+					"reference": "Appointment/appointment-1234-4"
+				},
+				"reason": [
+					{
+						"coding": [
+							{
+								"system": "http://snomed.info/sct",
+								"code": "306496000",
+								"display": "Follow-up cardiac assessment"
+							}
+						]
+					}
+				],
+				"length": {
+					"value": 20,
+					"unit": "min",
+					"system": "http://unitsofmeasure.org",
+					"code": "min"
+				},
+				"serviceProvider": {
+					"reference": "Organization/cardihab-hhs-12345"
+				}
+			}
+		},
+		{
+			"request": {
+				"method": "PUT",
+				"url": "QuestionnaireResponse/qr-1234-4"
+			},
+			"resource": {
+				"resourceType": "QuestionnaireResponse",
+				"id": "qr-1234-4",
+				"questionnaire": {
+					"reference": "Questionnaire/varnfield2014-week4"
+				},
+				"status": "completed",
+				"subject": {
+					"reference": "Patient/cardihab-patient-12345"
+				},
+				"context": {
+					"reference": "Encounter/encounter-1234-4"
+				},
+				"authored": "2018-08-31T06:20:00Z",
+				"source": {
+					"reference": "Practitioner/cardihab-practitioner-67890"
+				},
+				"item": [
+					{
+						"linkId": "safety-issues",
+						"item": [
+							{
+								"linkId": "symptoms",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "43664005",
+											"display": "No"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "rehab-weekly-reviews-only",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							}
+						]
+					},
+					{
+						"linkId": "weight",
+						"item": [
+							{
+								"linkId": "weight-loss",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "weight-target",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "43664005",
+											"display": "No"
+										}
+									}
+								]
+							}
+						]
+					},
+					{
+						"linkId": "adls-and-exercise",
+						"item": [
+							{
+								"linkId": "understanding",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "app-support",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							}
+						]
+					},
+					{
+						"linkId": "nutrition",
+						"item": [
+							{
+								"linkId": "support",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							}
+						]
+					},
+					{
+						"linkId": "alcohol-drugs",
+						"item": [
+							{
+								"linkId": "alcohol",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "recreational-drugs",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							}
+						]
+					},
+					{
+						"linkId": "goal-setting",
+						"item": [
+							{
+								"linkId": "patient-goals",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "program-tasks",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "app-support",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							}
+						]
+					},
+					{
+						"linkId": "diabetes",
+						"item": [
+							{
+								"linkId": "diabetes-management",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							}
+						]
+					},
+					{
+						"linkId": "cr-program",
+						"item": [
+							{
+								"linkId": "questions-about-program",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "43664005",
+											"display": "No"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "questions-about-app",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "43664005",
+											"display": "No"
+										}
+									}
+								]
+							},
+							{
+								"linkId": "confirm-next-appointment",
+								"answer": [
+									{
+										"valueCoding": {
+											"system": "asdf",
+											"code": "248342006",
+											"display": "Yes"
+										}
+									}
+								]
+							}
+						]
+					}
+				]
+			}
+		}
+	],
+	"resourceType": "Bundle",
+	"type": "transaction"
+}

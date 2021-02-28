@@ -1,0 +1,61 @@
+mat-accordion {
+  min-height: calc(100% - 176px);
+  display: block;
+  max-width: 60em;
+  margin: 16px auto 60px auto;
+
+  .mat-expansion-panel-header-title {
+    align-items: center;
+  }
+}
+
+mat-toolbar {
+  position: absolute;
+  height: 36px;
+  z-index: 1;
+  opacity: 0.75;
+}
+
+.info {
+  font-size: small;
+}
+
+mat-slide-toggle {
+  height: 36px;
+}
+
+mat-toolbar .mat-button {
+  vertical-align: top;
+}
+
+
+.design-container {
+  height: calc(100vh - 230px);
+  .stepper-container {
+    background-color: white;
+    width: 270px;
+    max-height: 100%;
+
+    ::ng-deep mat-step-header {
+      display: flex;
+      flex-direction: row;
+
+      &[aria-selected="true"] {
+        background-color: #eee;
+      }
+
+      .mat-step-label {
+        flex-grow: 1 !important;
+
+        .sublabel {
+          font-size: 12px;
+          color: #888;
+        }
+      }
+    }
+
+    button {
+      margin-top: 15px;
+    }
+  }
+}

@@ -1,0 +1,167 @@
+<mat-sidenav-container class="sidenav-container flexGrow">
+  <mat-sidenav #drawer class="sidenav" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)" position="end" color="primary">
+
+    <div class="flexColumn flexAlignFlexStartStretch" style="height: 100%">
+      <mat-card class="site-card">
+        <mat-form-field floatLabel="always" style="width: 100%">
+          <mat-label>Current Site</mat-label>
+          <mat-select (selectionChange)="filterBySite($event)" placeholder="-- All Sites --"
+            [(ngModel)]="options[filters.site]">
+            <mat-option *ngIf="allSites" [value]="undefined">-- All Sites --</mat-option>
+            <mat-option *ngFor="let site of sites | async" [value]="site.id">
+              {{site.name}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-card>
+      <app-pending-registrations style="width: 100%" [currentSite]="options[filters.site]"></app-pending-registrations>
+      <app-upcoming-appointments [org$]="org$"></app-upcoming-appointments>
+    </div>
+  </mat-sidenav>
+  <mat-sidenav-content color="primary">
+    <button *ngIf="(isHandset$ | async)" (click)="drawer.open()" color="primary" mat-stroked-button mat-icon-button
+      style="position: absolute; right: 20px; bottom: 10px">
+      <mat-icon>chrome_reader_mode</mat-icon>
+    </button>
+    <div class="patient-list">
+      <mat-table [dataSource]="rows | async" matSort>
+        <!-- Family Name Column -->
+        <ng-container matColumnDef="familyName">
+          <mat-header-cell class="name-column" *matHeaderCellDef mat-sort-header>
+            <div>Family Name</div>
+            <div>
+              <mat-form-field floatLabel="never">
+                <input matInput [(ngModel)]="options.family" (change)="filter($event)">
+                <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="resetFilter('family')">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+          </mat-header-cell>
+          <mat-cell class="name-column" *matCellDef="let row">{{showFamilyName(row.patient.family)}}</mat-cell>
+        </ng-container>
+
+        <!-- Given Name Column -->
+        <ng-container matColumnDef="givenName">
+          <mat-header-cell class="name-column" *matHeaderCellDef mat-sort-header>
+            <div>Given Name</div>
+            <div>
+              <mat-form-field floatLabel="never">
+                <input matInput [(ngModel)]="options.given" (change)="filter($event)">
+                <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="resetFilter('given')">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+          </mat-header-cell>
+          <mat-cell class="name-column" *matCellDef="let row">{{showGivenName(row.patient.given)}}</mat-cell>
+        </ng-container>
+
+        <!-- BirthDate Column -->
+        <ng-container matColumnDef="birthDate">
+          <mat-header-cell class="date-column" *matHeaderCellDef mat-sort-header>
+            <div>Birth Date</div>
+            <div>
+              <mat-form-field>
+                <input matInput [matDatepicker]="birthdatePicker" (click)="birthdatePicker.open()"
+                  (dateChange)="filter($event)" [(ngModel)]="birthDateFilter">
+                <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="resetFilter('birthdate')">
+                  <mat-icon>close</mat-icon>
+                </button>
+                <mat-datepicker #birthdatePicker disabled="false"></mat-datepicker>
+              </mat-form-field>
+            </div>
+          </mat-header-cell>
+          <mat-cell class="date-column" *matCellDef="let row">
+            <div>{{row.patient.birthDate | date:'d-MMM-y'}}</div>
+            <div>({{patientAge(row.patient.birthDate)}} ys)</div>
+          </mat-cell>
+        </ng-container>
+
+        <!-- Gender Column -->
+        <ng-container matColumnDef="gender">
+          <mat-header-cell *matHeaderCellDef mat-sort-header disableClear>
+            <div>Gender</div>
+            <div>
+              <mat-form-field floatLabel="never" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;">
+                <mat-select (selectionChange)="filterByGender($event)" [(ngModel)]="options.gender" multiple>
+                  <mat-option *ngFor="let gender of genders | async" [value]="gender.id">
+                    {{gender.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">{{row.patient.gender | titlecase}}</mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="conditions">
+          <mat-header-cell class="conditions-column" *matHeaderCellDef>
+            <div>Diagnosis/Episode/Procedure</div>
+            <div>
+              <mat-form-field floatLabel="never">
+                <mat-select (selectionChange)="filterByCondition($event)" [(ngModel)]="conditionFilter" multiple>
+                  <mat-option *ngFor="let condition of allConditions | async" [value]="condition.valueCoding.code">
+                    {{condition.valueCoding.display}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </mat-header-cell>
+          <mat-cell class="conditions-column" *matCellDef="let row">
+            <div *ngFor="let condition of row.conditions | async; let i = index; let l = count" class="condition">
+              <span>{{condition | fhirCoding}}</span>
+            </div>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="plan">
+          <mat-header-cell *matHeaderCellDef>
+            <div>Program</div>
+            <div>
+              <mat-form-field floatLabel="never">
+                <mat-select (selectionChange)="filterByProgram($event)" [(ngModel)]="programFilter" multiple>
+                  <mat-option *ngFor="let program of programs | async" [value]="program.value">
+                    {{program.name}}
+                  </mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+          </mat-header-cell>
+          <mat-cell *matCellDef="let row">
+            <div *ngIf="row.plan | async; let plan" style="text-align: right">
+              <div class="careplan-status">{{mapStatus(plan?.status)}}</div>
+              <div *ngIf="['Delivery', 'Discharged'].indexOf(mapStatus(plan?.status)) !== -1">Started:
+                {{plan?.period?.start | date:'mediumDate'}}</div>
+              <div *ngIf="mapStatus(plan?.status) === 'Discharged'">Discharged:
+                {{plan?.period?.end | date:'mediumDate'}}</div>
+            </div>
+          </mat-cell>
+        </ng-container>
+
+        <!-- URN Column -->
+        <ng-container matColumnDef="urn">
+          <mat-header-cell *matHeaderCellDef mat-sort-header>
+            <div>{{urnLabel$ | async}}</div>
+            <div>
+              <mat-form-field floatLabel="never">
+                <input matInput [(ngModel)]="options.identifier" (change)="filter($event)">
+                <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="resetFilter('identifier')">
+                  <mat-icon>close</mat-icon>
+                </button>
+              </mat-form-field>
+            </div>
+          </mat-header-cell>
+          <mat-cell class="urnColumn" *matCellDef="let row">{{getURN(row)}}</mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onSelect(row)"></mat-row>
+      </mat-table>
+      <mat-paginator [length]="page.total" [pageSize]="page.limit"></mat-paginator>
+      <app-footer></app-footer>
+    </div>
+
+  </mat-sidenav-content>
+</mat-sidenav-container>

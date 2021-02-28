@@ -1,0 +1,47 @@
+<mat-card *ngIf="!!patient">
+    <mat-list dense>
+      <mat-list-item>
+        <span [ngClass]="{'hidden': tablet$ | async}" disabled>Program Adherence</span>
+      </mat-list-item>
+      <mat-list-item class="tab-list" (click)="focusRecordedData('Observations','observation')">
+        <mat-icon class="tab-icon" title="Observation Adherence">vibration</mat-icon>
+        <span class="tab-label">Observations</span>
+      </mat-list-item>
+      <mat-list-item class="tab-list" (click)="focusRecordedData('Exercise','exercise')">
+        <mat-icon class="tab-icon" title="Exercise Adherence">directions_walk</mat-icon>
+        <span class="tab-label">Exercise</span>
+      </mat-list-item>
+      <mat-list-item class="tab-list" (click)="focusRecordedData('Education','education')">
+        <mat-icon class="tab-icon" title="Education Adherence">school</mat-icon>
+        <span class="tab-label">Education</span>
+      </mat-list-item>
+      <mat-list-item class="tab-list" (click)="focusRecordedData('Medication', 'medicine')">
+        <mat-icon class="tab-icon" title="Medication Adherence">local_pharmacy</mat-icon>
+        <span class="tab-label">Medication</span>
+      </mat-list-item>
+      <mat-list-item>
+        <span [ngClass]="{'hidden': tablet$ | async}" disabled>Recorded Data</span>
+      </mat-list-item>
+      <mat-list-item class="tab-list" (click)="focusRecordedData('Symptoms','symptoms')">
+        <mat-icon class="tab-icon" title="Symptoms">sentiment_dissatisfied</mat-icon>
+        <span class="tab-label">Symptoms</span>
+      </mat-list-item>
+      <mat-list-item class="tab-list" (click)="focusRecordedData('Goals','goals')">
+        <mat-icon class="tab-icon" title="Goals">track_changes</mat-icon>
+        <span class="tab-label">Goals</span>
+      </mat-list-item>
+      <mat-list-item class="tab-list" (click)="focusRecordedData('Medicines','medicines')">
+        <mat-icon class="tab-icon" title="Medicines">local_pharmacy</mat-icon>
+        <span class="tab-label">Medicines</span>
+      </mat-list-item>
+      <mat-list-item class="tab-list" (click)="focusRecordedData('Diary','diary')">
+        <mat-icon class="tab-icon" title="Diary">book</mat-icon>
+        <span class="tab-label">Diary</span>
+      </mat-list-item>
+      <mat-list-item class="tab-list" (click)="focusRecordedData('Charts','charts')">
+        <mat-icon class="tab-icon" title="Diary">insert_chart_outlined</mat-icon>
+        <span class="tab-label">Charts</span>
+      </mat-list-item>
+    </mat-list>
+</mat-card>
+

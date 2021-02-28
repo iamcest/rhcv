@@ -1,0 +1,33 @@
+--- !com.amazonaws.mobilehub.v0.Project 
+apps:
+  web: !com.amazonaws.mobilehub.v0.AppDO {}
+features:
+  cloudlogic: !com.amazonaws.mobilehub.v0.CloudLogic 
+    components:
+      dev-user-management: !com.amazonaws.mobilehub.v0.API 
+        attributes:
+          api-arn: 'arn:aws:execute-api:ap-southeast-2:940178875670:9zxnclt5c8'
+          name: dev-user-management
+          requires-signin: true
+          sdk-generation-stage-name: dev
+        paths:
+          /user: !com.amazonaws.mobilehub.v0.Function {}
+          '/user/{username}': !com.amazonaws.mobilehub.v0.Function {}
+          '/user/{username}/approval': !com.amazonaws.mobilehub.v0.Function {}
+  content-delivery: !com.amazonaws.mobilehub.v0.ContentDelivery 
+    attributes:
+      enabled: true
+      visibility: public-global
+    components:
+      release: !com.amazonaws.mobilehub.v0.Bucket {}
+  mobile-analytics: !com.amazonaws.mobilehub.v0.Pinpoint {}
+  sign-in: !com.amazonaws.mobilehub.v0.SignIn 
+    attributes:
+      enabled: true
+      optional-sign-in: false
+    components:
+      sign-in-user-pools: !com.amazonaws.mobilehub.v0.UserPoolsIdentityProvider 
+        attributes:
+          user-pool-id: ap-southeast-2_mCJZBOUJF
+name: PatientManagement-dev
+region: ap-southeast-2

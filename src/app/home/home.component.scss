@@ -1,0 +1,101 @@
+$toolbarHeight: 60px;
+
+::ng-deep app-patient-detail, ::ng-deep app-patient-list {
+  min-height: 0;
+}
+
+.home-component {
+  overflow-y: hidden;
+}
+
+.sidenav-container {
+  height: 100%;
+  padding-top: $toolbarHeight;
+}
+
+.sidenav {
+  padding-top: $toolbarHeight;
+  width: 300px;
+}
+
+.sidenav .mat-card {
+  margin: 8px;
+  /* padding: 0px; */
+}
+
+.cardihab-logo {
+  /* padding: 12px; */
+  background: white;
+  margin-right: 50px
+}
+
+[matListAvatar] {
+  border-radius: 50%;
+  height: 40px;
+}
+
+p.username {
+  margin: 0 0 0 10px;
+  color: white !important;
+  display: inline;
+}
+
+.hidden {
+  display: none;
+}
+
+.mat-toolbar {
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  min-height: $toolbarHeight;
+  max-height: $toolbarHeight;
+}
+
+.help-button{
+  $helpButtonIconSize: 36px;
+
+  &[disabled] {
+    color: #aaa;
+  }
+
+  .mat-icon {
+    width: $helpButtonIconSize;
+    height: $helpButtonIconSize;
+    font-size: $helpButtonIconSize;
+    line-height: $helpButtonIconSize;
+  }
+}
+
+::ng-deep .mat-expansion-panel {
+  .mat-expansion-panel-header {
+    padding: 10px 24px;
+  }
+
+  .mat-action-row {
+    .mat-expansion-indicator {
+      cursor: pointer;
+      margin: 16px;
+      display: flex;
+      align-items: center;
+      &::after {
+        transform: rotate(225deg);
+      }
+    }
+  }
+}
+
+::ng-deep .mat-card {
+  margin: 0 4px 10px;
+
+  .mat-card-title {
+    margin-bottom: 15px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .cardihab-logo {
+    display: none;
+  }
+}
+

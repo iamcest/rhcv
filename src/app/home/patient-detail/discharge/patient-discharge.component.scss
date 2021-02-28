@@ -1,0 +1,31 @@
+@media screen {
+    .mat-accordion {
+      min-height: calc(100% - 176px);
+      display: block;
+      max-width: 50em;
+      margin: 16px auto 60px auto;
+    }
+  
+    .patient-discharge {
+      height: 100%;
+      overflow-y: auto;
+    }
+  }
+  
+  @media print {
+    .final-assessment,
+    .discharge-report .mat-expansion-panel-header,
+    .discharge-report .discharge-report-actions,
+    app-footer, .mat-action-row {
+      display: none;
+    }
+  
+    .discharge-report {
+      margin: 0;
+    }
+  
+    app-discharge-report {
+      display: inline !important;
+    }
+  }
+  

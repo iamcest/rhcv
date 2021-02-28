@@ -1,0 +1,2 @@
+<app-smart-goal-list *ngIf="!(selectedGoal$ | async)" [patient]="patient" [carePlan]="carePlan" [selectedGoal$]="selectedGoal$" [filters]="filters" [defaultFilters]="defaultFilters"></app-smart-goal-list>
+<app-smart-goal-detail *ngIf="selectedGoal$ | async" [patient]="patient" [carePlan]="carePlan" [selectedGoal$]="selectedGoal$"></app-smart-goal-detail>

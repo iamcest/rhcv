@@ -1,0 +1,85 @@
+image: cardihab/pipelines-node-aws:10-alpine-chrome
+stepdefinitions:
+  - npmtest: &npmtest
+      name: Run npm install and execute tests
+      size: 2x
+      caches:
+          - node
+      script:
+        - export NODE_OPTIONS="--max-old-space-size=4096"
+        - npm -v
+        - node -v
+        - npm ci
+        - npm run lint
+        - npm run test-ci # run unit tests
+
+pipelines:
+  default:
+    - step: *npmtest
+
+  branches:
+    master:
+      - step: *npmtest
+      - step:
+          name: Publish browser build to S3/Cloudfront
+          deployment: test
+          size: 2x
+          caches:
+            - node
+          script:
+            # - npx awsmobile configure aws $AWS_ACCESS_KEY $AWS_ACCESS_KEY_SECRET ap-southeast-2
+            # - npx awsmobile init 403f98bb-d5bf-49e8-a655-0a206fef2100 -y
+            # - npx awsmobile publish
+            - export temp_role=$(aws sts assume-role --role-arn "arn:aws:iam::940178875670:role/BitbucketPipelines" --role-session-name "pam")
+            - export AWS_ACCESS_KEY_ID=$(echo $temp_role | jq .Credentials.AccessKeyId | xargs)
+            - export AWS_SECRET_ACCESS_KEY=$(echo $temp_role | jq .Credentials.SecretAccessKey | xargs)
+            - export AWS_SESSION_TOKEN=$(echo $temp_role | jq .Credentials.SessionToken | xargs)
+            - aws sts get-caller-identity
+            - export NODE_OPTIONS="--max-old-space-size=4096"
+            - echo > src/version.ts
+            - echo "export const BUILD_NUMBER = '$BITBUCKET_BUILD_NUMBER';export const PACKAGE_VERSION = '$(npm run version --silent)';" >> src/version.ts
+            - npm run build -- -c dev
+            - aws s3 sync dist s3://pam.dev.cardihab.com
+            - npm run upload-sentry-sourcemaps
+
+      - step:
+          name: Publish browser build to S3/Cloudfront
+          size: 2x
+          deployment: staging
+          size: 2x
+          caches:
+            - node
+          script:
+            - export temp_role=$(aws sts assume-role --role-arn "arn:aws:iam::273307537724:role/BitbucketPipelines" --role-session-name "pam")
+            - export AWS_ACCESS_KEY_ID=$(echo $temp_role | jq .Credentials.AccessKeyId | xargs)
+            - export AWS_SECRET_ACCESS_KEY=$(echo $temp_role | jq .Credentials.SecretAccessKey | xargs)
+            - export AWS_SESSION_TOKEN=$(echo $temp_role | jq .Credentials.SessionToken | xargs)
+            - aws sts get-caller-identity
+            - export NODE_OPTIONS="--max-old-space-size=4096"
+            - echo > src/version.ts
+            - echo "export const BUILD_NUMBER = '$BITBUCKET_BUILD_NUMBER';export const PACKAGE_VERSION = '$(npm run version --silent)';" >> src/version.ts
+            - npm run build -- -c staging
+            - aws s3 sync dist s3://pam.staging.cardihab.com
+            - npm run upload-sentry-sourcemaps
+
+      - step:
+          name: Publish browser build to S3/Cloudfront
+          deployment: production
+          trigger: manual
+          size: 2x
+          caches:
+            - node
+          script:
+            - export temp_role=$(aws sts assume-role --role-arn "arn:aws:iam::328679123332:role/BitbucketPipelines" --role-session-name "pam")
+            - export AWS_ACCESS_KEY_ID=$(echo $temp_role | jq .Credentials.AccessKeyId | xargs)
+            - export AWS_SECRET_ACCESS_KEY=$(echo $temp_role | jq .Credentials.SecretAccessKey | xargs)
+            - export AWS_SESSION_TOKEN=$(echo $temp_role | jq .Credentials.SessionToken | xargs)
+            - aws sts get-caller-identity
+            - export NODE_OPTIONS="--max-old-space-size=4096"
+            - echo > src/version.ts
+            - echo "export const BUILD_NUMBER = '$BITBUCKET_BUILD_NUMBER';export const PACKAGE_VERSION = '$(npm run version --silent)';" >> src/version.ts
+            - npm run build -- -c production
+            - aws s3 sync dist s3://pam.cardihab.com
+            - aws s3 cp dist/index.html s3://pam.cardihab.com --cache-control no-cache
+            - npm run upload-sentry-sourcemaps
+

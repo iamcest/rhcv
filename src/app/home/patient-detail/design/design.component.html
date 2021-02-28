@@ -1,0 +1,106 @@
+<div class="design-container flewColumn">
+  <div class="flexRow" style="max-height: 100%">
+    <div class="stepper-container">
+      <mat-vertical-stepper #designStepper (selectionChange)="onStepperSelectionChange($event)" selectedIndex="1">
+        <ng-template matStepperIcon="edit">
+          <mat-icon>done</mat-icon>
+        </ng-template>
+        <mat-step [optional]="true">
+          <ng-template matStepLabel>
+            Plan History
+          </ng-template>
+        </mat-step>
+        <mat-step [completed]="demographicValid" [hasError]="!demographicValid" errorMessage="Patient detail is incomplete">
+          <ng-template matStepLabel>
+            Identification
+          </ng-template>
+        </mat-step>
+
+        <mat-step>
+          <ng-template matStepLabel>
+            Plan Schedule
+          </ng-template>
+        </mat-step>
+        <mat-step [completed]="initialAssessment.status === 'VALID'" [hasError]="initialAssessment.status === 'INVALID'" errorMessage="Initial assessment is incomplete">
+          <ng-template matStepLabel>
+            Initial Assessment
+          </ng-template>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>
+            Plan Customisation
+          </ng-template>
+        </mat-step>
+      </mat-vertical-stepper>
+
+      <div style="display: flex; justify-content: space-evenly">
+        <button *ngIf="canStart" mat-raised-button color="primary"
+                [disabled]="initialAssessment.status !== 'VALID'"
+                (click)="activatePlan()"
+                title="Locks the Initial Assessment and activates the care plan schedule">
+          <mat-icon>play_arrow</mat-icon>
+          Start
+        </button>
+        <button *ngIf="carePlan?.status === 'draft' || carePlan?.status === 'suspended'" mat-button color="warn" (click)="cancelPlan()"
+          title="Removes this care plan and patient">
+          <mat-icon>cancel</mat-icon>
+          Cancel Plan
+        </button>
+      </div>
+    </div>
+    <div class="flexColumn" style="width:100%; max-height: 100%; overflow-y: auto">
+
+      <app-demographics [style.display]="expanded === 'identification'? 'block' : 'none'" *ngIf="patient && episodeOfCare"
+              [patient]="patient"
+              [episodeOfCare]="episodeOfCare"
+              (statusChanges)="onDemographicStatusChange($event)">
+      </app-demographics>
+
+      <ng-template [ngIf]="expanded === 'history'">
+            <app-plan-history [patient]="patient"></app-plan-history>
+      </ng-template>
+
+      <ng-template [ngIf]="expanded === 'schedule'">
+        <mat-card class="mat-elevation-z2" style="margin: 1em;">
+          <mat-card-header>
+            <mat-card-title>Plan Schedule</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <app-review-schedule [patient]="patient" [carePlan]="carePlan"></app-review-schedule>
+          </mat-card-content>
+        </mat-card>
+      </ng-template>
+
+      <mat-card class="mat-elevation-z2" style="margin: 1em;" [style.display]="expanded === 'initialAssessment' ? 'block' : 'none'">
+        <mat-card-header>
+          <mat-card-title>Initial Assessment</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <mat-progress-bar *ngIf="initialAssessment.loading" color="primary" mode="indeterminate"></mat-progress-bar>
+          <app-questionnaire *ngFor="let qa of initialAssesmentQuestionnaires$ | async"
+            [questionnaire]="qa.questionnaire"
+            [context]="episodeOfCare"
+            [answers]="qa.response"
+            [editable]="initialAssessment.edit"
+            (changesSaved)="onAnswersChange($event)"
+            (statusChanges)="onAssessmentStatusChange($event)">
+          </app-questionnaire>
+        </mat-card-content>
+      </mat-card>
+    
+
+      <ng-template [ngIf]="expanded === 'customisation'">
+        <mat-card class="mat-elevation-z2" style="margin: 1em;">
+          <mat-card-header>
+            <mat-card-title>Plan Customisation</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <app-goals [patient]="patient" [carePlan]="carePlan"></app-goals>
+          </mat-card-content>
+        </mat-card>
+      </ng-template>
+      
+    </div>
+  </div>
+  <app-footer></app-footer>
+</div>

@@ -1,0 +1,34 @@
+.site-container {
+  .site-name, .site-code {
+    margin: 0;
+  }
+
+  .site-code {
+    font-size: 12px;
+  }
+
+  .mat-list.patient {
+    width: 100%;
+
+    .mat-list-item {
+      margin-top: 5px;
+      padding: 5px 0;
+      height: auto;
+      width: 100%;
+
+      &:hover {
+        background-color: #eee;
+        cursor: pointer;
+      }
+
+      .mat-list-item-content {
+        width: 100%;
+      }
+    }
+
+    p, h4 {
+      margin: 0;
+      text-align: center;
+    }
+  }
+}

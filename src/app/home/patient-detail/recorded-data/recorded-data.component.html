@@ -1,0 +1,18 @@
+<app-dialog-header></app-dialog-header>
+<app-adherence [patient]="patient" [carePlan]="carePlan" [tablet$]="tablet$" id="observation-adherence-tab"
+  goalType="observation" *ngIf="(menuName=='observation')"></app-adherence>
+<app-adherence [patient]="patient" [carePlan]="carePlan" [tablet$]="tablet$" id="exercise-adherence-tab"
+  goalType="exercise" *ngIf="(menuName=='exercise')"></app-adherence>
+<app-adherence [patient]="patient" [carePlan]="carePlan" [tablet$]="tablet$" id="education-adherence-tab"
+  goalType="education" *ngIf="(menuName=='education')"></app-adherence>
+<app-adherence [patient]="patient" [carePlan]="carePlan" [tablet$]="tablet$" id="medication-adherence-tab"
+  goalType="medicine" *ngIf="(menuName=='medicine')"></app-adherence>
+<app-journal [patient]="patient" [carePlan]="carePlan" [category]="[journalEntryCodes.SYMPTOM.code]" id="symptoms-tab"
+  *ngIf="(menuName=='symptoms')">
+</app-journal>
+<app-smart-goals [patient]="patient" [carePlan]="carePlan" id="goals-tab" *ngIf="(menuName=='goals')"></app-smart-goals>
+<app-medicines [patient]="patient" [carePlan]="carePlan" [tablet$]="tablet$" id="medicines-tab"
+  *ngIf="(menuName=='medicines')"></app-medicines>
+<app-journal [patient]="patient" [carePlan]="carePlan" id="diary-tab" *ngIf="(menuName=='diary')"></app-journal>
+<app-charts [patient]="patient" [carePlan]="carePlan" class="flexColumn flexAlignSpaceBetween" id="charts-tab"
+  style="width:100%; height: 100%; overflow-y: auto" *ngIf="(menuName=='charts')"></app-charts>

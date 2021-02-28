@@ -1,0 +1,88 @@
+<button mat-mini-fab color="accent" type="button"
+        class="add-new-medicine" *ngIf="allowEditing"
+        (click)="addNewMedicine()">
+  <mat-icon>add</mat-icon>
+</button>
+
+<ngx-datatable style="height: 75vh"
+  #medicinesTable
+  class='material expandable medicines-table'
+  [rows]="currentMedications"
+  [columnMode]="'force'"
+  [headerHeight]="85"
+  [footerHeight]="30"
+  [rowHeight]="'100%'"
+  [scrollbarV]="true"
+  [virtualization]="false"
+  [loadingIndicator]="loading"
+  [selectionType]="'single'"
+  (select)="select($event)">
+
+  <ngx-datatable-column prop="name" [flexGrow]="3">
+    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+              <span class="datatable-header-cell-wrapper">
+                <span class="datatable-header-cell-label" layout="row" (click)="sort()">Name</span>
+              </span>
+    </ng-template>
+
+    <ng-template ngx-datatable-cell-template let-value="value">
+      <span [matTooltip]="value">{{value}}</span>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column prop="dosageText" [flexGrow]="3">
+    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+              <span class="datatable-header-cell-wrapper">
+                <span class="datatable-header-cell-label" layout="row" (click)="sort()">Dosage</span>
+              </span>
+    </ng-template>
+
+    <ng-template ngx-datatable-cell-template let-value="value">
+      <div *ngFor="let line of value" [matTooltip]="line">{{line}}</div>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column prop="startDate" [flexGrow]="1" maxWidth="120">
+    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+              <span class="datatable-header-cell-wrapper">
+                <span class="datatable-header-cell-label" layout="row" (click)="sort()">Start</span>
+              </span>
+    </ng-template>
+
+    <ng-template ngx-datatable-cell-template let-value="value">
+      <span [matTooltip]="value">{{value | date:'dd MMM yyyy'}}</span>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column prop="endDate" [flexGrow]="1" maxWidth="120">
+    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+              <span class="datatable-header-cell-wrapper">
+                <span class="datatable-header-cell-label" layout="row" (click)="sort()">End</span>
+              </span>
+    </ng-template>
+
+    <ng-template ngx-datatable-cell-template let-value="value">
+      <span [matTooltip]="value">{{value | date:'dd MMM yyyy'}}</span>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column prop="request.status" [flexGrow]="1" maxWidth="120">
+    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+              <span class="datatable-header-cell-wrapper">
+                <span class="datatable-header-cell-label flexRow" layout="row" (click)="sort()">Status</span>
+                <span class="md-padding flexRow">
+                  <mat-form-field floatLabel="never" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;">
+                    <mat-select (selectionChange)="filterByStatus($event)" [(ngModel)]="statusFilter" multiple>
+                      <mat-option *ngFor="let status of statuses | async" [value]="status.value">
+                        {{status.name}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field>
+                </span>
+              </span>
+    </ng-template>
+    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+      {{getStatusByValue(value)?.name}}
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>

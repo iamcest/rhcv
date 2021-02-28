@@ -1,0 +1,108 @@
+<form [formGroup]="demographicsForm">
+  <mat-card class="mat-elevation-z2" style="margin: 1em;">
+    <mat-card-header>
+      <mat-card-title>Identification</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="flexRowWrap flexLayoutAlignStart">
+        <ng-container *ngFor="let name of names.controls; let i = index" formArrayName="name">
+          <ng-container [formGroupName]="i">
+            <mat-form-field style="flex: 1 1 33%; box-sizing: border-box; max-width: 33%;">
+              <input matInput [placeholder]="placeholders.title" formControlName="prefix">
+            </mat-form-field>
+            <mat-form-field style="flex: 1 1 33%; box-sizing: border-box; max-width: 33%;">
+              <input matInput [placeholder]="placeholders.given" formControlName="given" required>
+            </mat-form-field>
+            <mat-form-field style="flex: 1 1 33%; box-sizing: border-box; max-width: 33%;">
+              <input matInput [placeholder]="placeholders.last" formControlName="family" required>
+            </mat-form-field>
+          </ng-container>
+        </ng-container>
+
+        <mat-form-field style="flex: 1 1 33%; box-sizing: border-box; max-width: 33%;">
+          <mat-select [placeholder]="placeholders.gender" formControlName="gender">
+            <mat-option *ngFor="let gender of genders" [value]="gender.value">{{gender.label}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field style="flex: 1 1 33%; box-sizing: border-box; max-width: 33%;">
+          <input matInput [matDatepicker]="dob" [placeholder]="placeholders.dob" formControlName="birthDate" required>
+          <mat-datepicker-toggle matSuffix [for]="dob"></mat-datepicker-toggle>
+          <mat-datepicker #dob></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field style="flex: 1 1 33%; box-sizing: border-box; max-width: 33%;">
+          <input matInput [placeholder]="placeholders.urn" formControlName="urn">
+        </mat-form-field>
+
+        <mat-form-field style="flex: 1 1 33%; box-sizing: border-box; max-width: 33%;" class="mobile-number-input">
+          <ngx-mat-intl-tel-input #mobile  [placeholder]="placeholders.mobile" [preferredCountries]="['gb']" [enablePlaceholder]="true" formControlName="mobile" required type="text" 
+            ></ngx-mat-intl-tel-input>
+        </mat-form-field>
+
+        <mat-form-field style="flex: 1 1 33%; box-sizing: border-box; max-width: 33%;" class="mobile-number-input">
+          <ngx-mat-intl-tel-input #landline  [placeholder]="placeholders.landline" [preferredCountries]="['au']" [enablePlaceholder]="true"  formControlName="landline" required type="text"
+            ></ngx-mat-intl-tel-input>
+        </mat-form-field>
+
+        <mat-form-field style="flex: 1 1 33%; box-sizing: border-box; max-width: 33%;">
+          <input matInput [placeholder]="placeholders.email" formControlName="email">
+        </mat-form-field>
+
+        <mat-form-field style="flex: 1 1 50%; box-sizing: border-box; max-width: 50%;">
+          <mat-select [placeholder]="placeholders.type" formControlName="type" required>
+            <mat-option value="cardiac-rehab">Cardiac Rehab</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <mat-form-field style="flex: 1 1 50%; box-sizing: border-box; max-width: 50%;">
+          <mat-select [placeholder]="placeholders.site" formControlName="site" required>
+            <mat-option *ngFor="let site of sites | async" [value]="site.id">{{site.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </div>
+
+    </mat-card-content>
+    <mat-card-header>
+      <mat-card-title>Emergency Contact Details</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <div class="flexRowWrap flexLayoutAlignStart">
+        <ng-container formGroupName="contact">
+          <mat-form-field style="flex: 1 1 33%; box-sizing: border-box; max-width: 33%;">
+            <input matInput [placeholder]="placeholders.contact.name" formControlName="name">
+          </mat-form-field>
+          <mat-form-field style="flex: 1 1 33%; box-sizing: border-box; max-width: 33%;">
+            <input matInput [placeholder]="placeholders.contact.relationship" formControlName="relationship" required>
+          </mat-form-field>
+          <mat-form-field style="flex: 1 1 33%; box-sizing: border-box; max-width: 33%;" class="mobile-number-input">
+            <ngx-mat-intl-tel-input  [placeholder]="placeholders.contact.landline" formControlName="landline" required
+              type="text"></ngx-mat-intl-tel-input>
+          </mat-form-field>
+          <mat-form-field style="flex: 1 1 33%; box-sizing: border-box; max-width: 33%;" class="mobile-number-input">
+            <ngx-mat-intl-tel-input [placeholder]="placeholders.contact.mobile" formControlName="mobile" required type="text"></ngx-mat-intl-tel-input>
+          </mat-form-field>
+          <mat-form-field style="flex: 1 1 33%; box-sizing: border-box; max-width: 33%;">
+            <input matInput [placeholder]="placeholders.contact.email" formControlName="email">
+          </mat-form-field>
+        </ng-container>
+      </div>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-button *ngIf="edit" (click)="reset()">
+        <mat-icon>cancel</mat-icon>Cancel
+      </button>
+
+      <button *ngIf="!edit && patient" mat-button color="primary" (click)="enableEdit()">
+        <mat-icon>edit</mat-icon>
+        <span>Edit</span>
+      </button>
+
+      <button *ngIf="edit && patient" [disabled]="!demographicsForm.valid" mat-button color="primary"
+        (click)="saveDemographics()">
+        <mat-icon>done</mat-icon>
+        <span>Done</span>
+      </button>
+    </mat-card-actions>
+  </mat-card>
+</form>

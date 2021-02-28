@@ -1,0 +1,14 @@
+<div class="flexRow flexAlignCenter">
+  <form class="note-form">
+    <mat-form-field class="form-field-full-width" appearance="outline">
+      <textarea matInput [placeholder]="placeholder"
+                [ngModelOptions]="{standalone: true}"
+                [(ngModel)]="newNoteText"></textarea>
+    </mat-form-field>
+  </form>
+  <div class="note-buttons">
+    <button mat-raised-button color="primary" (click)="addNote()">
+      {{buttonText}}
+    </button>
+  </div>
+</div>

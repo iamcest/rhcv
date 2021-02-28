@@ -1,0 +1,69 @@
+<form class="reports" [formGroup]="sitesForm">
+    <mat-form-field style="float: right" floatLabel="always">
+        <mat-label>Site Statistics</mat-label>
+        <mat-select formControlName="sites" multiple placeholder="-- All Sites --">
+            <mat-option disabled>-- All Sites --</mat-option>
+            <mat-option *ngFor="let site of sites$ | async" [value]="site.id">{{site.name}}</mat-option>
+        </mat-select>
+    </mat-form-field>
+    <h2>Patient Careplan Status</h2>
+    <div style="width: 100%; height: 200px">
+        <ngx-charts-pie-grid
+            [results]="planStats"
+            [animations]="false"
+        >
+        </ngx-charts-pie-grid>
+    </div>
+
+    <div style="display:flex; justify-content: stretch; width: 100%">
+        <div style="width: 100%;">
+            <h2>Gender Breakdown</h2>
+            <div style="height: 200px">
+                <ngx-charts-pie-chart
+                    [results]="genderStats"
+                    [animations]="false"
+                    [legend]="false"
+                    [labels]="true"
+                >
+                </ngx-charts-pie-chart>
+            </div>
+        </div>
+        <div style="width: 100%;">
+            <h2>Age Breakdown</h2>
+            <div style="height: 200px">
+                <ngx-charts-bar-horizontal
+                    [results]="ageStats"
+                    [animations]="false"
+                    [legend]="false"
+                    [xAxis]="true"
+                    [yAxis]="true"
+                    xAxisLabel="Patients"
+                    yAxisLabel="Age"
+                    [showDataLabel]="true"
+                >
+                </ngx-charts-bar-horizontal>
+            </div>
+        </div>
+
+        <div style="width: 100%;">
+            <h2>Condition Breakdown</h2>
+            <div style="height: 100%">
+                <ngx-charts-bar-horizontal
+                    [results]="conditionStats"
+                    [animations]="false"
+                    [legend]="false"
+                    [xAxis]="true"
+                    [yAxis]="true"
+                    xAxisLabel="Patients"
+                    yAxisLabel="Condition"
+                    [showDataLabel]="true"
+                >
+                </ngx-charts-bar-horizontal>
+            </div>
+        </div>
+    </div>
+
+</form>
+<button *ngIf="ictRole | async" mat-fab aria-label="Download Reports" class="download-button" (click)="downloadReports()">
+    <mat-icon>cloud_download</mat-icon>
+</button>

@@ -1,0 +1,32 @@
+<mat-toolbar>
+  <a mat-button (click)="goBack()">
+    <i class="material-icons">navigate_before</i>
+    Back to List
+  </a>
+</mat-toolbar>
+
+<mat-card>
+   <h1 class="heading flexRow flexAlignSpaceBetween">
+     <div class="flexRow flexAlignStart">
+        <!-- TODO commented out for now -->
+       <!--<app-priority-icon [priority]="selectedGoal?.view.priority?.short" fxLayout="row" fxLayoutAlign="center center">-->
+       <!--</app-priority-icon>-->
+       Goal:&nbsp;<span>{{selectedGoal?.view.name}}</span>
+     </div>
+     <app-goal-status [status]="selectedGoal?.view.status" class="flexRow flexAlignCenter"></app-goal-status>
+   </h1>
+
+  <div class="start-end-dates flexRow flexAlignSpaceAround">
+    <h4 matTooltip="{{selectedGoal?.view.futureGoal ? 'Starting': 'Started'}} {{selectedGoal?.view.sinceStarted}}">
+      Start: {{selectedGoal?.view.startDate | date:'dd MMM yyyy'}}</h4>
+    <h4 matTooltip="Due {{selectedGoal?.view.daysRemaining}}">
+      Due: {{selectedGoal?.view.dueDate | date:'dd MMM yyyy'}}</h4>
+  </div>
+
+  <mat-divider></mat-divider>
+
+  <div class="notes-container flexColumn">
+      <app-notes-list [carePlan]="carePlan" [notes]="selectedGoal?.view.notes" title="Notes"></app-notes-list>
+      <app-note-add (noteAdded)="saveNote($event)"></app-note-add>
+  </div>
+</mat-card>

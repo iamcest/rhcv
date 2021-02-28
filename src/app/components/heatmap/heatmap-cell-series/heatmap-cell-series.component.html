@@ -1,0 +1,23 @@
+<svg:g
+  app-heatmap-cell
+  *ngFor="let c of cells; trackBy:trackBy"
+  [x]="c.x"
+  [y]="c.y"
+  [width]="c.width"
+  [height]="c.height"
+  [fill]="c.fill"
+  [data]="c.data"
+  [date]="c.date"
+  (select)="onClick(c.cell)"
+  [gradient]="gradient"
+  [animations]="animations"
+  [rx]="rx"
+  [id]="c.id"
+  ngx-tooltip
+  [tooltipDisabled]="tooltipDisabled"
+  [tooltipPlacement]="'top'"
+  [tooltipType]="'tooltip'"
+  [tooltipTitle]="tooltipTemplate ? undefined : tooltipText(c)"
+  [tooltipTemplate]="tooltipTemplate"
+  [tooltipContext]="{series: c.series, name: c.label, value: c.data}">
+</svg:g>

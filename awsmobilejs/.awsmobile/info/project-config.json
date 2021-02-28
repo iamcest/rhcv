@@ -1,0 +1,6 @@
+{
+	"SourceDir": "src",
+	"DistributionDir": "dist",
+	"BuildCommand": "ng build --aot",
+	"StartCommand": "ng test --watch=false"
+}

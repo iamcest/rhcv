@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<testsuite name="Chrome Headless 86.0.4240.198 (Mac OS 10.15.7)" package="" timestamp="2020-11-16T00:40:42" id="0" hostname="Saisrikars-MacBook-Pro.local" tests="77" errors="0" failures="1" time="2.827">
+  <properties>
+    <property name="browser.fullName" value="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/86.0.4240.198 Safari/537.36"/>
+  </properties>
+  <testcase name="NotesListComponent should create" time="0.362" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).NotesListComponent"/>
+  <testcase name="AuthGuard should ..." time="0.005" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).AuthGuard"/>
+  <testcase name="NoteAddComponent should create" time="0.055" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).NoteAddComponent"/>
+  <testcase name="PatientService should be created" time="0.004" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).PatientService"/>
+  <testcase name="PractitionerOrganizationResolverGuard should ..." time="0.012" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).PractitionerOrganizationResolverGuard"/>
+  <testcase name="PatientResolverGuard should ..." time="0.002" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).PatientResolverGuard"/>
+  <testcase name="GlobalErrorsService should be created" time="0.003" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).GlobalErrorsService"/>
+  <testcase name="ProfileComponent should create" time="0.069" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).ProfileComponent"/>
+  <testcase name="MedicationService should be created" time="0.005" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).MedicationService"/>
+  <testcase name="PatientDetailSideComponent should create" time="0.059" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).PatientDetailSideComponent"/>
+  <testcase name="PriorityIconComponent should create" time="0.027" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).PriorityIconComponent"/>
+  <testcase name="CareplanService should expand recurring goals" time="0.021" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).CareplanService">
+    <failure type="">error properties: Object({ originalStack: 'Error: Expected '2069-12-31T23:00:00.000Z' to be '2070-01-01T09:00:00.000Z'.
+    at new ZoneAwareError (http://localhost:9876/_karma_webpack_/node_modules/zone.js/dist/zone-error.js:97:1)
+    at Spec.addExpectationResult (http:/ ...
+Error: Expected '2069-12-31T23:00:00.000Z' to be '2070-01-01T09:00:00.000Z'.
+    at &lt;Jasmine&gt;
+</failure>
+  </testcase>
+  <testcase name="CareplanService should be created" time="0.006" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).CareplanService"/>
+  <testcase name="PendingRegistrationsComponent should create" time="0.027" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).PendingRegistrationsComponent"/>
+  <testcase name="FooterComponent should create" time="0.02" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).FooterComponent"/>
+  <testcase name="ServicesModule should create an instance" time="0.002" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).ServicesModule"/>
+  <testcase name="PendingRegistrationsComponent should create" time="0.088" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).PendingRegistrationsComponent"/>
+  <testcase name="JournalComponent should create" time="0.147" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).JournalComponent"/>
+  <testcase name="FhirService should be created" time="0.005" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).FhirService"/>
+  <testcase name="AppComponent should have as title 'Cardihab Patient Management'" time="0.011" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).AppComponent"/>
+  <testcase name="AppComponent should render router-outlet" time="0.013" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).AppComponent"/>
+  <testcase name="AppComponent should create the app" time="0.008" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).AppComponent"/>
+  <testcase name="LoginComponent should create" time="0.043" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).LoginComponent"/>
+  <testcase name="PipesModule should create an instance" time="0.001" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).PipesModule"/>
+  <testcase name="ReportService should be created" time="0.005" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).ReportService"/>
+  <testcase name="PatientDischargeComponent should create" time="0.058" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).PatientDischargeComponent"/>
+  <testcase name="MedicinesDetailComponent should create" time="0.078" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).MedicinesDetailComponent"/>
+  <testcase name="AdherenceService should be created" time="0.003" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).AdherenceService"/>
+  <testcase name="HeatmapComponent should create" time="0.019" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).HeatmapComponent"/>
+  <testcase name="QuestionnaireService should be created" time="0.003" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).QuestionnaireService"/>
+  <testcase name="PendingRegistrationModalComponent should create" time="0.037" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).PendingRegistrationModalComponent"/>
+  <testcase name="ChartsComponent should create" time="0.021" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).ChartsComponent"/>
+  <testcase name="GoalStatusComponent should create" time="0.014" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).GoalStatusComponent"/>
+  <testcase name="HomeComponent should compile" time="0.052" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).HomeComponent"/>
+  <testcase name="SmartGoalsComponent should create" time="0.107" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).SmartGoalsComponent"/>
+  <testcase name="DischargeReportComponent should create" time="0.02" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).DischargeReportComponent"/>
+  <testcase name="GuardsModule should create an instance" time="0.002" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).GuardsModule"/>
+  <testcase name="CareplanResolverGuard should ..." time="0.004" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).CareplanResolverGuard"/>
+  <testcase name="ObservationValuePipe create an instance" time="0.002" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).ObservationValuePipe"/>
+  <testcase name="PatientListComponent should create" time="0.154" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).PatientListComponent"/>
+  <testcase name="ComboChartComponent should create" time="0" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).ComboChartComponent">
+    <skipped/>
+  </testcase>
+  <testcase name="ChangePasswordComponent should create" time="0.046" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).ChangePasswordComponent"/>
+  <testcase name="DischargeConfirmationComponent should create" time="0.058" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).DischargeConfirmationComponent"/>
+  <testcase name="PlanHistoryComponent should create" time="0.02" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).PlanHistoryComponent"/>
+  <testcase name="AdherenceTabsComponent should create" time="0.131" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).AdherenceTabsComponent"/>
+  <testcase name="SmartGoalDetailComponent should create" time="0.043" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).SmartGoalDetailComponent"/>
+  <testcase name="FhirCodingPipe create an instance" time="0.003" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).FhirCodingPipe"/>
+  <testcase name="SmartGoalListComponent should create" time="0.095" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).SmartGoalListComponent"/>
+  <testcase name="ReviewScheduleComponent should create" time="0.024" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).ReviewScheduleComponent"/>
+  <testcase name="ReviewScheduleComponent sets and updates activity week 1 start and end" time="0.019" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).ReviewScheduleComponent"/>
+  <testcase name="ReviewScheduleComponent sets and updates plan end date" time="0.019" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).ReviewScheduleComponent"/>
+  <testcase name="ReviewScheduleComponent sets and updates activity final assessment start and end" time="0.02" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).ReviewScheduleComponent"/>
+  <testcase name="ReviewScheduleComponent sets and updates plan start date" time="0.016" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).ReviewScheduleComponent"/>
+  <testcase name="ReviewScheduleComponent sets activity week 2 start and end" time="0.021" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).ReviewScheduleComponent"/>
+  <testcase name="ReviewScheduleComponent sets and updates activity initial assessment start and end" time="0.019" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).ReviewScheduleComponent"/>
+  <testcase name="AdherenceComponent should create" time="0.069" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).AdherenceComponent"/>
+  <testcase name="FhirUsualNamePipe Should return &lt;No Name> value is empty array" time="0.009" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).FhirUsualNamePipe"/>
+  <testcase name="FhirUsualNamePipe Should return &lt;No Name> value not defined" time="0" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).FhirUsualNamePipe"/>
+  <testcase name="FhirUsualNamePipe create an instance" time="0" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).FhirUsualNamePipe"/>
+  <testcase name="AppRoutingModule should create an instance" time="0" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).AppRoutingModule"/>
+  <testcase name="ReviewComponent should create" time="0.015" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).ReviewComponent"/>
+  <testcase name="RecordedDataComponent should create" time="0.12" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).RecordedDataComponent"/>
+  <testcase name="EditGoalModalComponent should create" time="0.044" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).EditGoalModalComponent"/>
+  <testcase name="PatientDeliveryComponent should create" time="0.018" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).PatientDeliveryComponent"/>
+  <testcase name="GoalsComponent should create" time="0.012" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).GoalsComponent"/>
+  <testcase name="AdherenceTableComponent should create" time="0.014" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).AdherenceTableComponent"/>
+  <testcase name="PatientDetailModule should create an instance" time="0" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).PatientDetailModule"/>
+  <testcase name="DemographicsComponent should create" time="0.1" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).DemographicsComponent"/>
+  <testcase name="MedicinesListComponent should create" time="0.085" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).MedicinesListComponent"/>
+  <testcase name="QuestionnaireComponent should create" time="0.014" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).QuestionnaireComponent"/>
+  <testcase name="MedicinesComponent should create" time="0.095" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).MedicinesComponent"/>
+  <testcase name="DesignComponent should create" time="0.043" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).DesignComponent"/>
+  <testcase name="OriginComponent should create" time="0.013" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).OriginComponent"/>
+  <testcase name="AgePipe handle empty DoB" time="0" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).AgePipe"/>
+  <testcase name="AgePipe create an instance" time="0" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).AgePipe"/>
+  <testcase name="PatientDetailComponent should create" time="0.058" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).PatientDetailComponent"/>
+  <testcase name="PractitionerService should be created" time="0.01" classname="Chrome_Headless_86_0_4240_198_(Mac_OS_10_15_7).PractitionerService"/>
+  <system-out>
+    <![CDATA[Chrome Headless 86.0.4240.198 (Mac OS 10.15.7) DEBUG: 'activating goal: undefined'
+,Chrome Headless 86.0.4240.198 (Mac OS 10.15.7) DEBUG: 'startAt: 9 hours'
+,Chrome Headless 86.0.4240.198 (Mac OS 10.15.7) DEBUG: 'Every: a day'
+,Chrome Headless 86.0.4240.198 (Mac OS 10.15.7) DEBUG: 'activating'
+,Chrome Headless 86.0.4240.198 (Mac OS 10.15.7) DEBUG: Object{resourceType: 'Bundle', type: 'transaction', entry: [Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}, Object{request: ..., resource: ...}]}
+,Chrome Headless 86.0.4240.198 (Mac OS 10.15.7) LOG: '2069-12-31T23:00:00.000Z'
+,Chrome Headless 86.0.4240.198 (Mac OS 10.15.7) ALERT: 'Registration does not contain site code. This shouldn't happen'
+,Chrome Headless 86.0.4240.198 (Mac OS 10.15.7) WARN: ''mat-chip-list' is not a known element:
+1. If 'mat-chip-list' is an Angular component, then verify that it is part of this module.
+2. If 'mat-chip-list' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.'
+,Chrome Headless 86.0.4240.198 (Mac OS 10.15.7) LOG: '/charts/Blood Pressure'
+,Chrome Headless 86.0.4240.198 (Mac OS 10.15.7) WARN: ''mat-chip' is not a known element:
+1. If 'mat-chip' is an Angular component, then verify that it is part of this module.
+2. If 'mat-chip' is a Web Component then add 'CUSTOM_ELEMENTS_SCHEMA' to the '@NgModule.schemas' of this component to suppress this message.'
+,Chrome Headless 86.0.4240.198 (Mac OS 10.15.7) LOG: '/observation-adherence'
+,Chrome Headless 86.0.4240.198 (Mac OS 10.15.7) LOG: 'QuestionnaireComponent ngOnInit'
+
+]]>
+  </system-out>
+  <system-err/>
+</testsuite>

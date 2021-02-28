@@ -1,0 +1,8 @@
+<div class="layout-container flexAlignMainCenter">
+  <app-medicines-list style="flex-grow:1" *ngIf="!(selectedMedicine$ | async)" [patient]="patient"
+                      [carePlan]="carePlan" [selectedMedicine$]="selectedMedicine$"
+                      [allowEditing]="allowEditing"></app-medicines-list>
+  <app-medicines-detail style="flex-grow:1" *ngIf="(selectedMedicine$ | async)" [patient]="patient"
+                        [carePlan]="carePlan" [selectedMedicine$]="selectedMedicine$"
+                        [allowEditing]="allowEditing"></app-medicines-detail>
+</div>

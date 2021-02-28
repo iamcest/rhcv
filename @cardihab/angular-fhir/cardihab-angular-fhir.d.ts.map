@@ -1,0 +1,1 @@
+{"version":3,"file":"cardihab-angular-fhir.d.ts","sources":["cardihab-angular-fhir.d.ts"],"names":[],"mappings":"AAAA;AACA;AACA;AACA;AACA","sourcesContent":["/**\n * Generated bundle index. Do not edit.\n */\n/// <amd-module name=\"@cardihab/angular-fhir\" />\nexport * from './public-api';\n"]}

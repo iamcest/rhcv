@@ -1,0 +1,11 @@
+<div class="layout-container flexAlignCenter">
+  <mat-tab-group class="record-type" mat-stretch-tabs fxFlexFill
+                 (selectedTabChange)="tabChanged($event)">
+    <mat-tab *ngFor="let item of keys(GoalType)" [label]="item">
+      <ng-template matTabContent>
+        <app-adherence [patient]="patient" [carePlan]="carePlan" [tablet$]="tablet$"
+                       [goalType]="goalType"></app-adherence>
+      </ng-template>
+    </mat-tab>
+  </mat-tab-group>
+</div>

@@ -1,0 +1,44 @@
+<mat-progress-bar *ngIf="loading" color="primary" mode="indeterminate"></mat-progress-bar>
+<form class="flexColumn flexAlignStartSpaceBetween" [formGroup]="rehabForm" *ngIf="parentPlan">
+  
+  <ng-container *ngIf="initialAssessment">
+    <ng-container *ngTemplateOutlet="activitySchedule; context: {activity: initialAssessment, appointment: appointmentFor(initialAssessment), form: rehabForm.get('reviews').at(0)}"></ng-container>
+  </ng-container>
+
+  <div formGroupName="period" class="flexRow flexAlignStartSpaceBetween" style="margin-right:15px;">
+    <div style="flex: 1 1 50%; box-sizing: border-box; max-width: 50%;">
+      <div>Plan Start Date:</div>
+    </div>
+    <mat-form-field style="flex: 1 1 25%; box-sizing: border-box; max-width: 25%;" appearance="outline">
+      <input matInput [matDatepicker]="startpicker" placeholder="Start date" formControlName="start" [readonly]="carePlan.status !== 'draft'">
+      <mat-datepicker-toggle matSuffix [for]="startpicker"></mat-datepicker-toggle>
+      <mat-datepicker #startpicker [disabled]="carePlan.status !== 'draft'"></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field style="flex: 1 1 25%; box-sizing: border-box; max-width: 25%;" appearance="outline">
+      <input matInput type="time" placeholder="Default Appointment Time" formControlName="defaultTime" [readonly]="carePlan.status !== 'draft'">
+    </mat-form-field>
+  </div>
+  <full-calendar [options]="calendarOptions" *ngIf="calendarOptions.initialDate">
+  </full-calendar>
+  <!-- <ng-container formArrayName="reviews" *ngIf="carePlan.period?.start">
+    <ng-container *ngFor="let activity of reviews; let week = index;">
+      <ng-container *ngTemplateOutlet="activitySchedule; context: {activity: activity, appointment: appointmentFor(activity), form: rehabForm.get('reviews').at(week+(initialAssessment ? 1 : 0))}"></ng-container>
+    </ng-container>
+  </ng-container> -->
+</form>
+
+<ng-template #activitySchedule let-activity="activity" let-appointment="appointment" let-form="form">
+  <div class="flexRow flexAlignStartSpaceBetween" style="margin-right:15px;" [formGroup]="form" *ngIf="activity">
+    <input type="hidden" formControlName="id">
+    <div style="flex: 1 1 50%; box-sizing: border-box; max-width: 50%;">{{appointment?.description}}</div>
+    <mat-form-field style="flex: 1 1 25%; box-sizing: border-box; max-width: 25%;">
+      <input matInput [matDatepicker]="activitystartpicker" placeholder="Appointment Date" formControlName="date" 
+          [readonly]="appointment?.status === 'fulfilled' || appointment?.status === 'entered-in-error' || !isCarePlanIncomplete()">
+      <mat-datepicker-toggle matSuffix [for]="activitystartpicker"></mat-datepicker-toggle>
+      <mat-datepicker #activitystartpicker  [disabled]="appointment?.status === 'fulfilled'"></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field style="flex: 1 1 25%; box-sizing: border-box; max-width: 25%;">
+      <input matInput type="time" placeholder="Time" formControlName="time" [readonly]="appointment?.status === 'fulfilled' || appointment?.status === 'entered-in-error' || !isCarePlanIncomplete()">
+    </mat-form-field>
+  </div>
+</ng-template>

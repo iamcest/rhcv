@@ -1,0 +1,15 @@
+mat-form-field {
+    padding-right: 12px;
+}
+
+.mobile-number-input ::ng-deep .mat-form-field-label-wrapper {
+    left: 3em;
+}
+
+.profile-form {
+  margin-top: 30px;
+}
+
+.mat-input-element:disabled {
+  color: #000;
+}

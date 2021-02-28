@@ -1,0 +1,23 @@
+<div *ngIf="loading" class="loading-panel flexColumn flexAlignCenter" >
+  <img src="/assets/Heart-1s-200px.svg">
+  <h1>Loading...</h1>
+</div>
+<div class="content-container flexRow">
+  <div class="wrapper flexAlignEnd">
+    <div  class="component-container heatmap flexColumn">
+      <!-- <div>
+        <button type="button" class="mat-raised-button mat-warn today-button" mat-button (click)="resetToToday()">
+          TODAY
+        </button>
+      </div> -->
+      <div class="wrap" [ngClass]="{'tablet': tablet$ | async}">
+        <div #heatmap style="height: 100%; min-width: 100%"></div>
+      </div>
+    </div>
+  </div>
+  <div class="wrapper flexAlignStart">
+    <div class="component-container table flexColumn">
+      <app-adherence-table [selection]="selection" [patient]="patient" [goalType]="goalType"></app-adherence-table>
+    </div>
+  </div>
+</div>

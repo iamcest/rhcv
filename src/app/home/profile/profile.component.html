@@ -1,0 +1,82 @@
+<app-dialog-header title="Profile"></app-dialog-header>
+
+<form [formGroup]="profileForm" class="profile-form">
+  <div class="flexRowWrap flexAlignStart">
+    <ng-container *ngFor="let name of names.controls; let i = index" formArrayName="name">
+      <ng-container [formGroupName]="i">
+        <mat-form-field style="flex: 1 1 50%; box-sizing: border-box; max-width: 50%;">
+          <input matInput placeholder="Family" formControlName="family">
+        </mat-form-field>
+        <mat-form-field style="flex: 1 1 50%; box-sizing: border-box; max-width: 50%;">
+          <input matInput placeholder="Given" formControlName="given">
+        </mat-form-field>
+      </ng-container>
+    </ng-container>
+
+    <mat-form-field style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;"
+      *ngIf="!!profileForm.get('gender').value">
+      <input matInput placeholder="Gender" formControlName="gender">
+    </mat-form-field>
+
+    <mat-form-field style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;"
+      *ngIf="!!profileForm.get('address').value">
+      <input matInput placeholder="Address" formControlName="address">
+    </mat-form-field>
+
+    <ng-container *ngFor="let telecom of telecoms.controls; let i = index" formArrayName="telecom">
+      <ng-container [formGroupName]="i">
+        <mat-form-field style="flex: 1 1 50%; box-sizing: border-box; max-width: 50%;">
+          <input matInput placeholder="{{telecom.get('comm').value}}" formControlName="value">
+        </mat-form-field>
+      </ng-container>
+    </ng-container>
+
+
+    <div class="flexAlignStart" style="width: 100%;">
+      <mat-form-field style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;">
+        <mat-select placeholder="Roles" formControlName="roles" multiple >
+          <mat-option>-- None --</mat-option>
+          <mat-option value="doctor">Doctor</mat-option>
+          <mat-option value="nurse">Nurse</mat-option>
+          <mat-option value="allied-health">Allied Health</mat-option>
+          <mat-option value="ict">ICT (Reporting)</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+
+      <div style="flex: 1 1 100%">
+        <mat-form-field *ngIf="(roles$ | async)?.length > 1" appearance="outline" style="width: calc(100% - 9em);">
+          <mat-select placeholder="Current Role"
+            formControlName="role">
+            <mat-option *ngFor="let role of roles$ | async" [value]="'PractitionerRole/'+role.id">{{(organizationRole(role)
+              | async)?.name}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <button mat-raised-button color="primary" (click)="switchRole()">Switch Role</button>
+      </div>
+    </div>
+
+    <ng-container>
+      <div style="flex: 1 1 50%; box-sizing: border-box; max-width: 50%;">
+        <h2>Multi-Factor Authentication (MFA) Settings</h2>
+        <button style="margin:0 5px !important;" mat-raised-button (click)="toggleTOTPSetup('totp')"
+          *ngIf="!showTOTPSetupForm" [color]="hasTOTPEnabled ? 'warn' : 'primary'">{{ hasTOTPEnabled ? 'Remove' :
+          'Enable'
+          }} Google Authenticator</button>
+        <button style="margin:0 5px !important;" mat-raised-button (click)="toggleTOTPSetup('sms')"
+          *ngIf="!showTOTPSetupForm" [color]="hasSMSEnabled ? 'warn' : 'primary'">{{ hasSMSEnabled ? 'Remove' : 'Enable'
+          }} SMS 2FA</button>
+      </div>
+    </ng-container>
+
+    <ng-container *ngIf="showTOTPSetupForm">
+      <qrcode [qrdata]="totpQrCode" [width]="256" [errorCorrectionLevel]="'M'"></qrcode>
+      <form [formGroup]="totpForm" (submit)="verifyTOTPSetup()">
+        <mat-form-field style="flex: 1 1 50%; box-sizing: border-box; max-width: 50%;">
+          <input matInput placeholder="TOTP Code" formControlName="code" />
+        </mat-form-field>
+        <button mat-raised-button color="primary">Verify Code</button>
+      </form>
+    </ng-container>
+  </div>
+</form>

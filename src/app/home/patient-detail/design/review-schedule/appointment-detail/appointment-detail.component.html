@@ -1,0 +1,31 @@
+<app-dialog-header title="Appointment Detail"></app-dialog-header>
+<form [formGroup]="appointmentForm" (ngSubmit)="saveAppointment()">
+
+    <mat-dialog-content style="min-width: 40em">
+        <h3>{{appointment.description}}</h3>
+        <div style="display: flex; justify-content: space-evenly; width: 100%;">
+            <mat-form-field>
+                <mat-label>Appoinment Date</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="date">
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+                <mat-label>Appoinment Time</mat-label>
+                <input matInput type="time" formControlName="time">
+            </mat-form-field>
+        </div>
+        <div>
+            <mat-label>Status</mat-label>
+        </div>
+        <mat-button-toggle-group name="fontStyle" aria-label="Status" formControlName="status" color="primary">
+            <mat-button-toggle value="proposed" [disabled]="appointment.status !== 'proposed'">Proposed</mat-button-toggle>
+            <mat-button-toggle value="booked" [disabled]="appointment.status !== 'cancelled'">Booked</mat-button-toggle>
+            <mat-button-toggle value="fulfilled" disabled>Completed</mat-button-toggle>
+            <mat-button-toggle value="cancelled" [disabled]="appointment.status === 'fulfilled'">Skipped</mat-button-toggle>
+        </mat-button-toggle-group>
+    </mat-dialog-content>
+    <mat-dialog-actions align="end">
+        <button mat-button [mat-dialog-close]="false" type="reset">Cancel</button>
+        <button mat-button color="primary" type="submit">Save</button>
+    </mat-dialog-actions>
+</form>

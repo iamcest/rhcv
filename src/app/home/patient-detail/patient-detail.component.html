@@ -1,0 +1,30 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #drawer class="sidenav" [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'side'" [opened]="!(isHandset$ | async)" position="end" color="primary">
+    <app-patient-detail-side></app-patient-detail-side>
+  </mat-sidenav>
+  <mat-sidenav-content color="primary">
+    <app-patient-detail-identify></app-patient-detail-identify>
+    <nav mat-tab-nav-bar color="accent">
+      <a mat-tab-link routerLink="design" #rlaDesign="routerLinkActive" routerLinkActive="mat-tab-label-active"
+        [active]="rlaDesign.isActive">Design</a>
+      <a mat-tab-link routerLink="delivery" *ngIf="carePlan && carePlan?.status !== 'draft'"
+        #rlaDelivery="routerLinkActive" routerLinkActive="mat-tab-label-active"
+        [active]="rlaDelivery.isActive">{{(!isCarePlanCompleted)? "Discharge" : "Delivery"}} </a>
+
+      <a mat-tab-link *ngIf="!carePlan || carePlan?.status == 'draft'" disabled>Delivery</a>
+      <!-- <a mat-tab-link *ngIf="!carePlan || carePlan?.status == 'draft'" disabled>Discharge</a> -->
+      <div>
+        <button *ngIf="(isHandset$ | async)" (click)="drawer.open()" color="primary" mat-flat-button mat-icon-button
+        style="position: absolute; right: 0.5em;">
+          <mat-icon>chrome_reader_mode</mat-icon>
+        </button>
+      </div>
+    </nav>
+    <div class="scrollable-content">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+<app-telehealth [patient]="patient" *ngIf="enableTelehealth"></app-telehealth>

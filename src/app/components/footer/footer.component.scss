@@ -1,0 +1,21 @@
+.footer-container {
+  background-color: #fafafa;
+  height: 80px;
+  margin: 20px 0;
+  color: #777;
+
+  .copyright {
+    font-size: 0.8em;
+    
+    .cardihab-heart {
+      color: #dc9092;
+    }
+  }
+
+  a, a:visited {
+    color: #003c5e;
+    &:hover {
+      color: #ff4500;
+    }
+  }
+}

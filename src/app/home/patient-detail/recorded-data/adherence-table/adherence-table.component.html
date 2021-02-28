@@ -1,0 +1,38 @@
+<ng-template #taskList let-items="items">
+  <mat-list *ngIf="items?.length">
+    <mat-list-item *ngFor="let item of items">
+      <mat-card class="record flexAlignSpaceBetweenCenter">
+        <div class="flexAlignFlexStartCenter">
+          <mat-icon class="tick" *ngIf="getItemStatus(item) === true" matTooltip="Taken">check_circle</mat-icon>
+          <mat-icon class="tick no" *ngIf="getItemStatus(item) === false" matTooltip="Skipped">remove_circle_outline</mat-icon>
+          <mat-icon class="tick" *ngIf="getItemStatus(item) === undefined" matTooltip="Unknown">radio_button_unchecked</mat-icon>
+          <div class="flexColumn">
+            <span>
+              <strong *ngIf="getDescription(item).time">{{getDescription(item).time}}:</strong>
+              {{getDescription(item).name}}
+            </span>
+            <div class="skipped-reason"
+                 *ngIf="getItemStatus(item) === false && getSkipReason(item)">
+                <strong>Skipped:</strong>&nbsp;{{getSkipReason(item)}}</div>
+          </div>
+        </div>
+        <!--TBA PAM-131-->
+        <div class="flexAlignFlexEndCenter"></div>
+      </mat-card>
+    </mat-list-item>
+  </mat-list>
+</ng-template>
+
+<div class="container flexAlignFlexStartCenter flexColumn">
+  <h1>{{weekDay}} {{date}}</h1>
+  <div class="adherence-table-tabs">
+    <ng-container *ngTemplateOutlet="taskList; context: {items: items}"></ng-container>
+  </div>
+
+  <div *ngIf="!items?.length">
+    <div  class="empty-card flexColumn">
+      <p>No {{goalType}} tasks</p>
+      <p>for {{formatName(patient?.name)}}</p>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,25 @@
+<mat-card *ngIf="!!patient" class="mat-card-identity">
+    <div class="flexRowWrap" style="justify-content: flex-start;">
+        <ng-container>
+            <mat-form-field appearance="outline" floatLabel="always" style="width: 15em">
+                <mat-label>Family, First Name</mat-label>
+                <input matInput [value]="patient.name | fhirUsualName" readonly style="color: black">
+            </mat-form-field>
+            <mat-form-field appearance="outline" floatLabel="always"  style="width: 8em">
+                <mat-label>Gender</mat-label>
+                <input matInput [value]="getPatientGender(patient).label" readonly style="color: black">
+            </mat-form-field>
+            <mat-form-field appearance="outline" floatLabel="always" style="width: 10em">
+                <mat-label>Date Of Birth</mat-label>
+                <input matInput [matDatepicker]="dob2" [value]="patient?.birthDate"
+                    readonly style="color: black">
+                <mat-datepicker #dob2></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field appearance="outline" floatLabel="always"  class="urn-input" style="width: 8em">
+                <mat-label>{{urnLabel}}</mat-label>
+                <input matInput [value]="(patientService.urn(patient) || {}).value || ''"
+                    readonly style="color: black">
+            </mat-form-field>
+        </ng-container>
+    </div>
+</mat-card>

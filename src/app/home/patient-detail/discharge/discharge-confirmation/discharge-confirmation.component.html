@@ -1,0 +1,59 @@
+<form (ngSubmit)="discharge()" [formGroup]="dischargeForm">
+  <app-dialog-header [title]="data.action || 'Discharge' + ' Confirmation'"></app-dialog-header>
+
+  <div mat-dialog-content *ngIf="data['type'] === 'REPORT';then dischargeReport else planHistory">
+  </div>
+
+  <ng-template #planHistory>
+    <div class="flexRowWrap">
+      <h4 style="flex: 1 1 33%; box-sizing: border-box; max-width: 33%;" translate>Patient</h4>
+      <div style="flex: 1 1 66%; box-sizing: border-box; max-width: 66%;" class="padding">
+        <div>{{data.patient.name | fhirUsualName}}</div>
+        <div>{{data.patient.gender | titlecase}}</div>
+        <div>{{data.patient.birthDate | date: 'mediumDate' }} ({{data.patient.birthDate | ageInYears}} years)</div>
+      </div>
+      <h4 style="flex: 1 1 33%; box-sizing: border-box; max-width: 33%;" translate>Condition:</h4>
+      <div style="flex: 1 1 66%; box-sizing: border-box; max-width: 66%;" class="padding">
+        <ng-container *ngFor="let condition of conditions | async">
+          <div>{{condition | fhirCoding}}</div>
+        </ng-container>
+      </div>
+      <h4 style="flex: 1 1 33%; box-sizing: border-box; max-width: 33%;" translate>Completed:</h4>
+      <div style="flex: 1 1 66%; box-sizing: border-box; max-width: 66%;" class="padding">{{completionStatus}}</div>
+    </div>
+
+    <div class="flexRow">
+      <mat-form-field>
+        <mat-label>Next steps</mat-label>
+        <mat-select formControlName="transition">
+          <mat-option translate value="">Patient remains active</mat-option>
+          <mat-option translate value="archive" [disabled]="allowedTransitions.indexOf('archive') === -1">Archive
+            Patient<sup>*</sup></mat-option>
+          <mat-option translate value="plan" *ngIf="allowedTransitions.indexOf('plan') !== -1">Transition to new plan
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+      <mat-form-field class="margin-left">
+        <mat-select formControlName="transitionTo">
+          <mat-option *ngFor="let plan of transitionPlans | async" [value]="plan" translate>Transition to
+            {{plan.resource.title}}</mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+    <mat-hint translate *ngIf="dischargeForm.value.transition === 'archive'"><sup>*</sup>An archived patient will
+      continue to have access to the app, but will not sync with the Portal*</mat-hint>
+  </ng-template>
+  <ng-template #dischargeReport>
+    <div class="flexRow">
+      <app-discharge-report [patient]="data.patient" [carePlan]="data.carePlan" style="zoom: 0.5;"></app-discharge-report>
+    </div>
+  </ng-template>
+
+
+  <div mat-dialog-actions align="end">
+    <mat-checkbox *ngIf="allowUnregister && dischargeForm.value.transition === 'archive'" formControlName="unregister">
+      Unregister from App</mat-checkbox>
+    <button mat-button [mat-dialog-close]="false" cdkFocusInitial translate>Cancel</button>
+    <button mat-button color="primary" translate>{{data.action || 'Discharge'}}</button>
+  </div>
+</form>

@@ -1,0 +1,264 @@
+{
+    "entry": [
+        {
+            "request": {
+              "method": "PUT",
+              "url": "Goal/goal-bloodpressure"
+            },
+            "resource": {
+              "extension": [
+                {
+                  "url": "https://fhir-registry.cardihab.com/StructureDefiniton/RecurringTask",
+                  "extension": [
+                    {
+                      "url": "timing",
+                      "valueString": "R6/P1W"
+                    }
+                  ]
+                },
+                {
+                    "url": "https://fhir-registry.cardihab.com/StructureDefiniton/Adherence",
+                    "extension": [
+                      {
+                        "url": "groupLabel",
+                        "valueString": "Blood Pressure"
+                      },
+                      {
+                          "url": "goalType",
+                          "valueString": "task"
+                      }
+                    ]
+                }
+              ],
+              "resourceType": "Goal",
+              "status": "proposed",
+              "description": {
+                  "text": "Record your blood pressure"
+                },
+              "target": {
+                "measure": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "75367002",
+                            "display": "Blood pressure"
+                        }
+                    ]
+                }
+              }
+            }
+        },
+        {
+            "request": {
+              "method": "PUT",
+              "url": "Goal/goal-systolic-bloodpressure"
+            },
+            "resource": {
+              "extension": [
+                {
+                    "url": "https://fhir-registry.cardihab.com/StructureDefiniton/Adherence",
+                    "extension": [
+                        {
+                            "url": "groupLabel",
+                            "valueString": "Blood Pressure"
+                        },
+                        {
+                            "url": "goalType",
+                            "valueString": "observation-component"
+                        }
+                    ]
+                  }
+              ],
+              "resourceType": "Goal",
+              "status": "proposed",
+              "description": {
+                  "text": "Systolic blood pressure in healthy range"
+                },
+              "target": {
+                "measure": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "271649006",
+                            "display": "Systolic blood pressure"
+                        }
+                    ]
+                },
+                "detailRange": {
+                    "low": 90,
+                    "high": 120
+                }
+              }
+            }
+        },
+        {
+            "request": {
+              "method": "PUT",
+              "url": "Goal/goal-diastolic-bloodpressure"
+            },
+            "resource": {
+              "extension": [
+                {
+                    "url": "https://fhir-registry.cardihab.com/StructureDefiniton/Adherence",
+                    "extension": [
+                        {
+                            "url": "groupLabel",
+                            "valueString": "Blood Pressure"
+                        },
+                        {
+                            "url": "goalType",
+                            "valueString": "observation-component"
+                        }
+                    ]
+                  }
+              ],
+              "resourceType": "Goal",
+              "status": "proposed",
+              "description": {
+                  "text": "Diastolic blood pressure in healthy range"
+                },
+              "target": {
+                "measure": {
+                    "coding": [
+                        {
+                            "system": "http://snomed.info/sct",
+                            "code": "271650006",
+                            "display": "Diastolic blood pressure"
+                        }
+                    ]
+                },
+                "detailRange": {
+                    "low": 60,
+                    "high": 80
+                }
+              }
+            }
+        },
+        {
+            "request": {
+              "method": "PUT",
+              "url": "Goal/goal-w1-education"
+            },
+            "resource": {
+              "extension": [
+                {
+                    "url": "https://fhir-registry.cardihab.com/StructureDefiniton/Adherence",
+                    "extension": [
+                      {
+                          "url": "goalType",
+                          "valueString": "education"
+                      }
+                    ]
+                },
+                {
+                    "url": "https://fhir-registry.cardihab.com/StructureDefiniton/EducationTask",
+                    "extension": [
+                      {
+                        "url": "content",
+                        "valueString": "about_your_heart_attack.html"
+                      }
+                    ]
+                },
+                {
+                  "url": "https://fhir-registry.cardihab.com/StructureDefiniton/TaskEnableWhen",
+                  "extension": [
+                    {
+                      "url": "questionnaire",
+                      "valueReference": {
+                        "reference": "Questionnaire/varnfield2014-initialassessment"
+                      }
+                    },
+                    {
+                      "url": "question",
+                      "valueString": "current-event-procedure-diagnosis"
+                    },
+                    {
+                      "url": "answerChoice",
+                      "extension": [
+                            {
+                                "url": "0",
+                                "valueCoding": {
+                                    "system": "http://snomed.info/sct",
+                                    "code": "401303003",
+                                    "display": "STEMI"
+                                }
+                            },
+                            {
+                                "url": "1",
+                                "valueCoding": {
+                                    "system": "http://snomed.info/sct",
+                                    "code": "401314000",
+                                    "display": "NSTEMI"
+                                }
+                            }
+                        ]
+                    }
+                  ]
+                }
+              ],
+              "resourceType": "Goal",
+              "status": "proposed",
+              "description": {
+                  "text": "Read this article to learn about your heart attack"
+                }
+            }
+          },
+          {
+            "request": {
+              "method": "PUT",
+              "url": "Goal/goal-w1-walking"
+            },
+            "resource": {
+                "extension": [
+                    {
+                      "url": "https://fhir-registry.cardihab.com/StructureDefiniton/RecurringTask",
+                      "extension": [
+                        {
+                          "url": "timing",
+                          "valueString": "R7/P1D"
+                        }
+                      ]
+                    },
+                    {
+                        "url": "https://fhir-registry.cardihab.com/StructureDefiniton/Adherence",
+                        "extension": [
+                          {
+                            "url": "groupLabel",
+                            "valueString": "Walking"
+                          },
+                          {
+                              "url": "goalType",
+                              "valueString": "exercise"
+                          }
+                        ]
+                    }
+                ],
+                "resourceType": "Goal",
+                "status": "proposed",
+                "description": {
+                    "text": "Week 1 Walking Daily Goal"
+                },
+                "target": {
+                    "measure": {
+                        "coding": [
+                            {
+                                "system": "http://snomed.info/sct",
+                                "code": "129006008",
+                                "display": "Walking"
+                            }
+                        ]
+                        
+                    },
+                    "detailQuantity": {
+                        "value": 10,
+                        "comparator": ">=",
+                        "unit": "minutes"
+                    }
+                }
+              
+            }
+          }
+    ],
+    "resourceType": "Bundle",
+    "type": "transaction"
+}

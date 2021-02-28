@@ -1,0 +1,40 @@
+<mat-card>
+  <mat-card-title>Appointments</mat-card-title>
+  <mat-card-content>
+    <div class="buttons flexRow flexAlignSpaceBetweenStretch" style="padding-top: 2px; padding-bottom: 2px;">
+      <button mat-button color="primary" (click)="prevDay()">
+        <mat-icon>arrow_back_ios</mat-icon>
+      </button>
+      <button mat-raised-button (click)="backToToday()">TODAY</button>
+      <button mat-button color="primary" (click)="nextDay()">
+        <mat-icon>arrow_forward_ios</mat-icon>
+      </button>
+    </div>
+
+    <div class="flexColumn flexAlignSpaceBetweenCenter">
+      <div class="current-date">{{currentDate.format('DD-MMM-YYYY')}}</div>
+      <mat-progress-bar *ngIf="loading" color="primary" mode="indeterminate"></mat-progress-bar>
+    </div>
+
+    <mat-list dense *ngIf="patientsCount > 0 && !loading">
+      <mat-list-item class="clickable" *ngFor="let item of items" (click)="goToPatientAppointment(item.patient$)">
+        <span mat-line style="font-size: 14px;"><b>{{item.appointment.start | date:'hh:SS a'}}&nbsp; {{formatName((item.patient$ | async))}}</b></span>
+        <span mat-line>{{item.appointment.description}}</span><br/>
+      </mat-list-item>
+    </mat-list>
+
+    <div class="no-appointments" *ngIf="patientsCount === 0 && !loading">
+      <h4>No appointments</h4>
+    </div>
+
+    <div *ngIf="!loading" class="more-buttons flexRow flexAlignFlexEndStretch">
+      <button *ngIf="totalPatientsCount > patientsCount" mat-button color="primary" (click)="toggleLimit(false)">
+        Show all ({{totalPatientsCount}})
+      </button>
+
+      <button *ngIf="patientsCount > limit" mat-button color="primary" (click)="toggleLimit(true)">
+        Show first {{limit}}
+      </button>
+    </div>
+  </mat-card-content>
+</mat-card>

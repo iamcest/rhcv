@@ -1,0 +1,14 @@
+.reports {
+    overflow-y: auto;
+    box-shadow: none;
+    height: calc(100vh - 60px);
+    margin-top: 60px;
+    background: white;
+    padding: 16px;
+}
+
+.download-button {
+    position: absolute;
+    right: 1em;
+    bottom: 1em;
+}

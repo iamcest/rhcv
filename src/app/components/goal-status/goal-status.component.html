@@ -1,0 +1,3 @@
+<div matTooltip="Goal status: {{status}}" class="flexRow flexAlignCenter">
+  <mat-icon [ngClass]="'goal-icon ' + getStatus(status)?.status">{{getStatus(status)?.icon}}</mat-icon>
+</div>

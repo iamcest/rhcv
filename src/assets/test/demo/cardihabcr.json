@@ -1,0 +1,448 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Organization",
+        "id": "cardihab-hhs-12345",
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ns.electronichealth.net.au/id/hi/hpio/1.0",
+                "code": "8003627500000328",
+                "display": "Health Provider Identifier - Organisation"
+              }
+            ]
+          },
+          {
+            "coding": [
+              {
+                "system": "http://www.abs.gov.au/ausstats/abs@.nsf/mf/1292.0",
+                "code": "8401",
+                "display": "Hospitals (Except Psychiatric Hospitals)"
+              }
+            ]
+          }
+        ],
+        "name": "Cardihab Hospital and Health Service",
+        "telecom": [
+          {
+            "system": "url",
+            "value": "https://cardihab.com/"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "Level 3, 315 Brunswick Street"
+            ],
+            "city": "Fortitude Valley",
+            "state": "Queensland",
+            "postalCode": "4006",
+            "country": "Australia"
+          },
+          {
+            "line": [
+              "PO Box 1319"
+            ],
+            "city": "Fortitude Valley",
+            "state": "Queensland",
+            "postalCode": "4006",
+            "country": "Australia"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Organization/cardihab-hhs-12345"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Organization",
+        "id": "cardihab-hhs-crservice-12345",
+        "identifier": [
+          {
+            "system": "urn:sitecode",
+            "value": "cardihabcr"
+          }
+        ],
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ns.electronichealth.net.au/id/hi/hpio/1.0",
+                "code": "8003627500000328",
+                "display": "Health Provider Identifier - Organisation"
+              }
+            ]
+          },
+          {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/v3/RoleCode",
+                "code": "CARD",
+                "display": "Ambulatory Health Care Facilities; Clinic/Center; Rehabilitation: Cardiac Facilities"
+              }
+            ]
+          }
+        ],
+        "name": "Cardihab Cardiac Rehabilitation Service",
+        "telecom": [
+          {
+            "system": "url",
+            "value": "https://cardihab.com/"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "Level 3, 315 Brunswick Street"
+            ],
+            "city": "Fortitude Valley",
+            "state": "Queensland",
+            "postalCode": "4006",
+            "country": "Australia"
+          },
+          {
+            "line": [
+              "PO Box 1319"
+            ],
+            "city": "Fortitude Valley",
+            "state": "Queensland",
+            "postalCode": "4006",
+            "country": "Australia"
+          }
+        ],
+        "partOf": {
+          "reference": "Organization/cardihab-hhs-12345"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Organization/cardihab-hhs-crservice-12345"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Location",
+        "id": "cardihab-hhs-crservice-gym-12345",
+        "status": "active",
+        "name": "Cardihab Cardiac Rehabilitation Service Gym",
+        "mode": "instance",
+        "type": {
+          "coding": [
+            {
+              "system": "http://hl7.org/fhir/v3/RoleCode",
+              "code": "CARD",
+              "display": "Ambulatory Health Care Facilities; Clinic/Center; Rehabilitation: Cardiac Facilities"
+            }
+          ]
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Location/cardihab-hhs-crservice-gym-12345"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "cardihab-practitioner-12345",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Smith",
+            "given": [
+              "John"
+            ],
+            "prefix": [
+              "Dr"
+            ]
+          }
+        ],
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "800-277-1993",
+            "use": "mobile"
+          },
+          {
+            "system": "email",
+            "value": "simon.mcbride+staging@cardihab.com",
+            "use": "work"
+          },
+          {
+            "system": "email",
+            "value": "neil.estandarte+staging@cardihab.com",
+            "use": "work"
+          },
+          {
+            "system": "email",
+            "value": "julie.shepard+staging@cardihab.com",
+            "use": "work"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "Level 3, 315 Brunswick Street"
+            ],
+            "city": "Fortitude Valley",
+            "state": "Queensland",
+            "postalCode": "4006",
+            "country": "Australia"
+          }
+        ],
+        "gender": "male"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Practitioner/cardihab-practitioner-12345"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "cardihab-practitioner-111213",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Brown",
+            "given": [
+              "Julie"
+            ],
+            "prefix": [
+              "Mrs"
+            ]
+          }
+        ],
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "800-277-2110",
+            "use": "mobile"
+          },
+          {
+            "system": "email",
+            "value": "gus.taddeo+staging@cardihab.com",
+            "use": "work"
+          },
+          {
+            "system": "email",
+            "value": "michelle.odea+staging@cardihab.com",
+            "use": "work"
+          },
+          {
+            "system": "email",
+            "value": "michael.cassano+staging@cardihab.com",
+            "use": "work"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "Level 3, 315 Brunswick Street"
+            ],
+            "city": "Fortitude Valley",
+            "state": "Queensland",
+            "postalCode": "4006",
+            "country": "Australia"
+          }
+        ],
+        "gender": "female"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Practitioner/cardihab-practitioner-111213"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "cardihab-practitioner-67890",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Johnson",
+            "given": [
+              "Amanda"
+            ],
+            "prefix": [
+              "Mrs"
+            ]
+          }
+        ],
+        "telecom": [
+          {
+            "system": "phone",
+            "value": "800-277-1991",
+            "use": "mobile"
+          },
+          {
+            "system": "email",
+            "value": "grant.jennings+staging@cardihab.com",
+            "use": "work"
+          },
+          {
+            "system": "email",
+            "value": "michael.wang+staging@cardihab.com",
+            "use": "work"
+          },
+          {
+            "system": "email",
+            "value": "christine.kwong+staging@cardihab.com",
+            "use": "work"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "Level 3, 315 Brunswick Street"
+            ],
+            "city": "Fortitude Valley",
+            "state": "Queensland",
+            "postalCode": "4006",
+            "country": "Australia"
+          }
+        ],
+        "gender": "female"
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Practitioner/cardihab-practitioner-67890"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "cardihab-practitionerrole-111213",
+        "active": true,
+        "practitioner": {
+          "reference": "Practitioner/cardihab-practitioner-111213"
+        },
+        "organization": {
+          "reference": "Organization/cardihab-hhs-12345"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "PractitionerRole/cardihab-practitionerrole-111213"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "cardihab-practitionerrole-12345",
+        "active": true,
+        "practitioner": {
+          "reference": "Practitioner/cardihab-practitioner-12345"
+        },
+        "organization": {
+          "reference": "Organization/cardihab-hhs-12345"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "PractitionerRole/cardihab-practitionerrole-12345"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "cardihab-practitionerrole-67890",
+        "active": true,
+        "practitioner": {
+          "reference": "Practitioner/cardihab-practitioner-67890"
+        },
+        "organization": {
+          "reference": "Organization/cardihab-hhs-12345"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "PractitionerRole/cardihab-practitionerrole-67890"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Organization",
+        "id": "cardihab-000000",
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "https://abr.business.gov.au/",
+                "code": "20610971910",
+                "display": "ABN 20 610 971 910"
+              }
+            ]
+          }
+        ],
+        "name": "Cardihab Pty Ltd",
+        "telecom": [
+          {
+            "system": "url",
+            "value": "https://cardihab.com/"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "Level 3, 315 Brunswick Street"
+            ],
+            "city": "Fortitude Valley",
+            "state": "Queensland",
+            "postalCode": "4006",
+            "country": "Australia"
+          },
+          {
+            "line": [
+              "PO Box 1319"
+            ],
+            "city": "Fortitude Valley",
+            "state": "Queensland",
+            "postalCode": "4006",
+            "country": "Australia"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Organization/cardihab-000000"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "CareTeam",
+        "id": "ct-1234",
+        "status": "active",
+        "category": [
+          {
+            "coding": [
+              {
+                "system": "http://hl7.org/fhir/care-team-category",
+                "code": "episode"
+              }
+            ]
+          }
+        ],
+        "name": "Cardihab Cardiac Rehabilitation Care Team",
+        "managingOrganization": [
+          {
+            "reference": "Organization/cardihab-hhs-12345"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "CareTeam/ct-1234"
+      }
+    }
+  ]
+}

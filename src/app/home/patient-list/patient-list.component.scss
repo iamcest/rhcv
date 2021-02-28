@@ -1,0 +1,113 @@
+@import "../home.component";
+
+.patient-list {
+  overflow-y: auto;
+  box-shadow: none;
+  height: calc(100vh - 60px);
+
+  mat-table {
+    width: 100%;
+
+    mat-row {
+      max-height: 8em;
+
+      mat-cell {
+        max-height: 8em;
+      }
+    }
+
+    mat-row:nth-child(even) {
+      background-color: #eee;
+    }
+
+    mat-row:hover {
+      background-color: rgba(0, 60, 94, 0.25);
+      cursor: pointer;
+    }
+
+    mat-header-cell {
+      display: flex;
+      flex-direction: column;
+      mat-form-field {
+        width: calc(100% - 8px);
+        ::ng-deep .mat-form-field-flex {
+          padding: 0px;
+        }
+        ::ng-deep .mat-form-field-wrapper {
+          padding-bottom: 0px;
+        }
+        ::ng-deep .mat-form-field-underline {
+          bottom: 0px;
+        }
+      }
+    }
+
+    .careplan-status {
+      font-weight: 500;
+    }
+
+    .mat-column-familyName, .mat-column-givenName {
+      min-width: 120px;
+      max-width: 25%;
+      mat-form-field {
+        width: 116px;
+      }
+    }
+
+    .mat-column-birthDate {
+      min-width: 130px;
+      max-width: 130px;
+      mat-form-field {
+        width: 116px;
+        left: 4px;
+      }
+    }
+
+    .mat-column-gender {
+      min-width: 90px;
+      max-width: 90px;
+      justify-content: flex-end;
+      mat-form-field {
+        width: 76px;
+        left: 4px;
+      }
+    }
+
+    .mat-column-conditions {
+      min-width: 175px;
+      max-width: 175px;
+      flex-direction: column;
+      .condition {
+        width: 100%;
+        text-align: right;
+      }
+      mat-form-field {
+        left: 8px;
+        width: 167px;
+      }
+    }
+
+    .mat-column-plan {
+      min-width: 150px;
+      justify-content: flex-end;
+      // max-width: 50%;
+      mat-form-field {
+        width: 140px;
+        left: 8px;
+      }
+    }
+
+  }
+}
+::ng-deep .mat-sort-header-content, ::ng-deep .mat-sort-header-button {
+  flex-direction: column;
+}
+
+mat-card.site-card {
+  margin: 0 4px 4px !important;
+}
+
+.urnColumn {
+	justify-content: center !important;
+	text-align: center !important;
+}

@@ -1,0 +1,9 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+export { AgePipe } from './age.pipe';
+export { FhirCodingPipe } from './fhir-coding.pipe';
+export { FhirUsualNamePipe } from './fhir-usual-name.pipe';
+export { ObservationValuePipe } from './observation-value.pipe';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290Ijoibmc6Ly9AY2FyZGloYWIvYW5ndWxhci1maGlyLyIsInNvdXJjZXMiOlsibGliL3BpcGVzL2luZGV4LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7QUFBQSxPQUFPLEVBQUUsT0FBTyxFQUFFLE1BQU0sWUFBWSxDQUFDO0FBQ3JDLE9BQU8sRUFBRSxjQUFjLEVBQUUsTUFBTSxvQkFBb0IsQ0FBQztBQUNwRCxPQUFPLEVBQUUsaUJBQWlCLEVBQUUsTUFBTSx3QkFBd0IsQ0FBQztBQUMzRCxPQUFPLEVBQUUsb0JBQW9CLEVBQUMsTUFBTSwwQkFBMEIsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbImV4cG9ydCB7IEFnZVBpcGUgfSBmcm9tICcuL2FnZS5waXBlJztcbmV4cG9ydCB7IEZoaXJDb2RpbmdQaXBlIH0gZnJvbSAnLi9maGlyLWNvZGluZy5waXBlJztcbmV4cG9ydCB7IEZoaXJVc3VhbE5hbWVQaXBlIH0gZnJvbSAnLi9maGlyLXVzdWFsLW5hbWUucGlwZSc7XG5leHBvcnQgeyBPYnNlcnZhdGlvblZhbHVlUGlwZX0gZnJvbSAnLi9vYnNlcnZhdGlvbi12YWx1ZS5waXBlJztcbiJdfQ==

@@ -1,0 +1,141 @@
+<div #contentToConvert class="content-to-convert">
+  <div class="report">
+    <div class="header flexRow">
+      <div class="logo">
+        <img class="cardihab-logo" src="/assets/CardihabLogo.png">
+      </div>
+
+      <div class="contact flexColumn">
+        <p class="facility-name"><strong>{{ organisation?.alias ? organisation?.alias[0] : organisation?.name
+            }}</strong></p>
+        <p class="address">{{ formatAddress(organisation, ['physical', 'both']) }}</p>
+      </div>
+    </div>
+
+    <div class="patient">
+      <p class="title">Patient</p>
+
+      <div class="patient-details flexRow">
+        <div class="row patient-details-name flexColumn">
+          <p class="label">Name</p>
+          <p class="info"> {{patient.name | fhirUsualName}}</p>
+        </div>
+
+        <div class=" row patient-details-born flexColumn">
+          <p class="label">Born</p>
+          <p class="info">{{formatDOB(patient.birthDate, true, true)}}</p>
+        </div>
+
+        <div class="row patient-details-gender flexColumn">
+          <p class="label">Gender</p>
+          <p class="info">{{patient.gender | titlecase}}</p>
+        </div>
+
+        <div class="row patient-details-phone flexColumn">
+          <p class="label">Phone</p>
+          <p class="info">{{getpatientPhone()}}</p>
+        </div>
+      </div>
+
+      <div class="patient-details-diagnosis-urn flexRow">
+        <div class="row patient-diagnosis flexColumn">
+          <p class="label">Principal Diagnosis/Current Episode/Procedure</p>
+          <p class="info">{{conditions}}</p>
+          <span *ngIf="diagnosisDate">&nbsp;({{diagnosisDate | date:'dd MMM yyyy'}})</span>
+        </div>
+
+        <div class="row patient-urn flexColumn">
+          <p class="label">{{urnLabel}}</p>
+          <p class="info">{{urn}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div class="summary">
+      <p class="title">Summary</p>
+
+      <div class="summary-details flexRow">
+        <div class="row summary-details-start flexRow">
+          <p class="label">Start</p>
+          <p class="info">{{carePlan?.period?.start | date:'dd MMM yyyy'}}</p>
+        </div>
+
+        <div class="row summary-details-end flexRow">
+          <p class="label">End</p>
+          <p class="info">{{isCarePlanIncomplete() ? 'Not Finished' : carePlan?.period?.end | date:'dd MMM yyyy'}}</p>
+        </div>
+      </div>
+
+      <div class="row summary-outcome flexRow">
+        <p class="label">Outcome</p>
+        <p class="info">{{(isProgress)? "": outcome }}</p>
+      </div>
+    </div>
+
+    <div class="risk-summary">
+      <p class="title">Risk Factor Summary</p>
+      <table>
+        <thead>
+          <th>Risk Factor (unit)</th>
+          <th>Pre</th>
+          <th>Post</th>
+          <th>Change (%)</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let factor of riskFactors">
+            <td class="text-cell" style="text-align: center;">{{factor.display}}<span *ngIf="factor.unit"> ({{factor.unit}})</span></td>
+            <td class=" value-cell" style="text-align: center;">{{factor.initial}}</td>
+            <td class="value-cell" style="text-align: center;">{{factor.final}}</td>
+            <td class="value-cell change-cell" style="text-align: center;">{{difference(factor)}}</td>
+          </tr>
+          <tr >
+            <td class="text-cell" style="text-align: center;"><b>Other Factors</b></td>
+            <td class="value-cell" style="text-align: center;">{{iaOtherFactors}}</td>
+            <td class="value-cell" style="text-align: center;">{{faOtherFactors}}</td>
+            <td class="value-cell change-cell" style="text-align: center;"></td>
+
+
+          </tr>
+          <tr class="value-cell"></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="current-medications" *ngIf="currentMedications.length">
+      <p class="title">Current Medications</p>
+      <table>
+        <thead>
+          <th>Name</th>
+        </thead>
+        <tbody>
+          <tr *ngFor="let medication of currentMedications">
+            <td>{{medication.name}}
+              <span
+                *ngIf="overallMedicationAdherence[medication.name]">({{overallMedicationAdherence[medication.name]?.value}}/{{overallMedicationAdherence[medication.name]?.total}}
+                - {{overallMedicationAdherence[medication.name]?.percentage}}%)</span>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div *ngFor="let review of weeklyReviews" class="review-row">
+      <p class="title">{{review.no}}</p>
+      <div class="row topics" *ngIf="review.topics && review.topics.length">
+        <p class="subheading">Task adherence</p>
+        <span *ngFor="let topic of review.topics; let i = index">{{topic}}
+          <span *ngIf="i < review.topics.length - 1" class="task-divider"> | </span></span>
+      </div>
+
+      <div class="row notes" *ngIf="review.notes && review.notes.length">
+        <p class="subheading">Notes</p>
+        <ul>
+          <li *ngFor="let note of review.notes">
+            <span class="username-date">{{note.author.name | fhirUsualName}} {{note.date | date:'dd MMM yyyy
+              HH:ss'}}</span>: {{note.text}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

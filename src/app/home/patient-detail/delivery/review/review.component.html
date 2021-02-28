@@ -1,0 +1,46 @@
+<div style="overflow-y: auto">
+  <div>
+    <app-questionnaire *ngIf="questionnaire"
+      [questionnaire]="questionnaire"
+      [context]="reviewEncounter"
+      [answers]="answers"
+      [activity]="activity"
+      [editable]="started"
+    >
+    </app-questionnaire>
+    <mat-list dense class="review-list" *ngIf="activity?.detail?.status !== 'completed' || (activity?.detail?.status === 'completed' && reminders.length > 0)"
+              [class.disabled]="activity?.detail?.status === 'completed'">
+      <h3>Patient Specific Review Topics</h3>
+      <div class="week-review-footer flexRow flexAlignCenter"
+           *ngIf="activity?.detail?.status !== 'completed' && isCarePlanIncomplete()">
+        <form class="reminder-form" (ngSubmit)="addReminder()">
+          <div>
+            <mat-form-field class="form-field-full-width">
+              <textarea matInput placeholder="Add a topic" [ngModelOptions]="{standalone: true}"
+                        [(ngModel)]="reminderText"></textarea>
+            </mat-form-field>
+          </div>
+          <div class="button-group flexRow flexAlignCenter">
+            <button mat-raised-button color="primary"
+                    (click)="onReminderChange(ReminderFrequency.Next)">{{ReminderFrequency.Next}}</button>
+            <button mat-raised-button color="primary"
+                    (click)="onReminderChange(ReminderFrequency.Remaining)">{{ReminderFrequency.Remaining}}</button>
+          </div>
+        </form>
+      </div>
+      <app-notes-list class="review-list" [hasCheckboxes]="true"
+                      [carePlan]="carePlan" [notes]="reminders"></app-notes-list>
+    </mat-list>
+
+    <div class="notes-component">
+      <app-notes-list class="review-list" [carePlan]="carePlan" [notes]="notes"
+                      [disabled]="activity?.detail?.status === 'completed' && isCarePlanIncomplete()"
+                      title="Review Notes"></app-notes-list>
+    </div>
+  </div>
+</div>
+<div class="week-review-footer-wrapper" [ngClass]="{active: isCarePlanIncomplete() && (activity?.detail?.status === 'in-progress' || activity?.detail?.status === 'completed')}">
+  <div class="week-review-footer" *ngIf="isCarePlanIncomplete()">
+    <app-note-add (noteAdded)="addReviewNote($event)" [placeholder]="addNotePlaceholderText"></app-note-add>
+  </div>
+</div>

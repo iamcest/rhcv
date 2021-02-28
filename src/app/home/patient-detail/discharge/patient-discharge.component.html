@@ -1,0 +1,55 @@
+<div class="patient-discharge">
+    <mat-accordion [multi]="true" class="patient-discharge-accordion">
+      <mat-expansion-panel [expanded]="expanded.assessment" class="final-assessment">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Final Assessment
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
+          <ng-container *ngFor="let assessment of finalAssessmentQuestionnaires">
+            <app-questionnaire
+              [questionnaire]="assessment"
+              [context]="carePlan.context"
+              [answers]="responseFor(assessment)"
+              [editable]="carePlan?.status === 'active'"
+              (changesSaved)="onAnswersChange($event)">
+            </app-questionnaire>
+          </ng-container>
+        </ng-template>
+  
+        <mat-action-row>
+          <button *ngIf="carePlan?.status === 'active'" mat-button color="primary" (click)="dischargePatient()" [disabled]="!valid">
+            <mat-icon>exit_to_app</mat-icon>
+            Discharge Patient
+          </button>
+          <span class="mat-expansion-indicator" (click)="expanded.assessment = !expanded.assessment"></span>
+        </mat-action-row>
+      </mat-expansion-panel>
+  
+      <mat-expansion-panel class="discharge-report" *ngIf="!isCarePlanIncomplete()"
+        [expanded]="expanded.report">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            Discharge Report
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+  
+        <ng-template matExpansionPanelContent>
+          <mat-action-row class="discharge-report-actions">
+            <button mat-button (click)="download()">
+              <mat-icon>save_alt</mat-icon>Download
+            </button>
+          </mat-action-row>
+  
+          <app-discharge-report [carePlan]="carePlan" style="zoom: 0.5"></app-discharge-report>
+  
+          <mat-action-row>
+            <span class="mat-expansion-indicator" (click)="expanded.report = !expanded.report"></span>
+          </mat-action-row>
+        </ng-template>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <app-footer></app-footer>
+  </div>
+  

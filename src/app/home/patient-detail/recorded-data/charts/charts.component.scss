@@ -1,0 +1,17 @@
+::ng-deep .mat-tab-body-wrapper {
+  height: 75vh;
+  max-height: 75vh;
+}
+
+.float-bottom-right {
+    position: absolute;
+    right: 4px;
+    bottom: 50px;
+    width: 150px;
+}
+
+.chart-container {
+  ::ng-deep .ngx-charts {
+    background-color: #fff;
+  }
+}

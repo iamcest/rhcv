@@ -1,0 +1,117 @@
+<ng-container [formGroup]="group" [ngSwitch]="question.type">
+    <mat-form-field *ngSwitchCase="'string'" style="flex: 1 1 100%" class="string-input-question" floatLabel="always">
+        <mat-label>{{question | questionLabel}}</mat-label>
+        <input matInput type="text" [formControlName]="question.linkId" (click)="$event.target.select()">
+    </mat-form-field>
+    <mat-form-field *ngSwitchCase="'text'" style="flex: 1 1 100%" class="text-input-question" floatLabel="always">
+        <mat-label>{{question | questionLabel}}</mat-label>
+        <textarea matInput [formControlName]="question.linkId"></textarea>
+    </mat-form-field>
+    <mat-form-field *ngSwitchCase="'url'" style="flex: 1 1 100%" class="url-input-question" floatLabel="always">
+        <mat-label>{{question | questionLabel}}</mat-label>
+        <input matInput type="url" [formControlName]="question.linkId" (click)="$event.target.select()">
+    </mat-form-field>
+    <mat-form-field *ngSwitchCase="'decimal'" class="numeric-input-question" floatLabel="always">
+        <mat-label>{{question | questionLabel}}</mat-label>
+        <input matInput type="text" [formControlName]="question.linkId" (click)="$event.target.select()">
+    </mat-form-field>
+    <ng-container  *ngSwitchCase="'integer'">
+        <mat-label [class.required]="question.required === true" style="display: block">
+            {{question | questionLabel}}
+            <span *ngIf="question.required === true" class="required-asterisk">*</span>
+        </mat-label>
+        <mat-form-field class="numeric-input-question" floatLabel="always">
+            <!-- <mat-label>{{question | questionLabel}}</mat-label> -->
+            <input matInput type="text" [formControlName]="question.linkId" step="1" (click)="$event.target.select()">
+        </mat-form-field>
+    </ng-container>
+    
+    <ng-container *ngSwitchCase="'quantity'" class="numeric-input-question">
+        <mat-form-field [formGroupName]="question.linkId" floatLabel="always">
+            <mat-label>{{question | questionLabel}}</mat-label>
+            <input matInput type="number" formControlName="value" (click)="$event.target.select()">
+            <span matSuffix>{{ question.initialQuantity?.unit }}</span>
+            <input formControlName="unit" type="hidden">
+        </mat-form-field>
+    </ng-container>
+    <mat-checkbox *ngSwitchCase="'boolean'" [formControlName]="question.linkId">{{question | questionLabel}}</mat-checkbox>
+    <mat-form-field *ngSwitchCase="'date'" class="date-input-question" floatLabel="always">
+        <mat-label>{{question | questionLabel}}</mat-label>
+        <input matInput [matDatepicker]="qDate" [formControlName]="question.linkId">
+        <mat-datepicker-toggle matSuffix [for]="qDate"></mat-datepicker-toggle>
+        <mat-datepicker #qDate></mat-datepicker>
+    </mat-form-field>
+    <mat-form-field *ngSwitchCase="'datetime'" floatLabel="always">
+        <mat-label>{{question | questionLabel}}</mat-label>
+        <input matInput type="datetime-local" [formControlName]="question.linkId">
+    </mat-form-field>
+    <ng-container *ngSwitchCase="'time'" [formGroupName]="question.linkId" >
+        <mat-label [class.required]="question.required === true" style="display: block">
+            {{question | questionLabel}}
+            <span *ngIf="question.required === true" class="required-asterisk">*</span>
+        </mat-label>
+        <!-- <input type="hidden" [formControlName]="question.linkId"> -->
+        <mat-form-field class="time-input-question" floatLabel="always">
+            <input matInput placeholder="hh" type="number" min="0" max="23" formControlName="hh">
+        </mat-form-field>
+        <mat-form-field class="time-input-question" floatLabel="always">
+            <input matInput placeholder="mm" type="number" min="0" max="59" formControlName="mm">
+        </mat-form-field>
+    </ng-container>
+    <ng-container *ngSwitchDefault>
+        Not supported
+    </ng-container>
+    <ng-container *ngSwitchCase="question.type === 'choice' || question.type === 'open-choice' || question.type === 'reference' ? question.type : ''">
+        <mat-list [formArrayName]="question.linkId" *ngIf="question.repeats" [class.disabled]="disabled || conditionallyDisabled" [class.con-disabled]="conditionallyDisabled">
+            <p [class.required]="question.required === true">
+                {{question | questionLabel}}
+                <span *ngIf="question.required === true" class="required-asterisk">*</span>
+            </p>
+            <mat-list-item class="flexRowWrap">
+                <ng-container *ngFor="let multi of group.get(question.linkId).value; let i = index">
+                    <ng-container [formGroupName]="i">
+                    <input type="hidden" formControlName="display">
+                    <input type="hidden" formControlName="system">
+                    <input type="hidden" formControlName="code">
+                    </ng-container>
+                </ng-container>
+
+                <mat-checkbox  style="flex: 2 2 50%" *ngFor="let option of question.option" [disabled]="disabled" [class.con-disabled]="conditionallyDisabled"
+                    (change)="onValueCodingChange($event, option.valueCoding)"
+                    [checked]="hasValueCoding(question.linkId, option.valueCoding)">
+                    {{option.valueCoding.display}}
+                </mat-checkbox>
+            </mat-list-item>
+        </mat-list>
+        <mat-list *ngIf="!question.repeats" [formGroupName]="question.linkId" [class.disabled]="disabled" [class.con-disabled]="conditionallyDisabled">
+            <p [class.required]="question.required === true">
+              {{question | questionLabel}}
+              <span *ngIf="question.required === true" class="required-asterisk">*</span>
+            </p>
+            <mat-list-item>
+                <mat-radio-group class="flexRowWrap"formControlName="code" (change)="onValueCodingChange($event)" [required]="question.required === true">
+                    <mat-radio-button *ngFor="let option of question.option" [value]="option.valueCoding.code">{{option.valueCoding.display}}&nbsp;</mat-radio-button>
+                    <mat-radio-button *ngIf="question.type === 'open-choice'" value="otherOption"><input matInput formControlName="otherOptionText" placeholder="Other" type="text" /></mat-radio-button>
+                </mat-radio-group>
+            </mat-list-item>
+            <input type="hidden" formControlName="display">
+            <input type="hidden" formControlName="system">
+        </mat-list>
+    </ng-container>
+    <mat-list *ngSwitchCase="'group'" dense [class.disabled]="disabled" [class.con-disabled]="conditionallyDisabled">
+        <h3>{{question | questionLabel}}</h3>
+        <mat-list-item>
+            <div *ngFor="let multipart of question.item" style="flex: 1 1 100%">
+                <app-question 
+                        [questionnaire]="questionnaire"
+                        [question]="multipart"
+                        [context]="context"
+                        [group]="group.get(question.linkId)"
+                        [class.con-disabled]="conditionallyDisabled"
+                        [disabled]="disabled"
+                        [answer]="answer">
+                </app-question>
+            </div>
+        </mat-list-item>
+    </mat-list>
+</ng-container>

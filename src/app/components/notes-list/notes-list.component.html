@@ -1,0 +1,26 @@
+<mat-list dense class="note-list" *ngIf="notes && notes.length" [class.disabled]="disabled">
+  <h3 *ngIf="title">{{title}}</h3>
+  <ng-container *ngIf="!hasCheckboxes">
+    <div class="note-container" *ngFor="let note of notes" >
+      <h5 matSubheader="" class="heading">
+        {{(note?.time | date:'medium') || datePlaceholder}} -
+        {{((practitioners.get(note?.authorReference?.reference) | async)?.name | fhirUsualName) || authorPlaceholder}}
+      </h5>
+      <mat-list-item class="note-text">{{note?.text}}</mat-list-item>
+    </div>
+  </ng-container>
+
+  <ng-container *ngIf="hasCheckboxes">
+    <div class="note-container" *ngFor="let note of notes">
+      <mat-checkbox (change)="updateReminderStatus($event, note)" [checked]="getReminderCheckedStatus(note)">
+        <h5 matSubheader="" class="heading">
+          {{(note?.time | date:'medium') || datePlaceholder}} -
+          {{((practitioners.get(note.authorReference.reference) | async)?.name | fhirUsualName) || authorPlaceholder}}
+        </h5>
+        <mat-list-item class="note-text">{{note?.text}}</mat-list-item>
+      </mat-checkbox>
+    </div>
+  </ng-container>
+</mat-list>
+
+

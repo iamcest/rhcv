@@ -1,0 +1,32 @@
+<div style="width:100%; height: 100%; overflow-y: auto" class="container flexColumn flexAlignCenter">
+
+  <div class="flexRow flexAlignStart" >
+    <img src="assets/CardihabLogo.png" height="120px" class="cardihab-logo">
+  </div>
+
+  <mat-card>
+    <mat-card-title>Welcome to CardiHab</mat-card-title>
+
+    <mat-card-content>
+      <div>You need to sign-in to continue...</div>
+      <mat-form-field>
+        <mat-label>Select a region</mat-label>
+        <mat-select [(ngModel)]="origin">
+          <mat-option value="au">Australia & New Zealand</mat-option>
+          <mat-option value="de">Europe</mat-option>
+          <mat-option value="us">North America</mat-option>
+        </mat-select>
+      </mat-form-field>
+      
+    </mat-card-content>
+
+    <mat-card-actions class="flexAlignCenter" style="display: flex;place-content: center center;align-items: center;">
+      <button type="button" class="mat-raised-button mat-primary" (click)="login()" mat-button>Login</button>
+      <input type="checkbox" id="shared" [(ngModel)]="isComputerShared">
+      <label for="shared"> Shared Computer</label>
+    </mat-card-actions>
+    
+  </mat-card>
+
+</div>
+<div class="attribution"><a href="https://loading.io/spinner/heart/-beating-heart-preloader">spinner by loading.io</a></div>

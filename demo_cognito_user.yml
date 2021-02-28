@@ -1,0 +1,471 @@
+Parameters:
+  Environment:
+    Type: String
+    Description: Name of the environmentL cf, dev, staging, prod
+    Default: cf
+    AllowedValues:
+      - cf  # TODO: remove this
+      - dev
+      - staging
+      - prod
+  Tenant:
+    Type: String
+    Description: The region or company the stack is going to be used for. This will be reflected in the domain name for the services
+    AllowedValues:
+      - au
+      - us
+      - eu
+    Default: au
+
+Resources:
+  SamJonesDemoUser:
+    Type: AWS::Cognito::UserPoolUser
+    Properties:
+      DesiredDeliveryMediums: 
+        - EMAIL
+      Username: '+61400000000'
+      UserAttributes: 
+        - 
+          Name: birthdate
+          Value: '1970-01-01'
+        -
+          Name: custom:sitecode
+          Value: cardihabcr
+        -
+          Name: custom:fhir
+          Value: demo
+        - 
+          Name: phone_number
+          Value: '+61400000000'
+        - 
+          Name: given_name
+          Value: Sam
+        - 
+          Name: family_name
+          Value: Jones
+        - 
+          Name: email
+          Value: 'grant.jennings@cardihab.com'
+        - 
+          Name: phone_number_verified
+          Value: True
+        - 
+          Name: email_verified
+          Value: True
+        - 
+          Name: gender
+          Value: Male
+      UserPoolId: 
+        Fn::ImportValue:
+          !Sub "${Environment}:${Tenant}:auth:AppUserPool"
+  MichaelWangDemoUser:
+    Type: AWS::Cognito::UserPoolUser
+    Properties:
+      DesiredDeliveryMediums: 
+        - EMAIL
+      Username: '+61412637365'
+      UserAttributes: 
+        - 
+          Name: birthdate
+          Value: '1970-01-01'
+        -
+          Name: custom:sitecode
+          Value: cardihabcr
+        - 
+          Name: phone_number
+          Value: '+61412637365'
+        - 
+          Name: given_name
+          Value: Michael
+        - 
+          Name: family_name
+          Value: WangTest
+        - 
+          Name: email
+          Value: 'michael.wang@cardihab.com'
+        - 
+          Name: phone_number_verified
+          Value: True
+        - 
+          Name: email_verified
+          Value: True
+        - 
+          Name: gender
+          Value: Male
+      UserPoolId:
+        Fn::ImportValue:
+          !Sub "${Environment}:${Tenant}:auth:AppUserPool"
+
+  GrantJenningsDemoAdminUser:
+    Type: AWS::Cognito::UserPoolUser
+    Properties:
+      DesiredDeliveryMediums: 
+        - EMAIL
+      Username: 
+        !Sub 'grant.jennings+${Environment}@cardihab.com'
+      UserAttributes: 
+        - 
+          Name: birthdate
+          Value: '1970-09-05'
+        -
+          Name: custom:fhir
+          Value: demo
+        - 
+          Name: phone_number
+          Value: '+61415731519'
+        - 
+          Name: given_name
+          Value: Grant
+        - 
+          Name: family_name
+          Value: Jennings
+        - 
+          Name: email
+          Value: 
+            !Sub 'grant.jennings+${Environment}@cardihab.com'
+        - 
+          Name: phone_number_verified
+          Value: True
+        - 
+          Name: email_verified
+          Value: True
+        - 
+          Name: gender
+          Value: Male
+      UserPoolId: 
+        Fn::ImportValue:
+          !Sub "${Environment}:${Tenant}:auth:AdminUserPool"
+
+  # GrantJenningsToClinicians:
+  #   Type: AWS::Cognito::UserPoolUserToGroupAttachment
+  #   Properties:
+  #     GroupName: Clinicians
+  #     Username: 
+  #       !Sub 'grant.jennings+${Environment}@cardihab.com'
+  #     UserPoolId:
+  #       Fn::ImportValue:
+  #         !Sub "${Environment}:${Tenant}:auth:AdminUserPool"
+
+  SimonMcbrideDemoAdminUser:
+    Type: AWS::Cognito::UserPoolUser
+    Properties:
+      DesiredDeliveryMediums: 
+        - EMAIL
+      Username: 
+        !Sub 'simon.mcbride+${Environment}@cardihab.com'
+      UserAttributes: 
+        - 
+          Name: birthdate
+          Value: '1970-09-05'
+        -
+          Name: custom:fhir
+          Value: demo
+        - 
+          Name: phone_number
+          Value: '+61404268945'
+        - 
+          Name: given_name
+          Value: Simon
+        - 
+          Name: family_name
+          Value: McBride
+        - 
+          Name: email
+          Value: 
+            !Sub 'simon.mcbride+${Environment}@cardihab.com'
+        - 
+          Name: phone_number_verified
+          Value: True
+        - 
+          Name: email_verified
+          Value: True
+        - 
+          Name: gender
+          Value: Male
+      UserPoolId: 
+        Fn::ImportValue:
+          !Sub "${Environment}:${Tenant}:auth:AdminUserPool"
+
+  # SimonMcbrideToClinicians:
+  #   Type: AWS::Cognito::UserPoolUserToGroupAttachment
+  #   Properties:
+  #     GroupName: Clinicians
+  #     Username: 
+  #       !Sub 'simon.mcbride+${Environment}@cardihab.com'
+  #     UserPoolId:
+  #       Fn::ImportValue:
+  #         !Sub "${Environment}:${Tenant}:auth:AdminUserPool"
+
+  JulieShepardDemoAdminUser:
+    Type: AWS::Cognito::UserPoolUser
+    Properties:
+      DesiredDeliveryMediums: 
+        - EMAIL
+      Username: 
+        !Sub 'julie.shepard+${Environment}@cardihab.com'
+      UserAttributes: 
+        - 
+          Name: birthdate
+          Value: '1970-01-01'
+        -
+          Name: custom:fhir
+          Value: demo
+        - 
+          Name: given_name
+          Value: Julie
+        - 
+          Name: family_name
+          Value: Shepard
+        - 
+          Name: email
+          Value: 
+            !Sub 'julie.shepard+${Environment}@cardihab.com'
+        - 
+          Name: email_verified
+          Value: True
+        - 
+          Name: gender
+          Value: Female
+      UserPoolId: 
+        Fn::ImportValue:
+          !Sub "${Environment}:${Tenant}:auth:AdminUserPool"
+
+  MichaelWangDemoAdminUser:
+    Type: AWS::Cognito::UserPoolUser
+    Properties:
+      DesiredDeliveryMediums: 
+        - EMAIL
+      Username: 
+        !Sub 'michael.wang+${Environment}@cardihab.com'
+      UserAttributes: 
+        - 
+          Name: birthdate
+          Value: '1970-01-01'
+        -
+          Name: custom:fhir
+          Value: demo
+        - 
+          Name: given_name
+          Value: Michael
+        - 
+          Name: family_name
+          Value: Wang
+        - 
+          Name: email
+          Value: 
+            !Sub 'michael.wang+${Environment}@cardihab.com'
+        - 
+          Name: email_verified
+          Value: True
+        - 
+          Name: gender
+          Value: Male
+      UserPoolId: 
+        Fn::ImportValue:
+          !Sub "${Environment}:${Tenant}:auth:AdminUserPool"
+
+  MarkRoldanDemoAdminUser:
+    Type: AWS::Cognito::UserPoolUser
+    Properties:
+      DesiredDeliveryMediums: 
+        - EMAIL
+      Username: 
+        !Sub 'mark.roldan+${Environment}@cardihab.com'
+      UserAttributes: 
+        - 
+          Name: birthdate
+          Value: '1970-01-01'
+        -
+          Name: custom:fhir
+          Value: demo
+        - 
+          Name: given_name
+          Value: Mark
+        - 
+          Name: family_name
+          Value: Roldan
+        - 
+          Name: email
+          Value: 
+            !Sub 'mark.roldan+${Environment}@cardihab.com'
+        - 
+          Name: email_verified
+          Value: True
+        - 
+          Name: gender
+          Value: Male
+      UserPoolId: 
+        Fn::ImportValue:
+          !Sub "${Environment}:${Tenant}:auth:AdminUserPool"
+
+
+  GusTaddeoDemoAdminUser:
+    Type: AWS::Cognito::UserPoolUser
+    Properties:
+      DesiredDeliveryMediums: 
+        - EMAIL
+      Username: 
+        !Sub 'gus.taddeo+${Environment}@cardihab.com'
+      UserAttributes: 
+        - 
+          Name: birthdate
+          Value: '1970-01-01'
+        -
+          Name: custom:fhir
+          Value: demo
+        - 
+          Name: given_name
+          Value: Gus
+        - 
+          Name: family_name
+          Value: Taddeo
+        - 
+          Name: email
+          Value: 
+            !Sub 'gus.taddeo+${Environment}@cardihab.com'
+        - 
+          Name: email_verified
+          Value: True
+        - 
+          Name: gender
+          Value: Male
+      UserPoolId: 
+        Fn::ImportValue:
+          !Sub "${Environment}:${Tenant}:auth:AdminUserPool"
+
+  MichaelCassanoDemoAdminUser:
+    Type: AWS::Cognito::UserPoolUser
+    Properties:
+      DesiredDeliveryMediums: 
+        - EMAIL
+      Username: 
+        !Sub 'michael.cassano+${Environment}@cardihab.com'
+      UserAttributes: 
+        - 
+          Name: birthdate
+          Value: '1970-01-01'
+        -
+          Name: custom:fhir
+          Value: demo
+        - 
+          Name: given_name
+          Value: Michael
+        - 
+          Name: family_name
+          Value: Cassano
+        - 
+          Name: email
+          Value: 
+            !Sub 'michael.cassano+${Environment}@cardihab.com'
+        - 
+          Name: email_verified
+          Value: True
+        - 
+          Name: gender
+          Value: Male
+      UserPoolId: 
+        Fn::ImportValue:
+          !Sub "${Environment}:${Tenant}:auth:AdminUserPool"
+
+          
+  ChristineKwongDemoAdminUser:
+    Type: AWS::Cognito::UserPoolUser
+    Properties:
+      DesiredDeliveryMediums: 
+        - EMAIL
+      Username: 
+        !Sub 'christine.kwong+${Environment}@cardihab.com'
+      UserAttributes: 
+        - 
+          Name: birthdate
+          Value: '1970-01-01'
+        -
+          Name: custom:fhir
+          Value: demo
+        - 
+          Name: given_name
+          Value: Christine
+        - 
+          Name: family_name
+          Value: Kwong
+        - 
+          Name: email
+          Value: 
+            !Sub 'christine.kwong+${Environment}@cardihab.com'
+        - 
+          Name: email_verified
+          Value: True
+        - 
+          Name: gender
+          Value: Female
+      UserPoolId: 
+        Fn::ImportValue:
+          !Sub "${Environment}:${Tenant}:auth:AdminUserPool"
+          
+  MichelleOdeaDemoAdminUser:
+    Type: AWS::Cognito::UserPoolUser
+    Properties:
+      DesiredDeliveryMediums: 
+        - EMAIL
+      Username: 
+        !Sub 'michelle.odea+${Environment}@cardihab.com'
+      UserAttributes: 
+        - 
+          Name: birthdate
+          Value: '1970-01-01'
+        -
+          Name: custom:fhir
+          Value: demo
+        - 
+          Name: given_name
+          Value: Michelle
+        - 
+          Name: family_name
+          Value: "O'Dea"
+        - 
+          Name: email
+          Value: 
+            !Sub 'michelle.odea+${Environment}@cardihab.com'
+        - 
+          Name: email_verified
+          Value: True
+        - 
+          Name: gender
+          Value: Female
+      UserPoolId: 
+        Fn::ImportValue:
+          !Sub "${Environment}:${Tenant}:auth:AdminUserPool"
+          
+  NeilEstandarteDemoAdminUser:
+    Type: AWS::Cognito::UserPoolUser
+    Properties:
+      DesiredDeliveryMediums: 
+        - EMAIL
+      Username: 
+        !Sub 'neil.estandarte+${Environment}@cardihab.com'
+      UserAttributes: 
+        - 
+          Name: birthdate
+          Value: '1970-01-01'
+        -
+          Name: custom:fhir
+          Value: demo
+        - 
+          Name: given_name
+          Value: Neil
+        - 
+          Name: family_name
+          Value: Estandarte
+        - 
+          Name: email
+          Value: 
+            !Sub 'neil.estandarte+${Environment}@cardihab.com'
+        - 
+          Name: email_verified
+          Value: True
+        - 
+          Name: gender
+          Value: Male
+      UserPoolId: 
+        Fn::ImportValue:
+          !Sub "${Environment}:${Tenant}:auth:AdminUserPool"

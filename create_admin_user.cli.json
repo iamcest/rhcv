@@ -1,0 +1,45 @@
+{
+  "UserPoolId": "ap-southeast-2_d7Ic1KJxP",
+  "Username": "+61006000000",
+  "UserAttributes": [
+    {
+      "Name": "given_name",
+      "Value": "Philip"
+    },
+    {
+      "Name": "family_name",
+      "Value": "Enright"
+    },
+    {
+      "Name": "email",
+      "Value": "grant.jennings+hfrct-006@cardihab.com"
+    },
+    {
+      "Name": "gender",
+      "Value": "Male"
+    },
+    {
+      "Name": "birthdate",
+      "Value": "1941-06-18"
+    },
+    {
+      "Name": "email_verified",
+      "Value": "True"
+    },
+    {
+      "Name": "custom:sitecode",
+      "Value": "hfrctcontrol"
+    },
+    {
+      "Name": "phone_number",
+      "Value": "+61006000000"
+    },
+    {
+      "Name": "phone_number_verified",
+      "Value": "True"
+    }
+  ],
+  "DesiredDeliveryMediums": [
+    "EMAIL"
+  ]
+}

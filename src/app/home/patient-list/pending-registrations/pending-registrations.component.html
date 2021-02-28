@@ -1,0 +1,21 @@
+<mat-card>
+    <mat-card-title>Pending Registrations</mat-card-title>
+    <mat-card-content>
+      <div class="site-container flexColumn flexAlignCenter" *ngFor="let site of sites | async">
+        <p class="site-code">Sitecode: <strong>{{siteCode(site).toUpperCase()}}</strong></p>
+        <mat-list class="patient" dense>
+          <mat-list-item class="flexAlignCenter" *ngFor="let user of pendingRegistrations[siteCode(site)]"
+                         (click)="reviewPending(user)">
+            <div>
+              <h4>{{getAttribute(user, 'given_name')}} {{getAttribute(user, 'family_name')}}</h4>
+              <p *ngIf="getAttribute(user, 'birthdate')">{{getAttribute(user, 'birthdate') | date:'d-MMM-y'}} ({{getAttribute(user, 'birthdate') | ageInYears}} ys)</p>
+              <p *ngIf="!getAttribute(user, 'birthdate')">No DoB provided</p>
+            </div>
+          </mat-list-item>
+          <mat-list-item *ngIf="pendingRegistrations[siteCode(site)]?.length == 0">
+            No pending registrations for this site
+          </mat-list-item>
+        </mat-list>
+      </div>
+    </mat-card-content>
+  </mat-card>

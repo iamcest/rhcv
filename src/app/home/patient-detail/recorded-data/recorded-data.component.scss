@@ -1,0 +1,81 @@
+mat-dialog-content {
+  width: calc(90vw - 96px);
+  height: calc(90vh - 88px);
+  max-height: inherit;
+  flex-grow: 1;
+}
+
+app-adherence {
+  height: 80vh;
+}
+
+::ng-deep .mat-tab-group.vertical {
+  flex-direction: row;
+  // background-color: #eee;
+
+  &.tablet {
+    > .mat-tab-header {
+      width: 85px;
+
+      > .mat-tab-label-container {
+        > .mat-tab-list {
+          > .mat-tab-labels {
+            > .mat-tab-label {
+              justify-content: flex-end;
+              padding-left: unset;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  > .mat-tab-header {
+    border-bottom: none;
+    width: 220px;
+    background-color: #fff;
+
+    > .mat-tab-header-pagination {
+      display: none !important;
+    }
+
+    > .mat-tab-label-container {
+      > .mat-tab-list {
+        > .mat-tab-labels {
+          flex-direction: column;
+
+          > .mat-tab-label {
+            justify-content: flex-start;
+            padding-left: 30px;
+            height: 64px;
+            border-bottom: 1px solid #979797;
+
+            .tab-label.tablet {
+              display: none;
+            }
+
+            &.mat-tab-label-active {
+              background-color: #eee;
+              color: #000;
+              opacity: 1;
+            }
+
+            .mat-icon {
+              margin-right: 10px;
+            }
+          }
+        }
+
+        > .mat-ink-bar {
+          display: none;
+        }
+      }
+    }
+  }
+
+  > .mat-tab-body-wrapper {
+    flex: 1 1 auto;
+    min-height: 100%;
+    max-height: 100%;
+  }
+}

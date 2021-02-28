@@ -1,0 +1,44 @@
+<mat-card class="mat-elevation-z2" style="margin: 1em;">
+  <mat-card-header>
+    <mat-card-title>Plan History</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+
+    <mat-list>
+      <ng-container *ngFor="let plan of plans$ | async; let i=index">
+        <mat-list-item>
+          <h4 matLine>
+            {{plan.period?.start | date:'mediumDate'}} - {{plan.period?.end | date:'mediumDate'}}
+            <div class="current-plan" *ngIf="plan.id === currentPlan?.id">Current Plan</div>
+            <div class="plan-status">{{plan.status | titlecase}}</div>
+          </h4>
+          <p matLine>{{plan.description}}</p>
+          <p matLine *ngIf="plan.status === 'completed' || plan.status === 'cancelled'">
+            <button mat-button (click)="downloadDischargeReport(i)">
+              Discharge Report<mat-icon>launch</mat-icon>
+            </button>
+          </p>
+        </mat-list-item>
+        <app-discharge-report [carePlan]="plan" style="display: none"></app-discharge-report>
+
+      </ng-container>
+    </mat-list>
+
+    <mat-card-actions>
+      <button *ngIf="currentPlan?.status !== 'active' && currentPlan?.status !== 'draft'" mat-button color="warn"
+              title="Transition a patient to a new plan">
+        <mat-icon>favorite</mat-icon>
+        Start New Plan
+      </button>
+<!-- 
+      <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item>Item 1</button>
+      <button mat-menu-item>Item 2</button>
+    </mat-menu> -->     
+
+
+    </mat-card-actions>
+
+  </mat-card-content>
+</mat-card>

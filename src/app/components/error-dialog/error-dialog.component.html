@@ -1,0 +1,8 @@
+<app-dialog-header [title]="data.title || 'Error'"></app-dialog-header>
+
+<div mat-dialog-content>
+  <p>{{data.text}}</p>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>OK</button>
+</div>

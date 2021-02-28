@@ -1,0 +1,62 @@
+@import "../home.component";
+
+.sidenav {
+    width: 250px;
+}
+
+.scrollable-content {
+    display: flex;
+    flex-flow: column;
+    flex-direction: column;
+    overflow-y: auto;
+    height: calc(100vh - 192px);
+}
+
+
+
+mat-card {
+    padding: 8px;
+}
+
+mat-horizontal-stepper {
+    margin-bottom: 8px;
+}
+
+
+::ng-deep .mat-tab-body-wrapper {
+    height: 100%
+}
+
+.responsive-recorded-data-link {
+    position: absolute;
+    right: 0;
+}
+
+@media screen and (min-width: 600px) {
+    
+    .responsive-recorded-data-link {
+        display: none;
+    }
+}
+
+:host {
+    flex-grow: 1
+}
+
+@media print {
+  .sidenav-container {
+    padding: 0;
+  }
+}
+
+app-telehealth {
+    min-width: 300px;
+    min-height: 56px;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    display: flex;
+    justify-content: flex-end;
+    z-index: 2;
+    flex-direction: column;
+}

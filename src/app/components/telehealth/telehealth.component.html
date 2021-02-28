@@ -1,0 +1,31 @@
+<div *ngIf="previousStatus !== CallStatusType.NO_DEVICE && patientDevice" style="min-height: 5em;">
+    <!-- <div class="video-header" *ngIf="[CallStatusType.CALLING, CallStatusType.CONNECTING, CallStatusType.CONNECTED].indexOf(previousStatus) !== -1">
+        <button mat-button (click)="fullscreen(true)"><mat-icon style="color: white">fullscreen</mat-icon></button>
+        <button mat-button (click)="fullscreen(false)"><mat-icon style="color: white">fullscreen_exit</mat-icon></button>
+    </div> -->
+
+    <audio #meetingAudio style="display:none"></audio>
+
+    <video #videoMe [style.display]="canStartLocalVideo ? 'block' : 'none'"
+        [style.height]="localTileHeight" [style.width]="localTileWidth" [style.right]="tileWidth"
+            style="background-color: gray; position: absolute; z-index: 2; bottom: 0"></video>
+
+    <div style="display: flex; justify-content: flex-end;">
+        <video #videoOther [style.display]="previousStatus === CallStatusType.CONNECTED ? 'block' : 'none'"
+            [style.width]="tileWidth" [style.height]="tileHeight"
+            style="z-index: 1" (resize)="videoSizeChanged($event)"></video>
+    </div>
+    <img *ngIf="previousStatus === CallStatusType.CALLING || previousStatus === CallStatusType.CONNECTING" src="assets/Heart-1s-200px.svg" width="256" height="190" 
+            style="z-index: 1; position: absolute; background-color: black; right:0; bottom:56px">
+
+    <p *ngIf="previousStatus === CallStatusType.AVAILABLE" style="color: white; text-align: right;">Telehealth Video: {{previousStatus}}</p>
+
+    <div class="video-footer" style="display: flex; justify-content: flex-end; width: 100%; z-index:2">
+        <button *ngIf="patientDevice && previousStatus=== CallStatusType.AVAILABLE" (click)="callPatient()" color="primary" mat-raised-button>
+            <mat-icon>video_call</mat-icon>Start Call
+        </button>
+        <button mat-raised-button color="warn" *ngIf="[CallStatusType.CALLING, CallStatusType.CONNECTING, CallStatusType.CONNECTED].indexOf(previousStatus) !== -1" (click)="hangUp()">End Call</button>
+        <button mat-mini-fab color="primary" aria-label="Enable/Disable Video" (click)="toggleVideo()"><mat-icon>{{videoCam ? 'videocam' : 'videocam_off'}}</mat-icon></button>
+        <button mat-mini-fab color="primary" aria-label="Enable/Disable Audio" (click)="toggleMute()"><mat-icon>{{muted ? 'mic_off' : 'mic'}}</mat-icon></button>
+    </div>
+</div>

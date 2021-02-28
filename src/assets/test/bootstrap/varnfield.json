@@ -1,0 +1,229 @@
+{
+  "entry": [
+    {
+      "request": {
+        "method": "PUT",
+        "url": "Group/cardihab-group-12345"
+      },
+      "resource": {
+        "resourceType": "Group",
+        "active": true,
+        "type": "device",
+        "actual": true,
+        "id": "cardihab-group-12345",
+        "code": {
+          "coding": [
+            {
+              "system": "http://snomed.info/sct",
+              "version": "http://snomed.info/sct/32506021000036107/version/20180731",
+              "code": "223366009",
+              "display": "Healthcare professional"
+            }
+          ]
+        },
+        "member": [
+          {
+           "entity": {
+               "reference": "#nobody"
+             },
+             "period": {
+               "start": "2018-08-14"
+             }
+          }
+         ],
+         "contained": [
+          {
+            "id": "nobody",
+            "resourceType": "Practitioner"
+          }
+         ],
+        "name": "Approved Practitioners"
+      }
+    },
+    {
+      "request": {
+        "method": "PUT",
+        "url": "CarePlan/varnfield2014"
+      },
+      "resource": {
+        "resourceType": "CarePlan",
+        "id": "varnfield2014",
+        "title": "Varnfield 2014",
+        "description": "Phase 2 cardiac rehabilitation program based on Varnfield 2014 (see http://dx.doi.org/10.1136/heartjnl-2014-305783).",
+        "author": [
+          {
+            "reference": "Organization/cardihab"
+          }
+        ],
+        "subject": {
+          "reference": "Group/cardihab-group-12345"
+        },
+        "goal": [
+          {
+            "reference": "Goal/goal-bloodpressure"
+          },
+          {
+            "reference": "Goal/goal-systolic-bloodpressure"
+          },
+          {
+            "reference": "Goal/goal-diastolic-bloodpressure"
+          }
+        ],
+        "activity": [
+          {
+            "detail": {
+              "code": {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "170571002",
+                    "display": "Initial cardiac assessment"
+                  }
+                ]
+              },
+              "description": "Initial Assessment",
+              "definition": {
+                "reference": "Questionnaire/varnfield2014-initialassessment"
+              }
+            }
+          },
+          {
+            "detail": {
+              "code": {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "170572009",
+                    "display": "Follow-up cardiac assessment"
+                  }
+                ]
+              },
+              "description": "Week 1 Review",
+              "scheduledString": "P0W/P1W",
+              "definition": {
+                "reference": "Questionnaire/varnfield2014-week1"
+              },
+              "goal": [
+                {
+                  "reference": "Goal/goal-w1-education"
+                },
+                {
+                  "reference": "Goal/goal-w1-walking"
+                }
+              ]
+            }
+          },
+          {
+            "detail": {
+              "code": {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "170572009",
+                    "display": "Follow-up cardiac assessment"
+                  }
+                ]
+              },
+              "description": "Week 2 Review",
+              "scheduledString": "P1W/P2W",
+              "definition": {
+                "reference": "Questionnaire/varnfield2014-week2"
+              }
+            }
+          },
+          {
+            "detail": {
+              "code": {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "170572009",
+                    "display": "Follow-up cardiac assessment"
+                  }
+                ]
+              },
+              "description": "Week 3 Review",
+              "scheduledString": "P2W/P3W",
+              "definition": {
+                "reference": "Questionnaire/varnfield2014-week3"
+              }
+            }
+          },
+          {
+            "detail": {
+              "code": {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "170572009",
+                    "display": "Follow-up cardiac assessment"
+                  }
+                ]
+              },
+              "description": "Week 4 Review",
+              "scheduledString": "P3W/P4W",
+              "definition": {
+                "reference": "Questionnaire/varnfield2014-week4"
+              }
+            }
+          },
+          {
+            "detail": {
+              "code": {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "170572009",
+                    "display": "Follow-up cardiac assessment"
+                  }
+                ]
+              },
+              "description": "Week 5 Review",
+              "scheduledString": "P4W/P5W",
+              "definition": {
+                "reference": "Questionnaire/varnfield2014-week5"
+              }
+            }
+          },
+          {
+            "detail": {
+              "code": {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "170572009",
+                    "display": "Follow-up cardiac assessment"
+                  }
+                ]
+              },
+              "description": "Week 6 Review",
+              "scheduledString": "P5W/P6W",
+              "definition": {
+                "reference": "Questionnaire/varnfield2014-week6"
+              }
+            }
+          },
+          {
+            "detail": {
+              "code": {
+                "coding": [
+                  {
+                    "system": "http://snomed.info/sct",
+                    "code": "306496000",
+                    "display": "Discharge by cardiac rehabilitation nurse"
+                  }
+                ]
+              },
+              "description": "Final Assessment and Discharge",
+              "definition": {
+                "reference": "Questionnaire/varnfield2014-finalassessment"
+              }
+            }
+          }
+        ]
+      }
+    }
+  ],
+  "resourceType": "Bundle",
+  "type": "transaction"
+}

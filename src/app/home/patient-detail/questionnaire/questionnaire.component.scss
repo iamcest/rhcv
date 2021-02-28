@@ -1,0 +1,13 @@
+::ng-deep .mat-list[dense] .mat-list-item .mat-list-item-content {
+    flex-wrap: wrap;
+}
+
+.mat-list[dense] .mat-list-item {
+    height: auto;
+}
+
+form {
+    background: white;
+    border: 1px ridge;
+    max-width: 50em;
+}

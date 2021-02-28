@@ -1,0 +1,242 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/indigo-pink.css';
+
+@import '~@swimlane/ngx-datatable/index.css';
+@import '~@swimlane/ngx-datatable/themes/material.css';
+@import '~@swimlane/ngx-datatable/assets/icons.css';
+
+$tableAlternateRowColour: #eee;
+$tableRowHoverCover: darken($tableAlternateRowColour, 10%);
+$questionFontSize: 14px;
+$questionDisabledColor: rgba(0, 0, 0, 0.56);
+
+html, body {
+  height: 100%;
+ }
+body { margin: 0 }
+
+@media print {
+  body {
+    height: auto;
+    -webkit-print-color-adjust: exact;
+  }
+}
+
+@page {
+  size: A4 portrait;
+}
+
+// for some reason the grouped rows are not positioned properly
+.ngx-datatable.scroll-vertical.virtualized .datatable-body .datatable-row-wrapper {
+  position: static !important;
+}
+
+.ngx-datatable.material {
+  .datatable-header .datatable-header-cell {
+    color: #000;
+    .sort-btn {
+      line-height: 100%;
+      vertical-align: middle;
+      display: inline-block;
+      cursor: pointer;
+      position: absolute;
+      top: 15px;
+      right: 0;
+      margin-right: 10px;
+    }
+  }
+
+  .datatable-row-wrapper .datatable-body-row.datatable-row-odd {
+    background-color: $tableAlternateRowColour;
+  }
+
+  &.material:not(.cell-selection) .datatable-body-row:hover .datatable-row-group
+  {
+    background: $tableRowHoverCover;
+  }
+
+  .datatable-body-row .datatable-body-cell .datatable-body-cell-label {
+    white-space: normal;
+  }
+}
+
+.mat-list[dense] {
+  margin-bottom: 10px;
+
+  h3 {
+    margin: 0 0 10px 16px;
+    font-weight: 600;
+  }
+
+  h4 {
+    font-weight: 500;
+    margin-left: 10px;
+  }
+
+  p {
+    font-size: $questionFontSize;
+  }
+
+  &.disabled {
+    h2, h3, h4, h5, p, div {
+      color: $questionDisabledColor;
+    }
+  }
+}
+
+.layout-container {
+  height: 100%;
+}
+
+@media print {
+  .mat-toolbar.mat-toolbar-single-row,
+  .mat-tab-nav-bar,
+  .sidenav.mat-sidenav {
+    display: none;
+  }
+
+  .mat-drawer-content.mat-sidenav-content {
+    margin-right: 0 !important;
+  }
+
+  .mat-expansion-panel-body {
+    padding: 0;
+  }
+
+  // This is to prevent printed pdf from being cut off
+  .mat-sidenav-container.mat-drawer-container {
+    height: auto;
+    overflow: visible;
+
+    mat-sidenav-content.mat-drawer-content {
+      height: auto;
+    }
+  }
+}
+// flex-layout global styles 
+.flexColumn {
+  display: flex;
+  flex-flow: column;
+  flex-direction: column;
+  overflow-y: auto;
+}
+
+.flexRow {
+  display: flex;
+  flex-flow: row;
+  flex-direction: row;
+}
+
+.flexRowWrap {
+  display: flex;
+  flex-flow: row wrap;
+  flex-direction: row;
+}
+
+.flexGrow {
+  flex: 1 1 auto;
+  align-self: center;
+}
+
+.flexLayoutAlignStart{
+  display: flex;
+  place-content: start start;
+}
+
+.flexAlignMainCenter {
+  display: flex;
+  place-content: stretch center;
+  align-items: stretch;
+  box-sizing: border-box;
+}
+.flexAlignCenter {
+  display: flex;
+  place-content: center center;
+  align-items: center;
+}
+.flexAlignStart {
+  display: flex;
+  justify-content: flex-start;
+}
+
+.flexAlignEnd {
+  display: flex;
+  justify-content: flex-end
+}
+.flexAlignSpaceAround {
+  display: flex;
+  justify-content: space-around;
+}
+.flexAlignStartSpaceBetween {
+  display: flex;
+  max-height: 100%;
+  box-sizing: border-box;
+  justify-content: flex-start;
+  align-items: space-between; 
+  align-content: space-between;
+  
+}
+
+.flexAlignSpaceBetween {
+  display: flex;
+  max-height: 100%;
+  box-sizing: border-box;
+  justify-content: space-between
+}
+.flexAlignSpaceBetweenStretch {
+  display: flex;
+  justify-content: space-between;
+  max-height: 100%;
+  box-sizing: border-box;
+  place-content: stretch space-between;
+  align-items: stretch;
+}
+.flexAlignSpaceBetweenCenter {
+  display: flex;
+  justify-content: space-between;
+  max-height: 100%;
+  box-sizing: border-box;
+  align-items: center; 
+  align-content: center
+}
+
+.flexAlignFlexEndStretch {
+  display: flex;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  max-height: 100%; 
+  align-items: stretch;
+  // align-content: center
+}
+.flexAlignFlexStartStretch {
+  display: flex;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  max-width: 100%; 
+  align-items: stretch;
+}
+
+.flexAlignFlexStartCenter {
+  display: flex;
+  justify-content: flex-start;
+  box-sizing: border-box;
+  max-width: 100%; 
+  align-items: center;
+}
+.flexAlignFlexEndCenter {
+  display: flex;
+  justify-content: flex-end;
+  box-sizing: border-box;
+  max-width: 100%; 
+  align-items: center;
+}
+
+@media screen and (min-width: 960px) and (max-width: 1279px) {
+  .flexAlignCenter {
+     place-content: center center;
+     display: flex;
+      align-items: center;
+  }
+}
+
+// END: flex-layout global styles 

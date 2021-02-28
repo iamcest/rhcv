@@ -1,0 +1,48 @@
+::ng-deep ngx-datatable.medicines-table.material {
+  box-shadow: none;
+  height: 100%;
+
+  &.fixed-header .datatable-header .datatable-header-inner .datatable-header-cell {
+    display: flex;
+    align-items: center;
+
+    .datatable-header-cell-template-wrap {
+      width: 100%;
+    }
+  }
+
+  datatable-row-wrapper.datatable-row-wrapper {
+    .datatable-row-left {
+      .datatable-body-cell {
+        display: flex;
+        align-items: center;
+      }
+    }
+
+    .datatable-group-header {
+      border-bottom: none;
+      border-top: none;
+
+      .group-panel.mat-expansion-panel {
+        box-shadow: none;
+        border-bottom: 1px solid rgba(0, 0, 0, 0.12);
+        border-top: 1px solid rgba(0, 0, 0, 0.12);
+
+        &.mat-expanded {
+          border-top: 1px solid rgba(0, 0, 0, 0.12);
+        }
+
+        .mat-expansion-panel-content {
+          display: none;
+        }
+      }
+    }
+  }
+}
+
+.add-new-medicine {
+  position: absolute;
+  left: calc(100% - 410px);
+  bottom: calc(100% - 210px);
+  z-index: 100;
+}

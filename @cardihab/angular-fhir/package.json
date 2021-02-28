@@ -1,0 +1,64 @@
+{
+  "_args": [
+    [
+      "git+ssh://git@bitbucket.org/cardihab/cardihab-angular-fhir.git#1.0.1",
+      "/Users/saisrikarparuchuri/Documents/PAM/patient-management"
+    ]
+  ],
+  "_from": "git+ssh://git@bitbucket.org/cardihab/cardihab-angular-fhir.git#1.0.1",
+  "_id": "@cardihab/angular-fhir@git+ssh://git@bitbucket.org/cardihab/cardihab-angular-fhir.git#2b123cd01addecbbcd054066a3743fc92aadd8ad",
+  "_inBundle": false,
+  "_integrity": "",
+  "_location": "/@cardihab/angular-fhir",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "git",
+    "raw": "git+ssh://git@bitbucket.org/cardihab/cardihab-angular-fhir.git#1.0.1",
+    "rawSpec": "git+ssh://git@bitbucket.org/cardihab/cardihab-angular-fhir.git#1.0.1",
+    "saveSpec": "git+ssh://git@bitbucket.org/cardihab/cardihab-angular-fhir.git#1.0.1",
+    "fetchSpec": "ssh://git@bitbucket.org/cardihab/cardihab-angular-fhir.git",
+    "gitCommittish": "1.0.1"
+  },
+  "_requiredBy": [
+    "/"
+  ],
+  "_resolved": "git+ssh://git@bitbucket.org/cardihab/cardihab-angular-fhir.git#2b123cd01addecbbcd054066a3743fc92aadd8ad",
+  "_spec": "git+ssh://git@bitbucket.org/cardihab/cardihab-angular-fhir.git#1.0.1",
+  "_where": "/Users/saisrikarparuchuri/Documents/PAM/patient-management",
+  "dependecies": {
+    "moment": "^2.24.0",
+    "url": "^0.11.0"
+  },
+  "dependencies": {
+    "tslib": "^1.10.0"
+  },
+  "description": "This library was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.2.0.",
+  "es2015_ivy_ngcc": "__ivy_ngcc__/fesm2015/cardihab-angular-fhir.js",
+  "es2015": "fesm2015/cardihab-angular-fhir.js",
+  "esm2015": "esm2015/cardihab-angular-fhir.js",
+  "esm5": "esm5/cardihab-angular-fhir.js",
+  "fesm2015_ivy_ngcc": "__ivy_ngcc__/fesm2015/cardihab-angular-fhir.js",
+  "fesm2015": "fesm2015/cardihab-angular-fhir.js",
+  "fesm5": "fesm5/cardihab-angular-fhir.js",
+  "main": "bundles/cardihab-angular-fhir.umd.js",
+  "module": "fesm5/cardihab-angular-fhir.js",
+  "name": "@cardihab/angular-fhir",
+  "peerDependencies": {
+    "@angular/common": ">=9",
+    "@angular/core": ">=9",
+    "@angular/cdk": ">=9",
+    "rxjs": ">=6"
+  },
+  "scripts": {
+    "prepublishOnly": "node --eval \"console.error('ERROR: Trying to publish a package that has been compiled by NGCC. This is not allowed.\\nPlease delete and rebuild the package, without compiling with NGCC, before attempting to publish.\\nNote that NGCC may have been run by importing this package into another project that is being built with Ivy enabled.\\n')\" && exit 1",
+    "prepublishOnly__ivy_ngcc_bak": "node --eval \"console.error('ERROR: Trying to publish a package that has been compiled by Ivy. This is not allowed.\\nPlease delete and rebuild the package, without compiling with Ivy, before attempting to publish.\\n')\" && exit 1"
+  },
+  "sideEffects": false,
+  "typings": "cardihab-angular-fhir.d.ts",
+  "version": "1.0.1",
+  "__processed_by_ivy_ngcc__": {
+    "es2015": "11.1.1",
+    "fesm2015": "11.1.1",
+    "typings": "11.1.1"
+  }
+}

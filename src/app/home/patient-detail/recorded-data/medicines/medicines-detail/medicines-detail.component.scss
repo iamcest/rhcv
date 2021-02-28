@@ -1,0 +1,50 @@
+.medicine-container {
+  padding: 15px;
+
+  .take-time-wrapper {
+    margin: 0 15px 10px 0;
+    padding: 15px;
+    border: 1px solid #eee;
+    border-radius: 5px;
+    max-width: 250px;
+
+    .take-wrapper {
+      > *:not(:last-child) {
+        margin-right: 10px;
+      }
+
+      .clear-button {
+        right: 35px;
+        top: -15px;
+      }
+    }
+  }
+
+  .prescription-form {
+    ::ng-deep .mat-form-field-disabled .mat-select-disabled .mat-select-value,
+    .mat-input-element:disabled {
+      color: #666;
+    }
+
+    ::ng-deep .mat-accordion {
+      .mat-expansion-panel {
+        .mat-expansion-panel-header {
+          .mat-content {
+            align-items: center;
+
+            .mat-action-row {
+              border-top: none;
+            }
+
+            .mat-expansion-panel-header-title {
+              h2.panel-title {
+                margin: 0;
+              }
+            }
+          }
+
+        }
+      }
+    }
+  }
+}

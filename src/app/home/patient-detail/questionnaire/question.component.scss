@@ -1,0 +1,68 @@
+@import '../../../../styles';
+
+.mat-list[dense] {
+  .mat-list-base {
+    margin-bottom: 10px;
+  }
+
+  .mat-list-item {
+    height: auto;
+  }
+
+  .mat-subheader {
+    height: auto;
+    line-height: inherit;
+    font-size: $questionFontSize;
+    padding-left: 0;
+  }
+
+  .required-asterisk {
+    font-size: 16px;
+    color: #ff0000;
+  }
+}
+
+mat-form-field {
+  width: 100%;
+  font-size: $questionFontSize;
+  margin-top: 0.5em;
+
+  .mat-form-field-wrapper {
+    padding-bottom: 1em;
+  }
+
+  ::ng-deep .mat-form-field-label {
+    font-size: $questionFontSize;
+  }
+}
+
+mat-form-field.date-input-question, mat-form-field.numeric-input-question {
+  max-width: 20em;
+}
+
+mat-form-field.time-input-question {
+  max-width: 5em;
+  margin-right: 1em;
+}
+
+.mat-radio-button {
+  padding-right: 20px;
+  margin-bottom: 8px;
+}
+
+.mat-checkbox {
+  margin-bottom: 8px;
+  font-size: 12px;
+}
+
+.mat-datepicker-toggle {
+  font-size: 120%
+}
+
+.disabled {
+  color: rgba(0, 0, 0, 0.38);
+}
+
+.con-disabled {
+  display: none;
+}

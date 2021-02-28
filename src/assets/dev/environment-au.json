@@ -1,0 +1,54 @@
+{
+    "Auth": {
+        "oauth": {
+            "domain": "cardihab-auth-dev-au-admin.auth.ap-southeast-2.amazoncognito.com",
+            "scope" : ["phone", "email", "profile", "openid", "aws.cognito.signin.user.admin"],
+            "responseType": "code"
+        }
+    },
+    "aws_app_analytics": "disable",
+    "aws_cloud_logic": "enable",
+    "aws_cloud_logic_custom": [
+        {
+            "id": "a3sq1bdwi1",
+            "name": "dev-user-management",
+            "description": "",
+            "endpoint": "https://user-management-api-au.dev.cardihab.com",
+            "region": "ap-southeast-2",
+            "paths": [
+                "/user",
+                "/user/{pool}/{username}",
+                "/tenancy"
+            ]
+        },
+        {
+            "id": "uvay7o2m72",
+            "name": "dev-user-authz",
+            "description": "",
+            "endpoint": "https://sites-api-au.dev.cardihab.com",
+            "region": "ap-southeast-2",
+            "paths": [
+                "/site/{sitecode}"
+            ]
+        }
+    ],
+    "aws_cognito_identity_pool_id": "ap-southeast-2:e1c647f2-777e-4d30-a4d1-abbb21b6ebc8",
+    "aws_cognito_region": "ap-southeast-2",
+    "aws_project_region": "ap-southeast-2",
+    "aws_sign_in_enabled": "enable",
+    "aws_user_pools": "enable",
+    "aws_user_pools_id": "ap-southeast-2_mCJZBOUJF",
+    "aws_user_pools_web_client_id": "6gnkdvkfd3202529rl6df2sffp",
+    "api": {
+        "fhir":  "https://fhir-au.dev.cardihab.com",
+        "mobile": "https://mobile-api-au.dev.cardihab.com",
+        "user-management": "dev-user-management",
+        "registrations-websocket": "wss://user-management-ws-au.dev.cardihab.com",
+        "helpers": "https://helpers-au.dev.cardihab.com/helpers",
+        "reporting": "https://reporting-api-au.dev.cardihab.com",
+        "ontoserver": {
+          "url": "https://ontoserver-au.platform.cardihab.com/fhir",
+          "snomed": "http://snomed.info/sct/32506021000036107?fhir_vs=refset/929360041000036105"
+        }
+    }
+}

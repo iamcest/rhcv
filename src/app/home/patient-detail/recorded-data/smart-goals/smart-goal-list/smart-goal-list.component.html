@@ -1,0 +1,146 @@
+<ngx-datatable style="height: 75vh"
+  #smartGoalsTable
+    class='material expandable smart-goals-table'
+    [rows]="rows"
+    [columnMode]="'force'"
+    [headerHeight]="85"
+    [footerHeight]="30"
+    [rowHeight]="'100%'"
+    [scrollbarV]="true"
+    [virtualization]="false"
+    [loadingIndicator]="loading"
+    (sort)="onSort($event)"
+    (select)="select($event)"
+    [selectionType]="'single'">
+
+  <!-- TODO commented out for now -->
+  <!--<ngx-datatable-column [resizeable]="false" prop="view.priority.short" maxWidth="50">-->
+    <!--<ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>-->
+        <!--<span class="datatable-header-cell-wrapper">-->
+          <!--<span class="datatable-header-cell-label" layout="row" (click)="sort()">Priority</span>-->
+          <!--<span class="md-padding" layout="row" flex>-->
+            <!--<mat-form-field floatLabel="never" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" [ngClass]="{'filtered': isFiltered('priority')}">-->
+              <!--<mat-select (selectionChange)="applyFilters()" [(ngModel)]="filters.priority" multiple>-->
+                <!--<mat-option *ngFor="let priority of priorities" [value]="priority.value">-->
+                  <!--{{priority.name}}-->
+                <!--</mat-option>-->
+              <!--</mat-select>-->
+            <!--</mat-form-field>-->
+          <!--</span>-->
+        <!--</span>-->
+    <!--</ng-template>-->
+
+    <!--<ng-template ngx-datatable-cell-template let-value="value">-->
+      <!--<app-priority-icon [priority]="getPriorityLabel(value)" fxLayout="row"-->
+                         <!--fxLayoutAlign="center center"></app-priority-icon>-->
+    <!--</ng-template>-->
+  <!--</ngx-datatable-column>-->
+
+  <ngx-datatable-column prop="view.name" [flexGrow]="3">
+    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+        <span class="datatable-header-cell-wrapper">
+          <span class="datatable-header-cell-label" layout="row" (click)="sort()">Description</span>
+          <span class="md-padding flexRow" layout="row" >
+            <mat-form-field floatLabel="never" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" [ngClass]="{'filtered': isFiltered('name')}">
+              <input matInput [(ngModel)]="filters.name" (change)="applyFilters()">
+              <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="resetFilter('name')">
+                <mat-icon>close</mat-icon>
+              </button>
+            </mat-form-field>
+          </span>
+        </span>
+    </ng-template>
+
+    <ng-template ngx-datatable-cell-template let-value="value">
+      <span [matTooltip]="value">{{value}}</span>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column prop="view.startDate" [flexGrow]="1" maxWidth="120">
+    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+        <span class="datatable-header-cell-wrapper">
+          <span class="datatable-header-cell-label" layout="row" (click)="sort()">Start Date</span>
+          <span class="md-padding flexRow" layout="row" >
+            <!-- <mat-form-field fxLayoutAlign="flex-start center" [ngClass]="{'filtered': isFiltered('startDate')}">
+              <input matInput [matDatepicker]="startdatePicker" (click)="startdatePicker.open()"
+                     (dateChange)="applyFilters()" [(ngModel)]="filters.startDate">
+              <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="resetFilter('startDate')">
+                <mat-icon>close</mat-icon>
+              </button>
+              <mat-datepicker #startdatePicker disabled="false"></mat-datepicker>
+            </mat-form-field> -->
+          </span>
+        </span>
+    </ng-template>
+
+    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+      <span
+        matTooltip="{{row.view.futureGoal ? 'Starting': 'Started'}} {{row.view.sinceStarted}}">{{value | date:'dd MMM yyyy'}}</span>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column prop="view.dueDate" [flexGrow]="1" maxWidth="120">
+    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+        <span class="datatable-header-cell-wrapper">
+          <span class="datatable-header-cell-label" layout="row" (click)="sort()">Due Date</span>
+          <span class="md-padding flexRow" layout="row" >
+            <!-- <mat-form-field fxLayoutAlign="flex-start center" [ngClass]="{'filtered': isFiltered('dueDate')}">
+              <input matInput [matDatepicker]="duedatePicker" (click)="duedatePicker.open()"
+                     (dateChange)="applyFilters()" [(ngModel)]="filters.dueDate">
+              <button mat-button matSuffix mat-icon-button aria-label="Clear" (click)="resetFilter('dueDate')">
+                <mat-icon>close</mat-icon>
+              </button>
+              <mat-datepicker #duedatePicker disabled="false"></mat-datepicker>
+            </mat-form-field> -->
+          </span>
+        </span>
+    </ng-template>
+
+    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+      <span matTooltip="Due {{row.view.daysRemaining}}">{{value | date:'dd MMM yyyy'}}</span>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column [resizeable]="false" prop="view.notes" [flexGrow]="1" maxWidth="80">
+    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+        <span class="datatable-header-cell-wrapper">
+          <span class="datatable-header-cell-label" layout="row" (click)="sort()">Notes</span>
+          <span class="md-padding flexRow" layout="row">
+            <mat-form-field floatLabel="never" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" [ngClass]="{'filtered': isFiltered('notes')}">
+              <mat-select (selectionChange)="applyFilters()" [(ngModel)]="filters.notes" multiple>
+                <mat-option *ngFor="let note of notes | async" [value]="note.value">
+                  {{note.name}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </span>
+        </span>
+    </ng-template>
+    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+      <div class="flexRow">
+        <mat-icon class="chat-bubble" [matTooltip]="row.view.notesPreview">chat_bubble_outline</mat-icon>
+        <span>&nbsp;{{value.length}}</span>
+      </div>
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column [resizeable]="false" prop="view.status" [flexGrow]="1" maxWidth="50">
+    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+        <span class="datatable-header-cell-wrapper">
+          <span class="datatable-header-cell-label" layout="row" (click)="sort()">Status</span>
+          <span class="md-padding flexRow" layout="row" >
+            <mat-form-field floatLabel="never" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;" [ngClass]="{'filtered': isFiltered('status')}">
+              <mat-select (selectionChange)="applyFilters()" [(ngModel)]="filters.status" multiple>
+                <mat-option *ngFor="let status of statuses | async" [value]="status.value">
+                  <app-goal-status [status]="status.value"></app-goal-status>
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </span>
+        </span>
+    </ng-template>
+    <ng-template ngx-datatable-cell-template let-value="value">
+      <app-goal-status [status]="value"></app-goal-status>
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>

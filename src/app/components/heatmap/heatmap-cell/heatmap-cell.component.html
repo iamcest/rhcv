@@ -1,0 +1,19 @@
+<svg:g [attr.transform]="transform" class="cell">
+  <defs *ngIf="gradient">
+    <svg:g ngx-charts-svg-linear-gradient
+           orientation="vertical"
+           [name]="gradientId"
+           [stops]="gradientStops"
+    />
+  </defs>
+  <svg:rect
+    [attr.fill]="gradient ? gradientUrl : fill"
+    [attr.rx]="rx"
+    [attr.width]="width"
+    [attr.height]="height"
+    class="cell rect"
+    [attr.id]="id"
+    style="cursor: pointer"
+    (click)="onClick($event)"
+  />
+</svg:g>

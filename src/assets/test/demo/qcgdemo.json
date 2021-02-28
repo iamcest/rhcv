@@ -1,0 +1,407 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Organization",
+        "id": "qcg-demo-1",
+        "identifier": [
+            {
+              "system": "urn:sitecode",
+              "value": "qcgdemo"
+            }
+          ],
+        "type": [
+          {
+            "coding": [
+              {
+                "system": "http://ns.electronichealth.net.au/id/hi/hpio/1.0",
+                "code": "8003627500000328",
+                "display": "Health Provider Identifier - Organisation"
+              }
+            ]
+          },
+          {
+            "coding": [
+              {
+                "system": "http://www.abs.gov.au/ausstats/abs@.nsf/mf/1292.0",
+                "code": "8401",
+                "display": "Hospitals (Except Psychiatric Hospitals)"
+              }
+            ]
+          }
+        ],
+        "name": "(Demo) Queensland CardioVascular Group Pty. Ltd. ",
+        "telecom": [
+          {
+            "system": "url",
+            "value": "https://qcg.com/"
+          }
+        ],
+        "address": [
+          {
+            "line": [
+              "Level 8, 457 Wickham Terrace"
+            ],
+            "city": "Spring Hill",
+            "state": "Queensland",
+            "postalCode": "4004",
+            "country": "Australia"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Organization/qcg-demo-1"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "amandab-qcg",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Benvenuti",
+            "given": [
+              "Amanda"
+            ],
+            "prefix": [
+                "DEMO"
+            ]
+          }
+        ],
+        "telecom": [
+          {
+            "system": "email",
+            "value": "qcgtester-amandab@cardihab.com",
+            "use": "work"
+          }
+        ],
+        "gender": "female"
+      },
+      "request": {
+        "method": "POST",
+        "url": "Practitioner/amandab-qcg"
+      }
+    },
+    
+    {
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "amandab-qcg-role",
+        "active": true,
+        "practitioner": {
+          "reference": "Practitioner/amandab-qcg"
+        },
+        "organization": {
+          "reference": "Organization/qcg-demo-1"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "PractitionerRole/amandab-qcg-role"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "biancak-qcg",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Kennedy",
+            "given": [
+              "Bianca"
+            ],
+            "prefix": [
+                "DEMO"
+            ]
+          }
+        ],
+        "telecom": [
+          {
+            "system": "email",
+            "value": "qcgtester-biancak@cardihab.com",
+            "use": "work"
+          }
+        ],
+        "gender": "female"
+      },
+      "request": {
+        "method": "POST",
+        "url": "Practitioner/biancak-qcg"
+      }
+    },
+    
+    {
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "biancak-qcg-role",
+        "active": true,
+        "practitioner": {
+          "reference": "Practitioner/biancak-qcg"
+        },
+        "organization": {
+          "reference": "Organization/qcg-demo-1"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "PractitionerRole/biancak-qcg-role"
+      }
+    }
+    
+
+    ,
+    {
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "carlas-qcg",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Smith",
+            "given": [
+              "Carla"
+            ],
+            "prefix": [
+                "DEMO"
+            ]
+          }
+        ],
+        "telecom": [
+          {
+            "system": "email",
+            "value": "qcgtester-carlas@cardihab.com",
+            "use": "work"
+          }
+        ],
+        "gender": "female"
+      },
+      "request": {
+        "method": "POST",
+        "url": "Practitioner/carlas-qcg"
+      }
+    },
+    
+    {
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "carlas-qcg-role",
+        "active": true,
+        "practitioner": {
+          "reference": "Practitioner/carlas-qcg"
+        },
+        "organization": {
+          "reference": "Organization/qcg-demo-1"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "PractitionerRole/carlas-qcg-role"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "georginnab-qcg",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Bonaventura",
+            "given": [
+              "Georginna"
+            ],
+            "prefix": [
+                "DEMO"
+            ]
+          }
+        ],
+        "telecom": [
+          {
+            "system": "email",
+            "value": "qcgtester-georginnab@cardihab.com",
+            "use": "work"
+          }
+        ],
+        "gender": "female"
+      },
+      "request": {
+        "method": "POST",
+        "url": "Practitioner/georginnab-qcg"
+      }
+    },
+    
+    {
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "georginnab-qcg-role",
+        "active": true,
+        "practitioner": {
+          "reference": "Practitioner/georginnab-qcg"
+        },
+        "organization": {
+          "reference": "Organization/qcg-demo-1"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "PractitionerRole/georginnab-qcg-role"
+      }
+    },
+
+
+    {
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "glynr-qcg",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Rangihuna",
+            "given": [
+              "Glyn"
+            ],
+            "prefix": [
+                "DEMO"
+            ]
+          }
+        ],
+        "telecom": [
+          {
+            "system": "email",
+            "value": "qcgtester-glynr@cardihab.com",
+            "use": "work"
+          }
+        ],
+        "gender": "male"
+      },
+      "request": {
+        "method": "POST",
+        "url": "Practitioner/glynr-qcg"
+      }
+    },    
+    {
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "glynr-qcg-role",
+        "active": true,
+        "practitioner": {
+          "reference": "Practitioner/glynr-qcg"
+        },
+        "organization": {
+          "reference": "Organization/qcg-demo-1"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "PractitionerRole/glynr-qcg-role"
+      }
+    },
+
+
+    {
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "jamesc-qcg",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Cameron",
+            "given": [
+              "James"
+            ],
+            "prefix": [
+                "DEMO"
+            ]
+          }
+        ],
+        "telecom": [
+          {
+            "system": "email",
+            "value": "qcgtester-jamesc@cardihab.com",
+            "use": "work"
+          }
+        ],
+        "gender": "male"
+      },
+      "request": {
+        "method": "POST",
+        "url": "Practitioner/jamesc-qcg"
+      }
+    },    
+    {
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "jamesc-qcg-role",
+        "active": true,
+        "practitioner": {
+          "reference": "Practitioner/jamesc-qcg"
+        },
+        "organization": {
+          "reference": "Organization/qcg-demo-1"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "PractitionerRole/jamesc-qcg-role"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "Practitioner",
+        "id": "jtr-epr-qcg",
+        "active": true,
+        "name": [
+          {
+            "use": "official",
+            "family": "Rivers",
+            "given": [
+              "John"
+            ],
+            "prefix": [
+                "DEMO"
+            ]
+          }
+        ],
+        "telecom": [
+          {
+            "system": "email",
+            "value": "qcgtester-jtr.epr@cardihab.com",
+            "use": "work"
+          }
+        ],
+        "gender": "male"
+      },
+      "request": {
+        "method": "POST",
+        "url": "Practitioner/jtr-epr-qcg"
+      }
+    },    
+    {
+      "resource": {
+        "resourceType": "PractitionerRole",
+        "id": "jtr-epr-qcg-role",
+        "active": true,
+        "practitioner": {
+          "reference": "Practitioner/jtr-epr-qcg"
+        },
+        "organization": {
+          "reference": "Organization/qcg-demo-1"
+        }
+      },
+      "request": {
+        "method": "PUT",
+        "url": "PractitionerRole/jtr-epr-qcg-role"
+      }
+    }
+  ]
+}

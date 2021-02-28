@@ -1,0 +1,52 @@
+.delivery-container {
+  height: 100%;
+  .stepper-container {
+    background-color: white;
+    height: 100%;
+    width: 270px;
+
+    mat-vertical-stepper {
+      height: calc(100% - 120px);
+      overflow-y: auto;
+    }
+
+    ::ng-deep mat-step-header {
+      display: flex;
+      flex-direction: row;
+
+      &[aria-selected="true"] {
+        background-color: #eee;
+      }
+
+      .mat-step-label {
+        flex-grow: 1 !important;
+        .mat-step-text-label {
+          overflow: visible;
+          white-space: normal;
+        }
+
+        .sublabel {
+          font-size: 12px;
+          color: #888;
+        }
+      }
+    }
+
+
+    button {
+      margin-top: 15px;
+    }
+    
+    ::ng-deep .mat-step:last-child {
+      display: none;
+    }
+  }
+}
+
+:host {
+  height: 100%;
+}
+
+
+
+

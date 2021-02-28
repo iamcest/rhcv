@@ -1,0 +1,54 @@
+::ng-deep .mat-grid-list {
+  margin-bottom: 16px;
+
+  .mat-grid-tile {
+    display: flex;
+    align-items: center;
+
+    &:hover {
+      .mat-button.goal-edit {
+        display: block;
+      }
+    }
+
+    .mat-figure {
+      align-items: center;
+      justify-content: left !important;
+
+      p {
+        margin-bottom: 0;
+      }
+    }
+
+    .mat-icon.goal-icon {
+      margin-left: 15px;
+    }
+  }
+}
+
+h3.mat-subheader {
+  background-color: #eee;
+  padding: 16px;
+}
+
+.mat-button.goal-edit {
+  display: none;
+  padding: 0;
+  min-width: 42px;
+  margin: 0 5px;
+  :not(:hover) {
+    color: #bbb;
+  }
+
+  // This is a hack to prevent edit button from staying focused
+  // after the modal has been closed
+  // see https://github.com/angular/material2/issues/8420
+  &.cdk-program-focused
+  {
+    ::ng-deep .mat-button-focus-overlay
+    {
+      opacity: 0;  // hide overlay
+    }
+  }
+}
+

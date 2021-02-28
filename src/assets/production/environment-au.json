@@ -1,0 +1,56 @@
+{
+    "Auth": {
+        "oauth": {
+            "domain": "auth-au-admin.platform.cardihab.com",
+            "scope": [ "phone", "email", "profile", "openid", "aws.cognito.signin.user.admin" ],
+            "responseType": "code"
+        }
+    },
+    "aws_app_analytics": "disable",
+    "aws_cloud_logic": "enable",
+    "aws_cloud_logic_custom": [
+        {
+            "id": "hpmffdxno7",
+            "name": "prod-user-management",
+            "description": "",
+            "endpoint": "https://user-management-api-au.platform.cardihab.com",
+            "region": "ap-southeast-2",
+            "paths": [
+                "/user",
+                "/user/{pool}",
+                "/user/{pool}/{username}",
+                "/tenancy",
+                "/zendesk/token"
+            ]
+        },
+        {
+            "id": "8t31dqvioh",
+            "name": "prod-user-authz",
+            "description": "",
+            "endpoint": "https://sites-api-au.platform.cardihab.com",
+            "region": "ap-southeast-2",
+            "paths": [
+                "/site/{sitecode}"
+            ]
+        }
+    ],
+    "aws_cognito_identity_pool_id": "ap-southeast-2:655c9783-656d-49eb-b27d-c764b6b45c4f",
+    "aws_cognito_region": "ap-southeast-2",
+    "aws_project_region": "ap-southeast-2",
+    "aws_sign_in_enabled": "enable",
+    "aws_user_pools": "enable",
+    "aws_user_pools_id": "ap-southeast-2_NTk1bmXZ3",
+    "aws_user_pools_web_client_id": "6ihicraicid2o9mo7j5kmj3es",
+    "api": {
+        "fhir":  "https://fhir-au.platform.cardihab.com",
+        "mobile": "https://mobile-api-au.platform.cardihab.com",
+        "user-management": "prod-user-management",
+        "registrations-websocket": "wss://user-management-ws-au.platform.cardihab.com",
+        "helpers": "https://helpers-au.platform.cardihab.com/helpers",
+        "reporting": "https://reporting-api-au.platform.cardihab.com",
+        "ontoserver": {
+          "url": "https://ontoserver-au.platform.cardihab.com/fhir",
+          "snomed": "http://snomed.info/sct/32506021000036107?fhir_vs=refset/929360041000036105"
+        }
+    }
+}

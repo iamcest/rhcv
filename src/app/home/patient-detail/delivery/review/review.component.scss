@@ -1,0 +1,72 @@
+.form-field-full-width {
+  width: 100%;
+}
+
+.week-review-footer-wrapper {
+  flex-shrink: 0;
+  bottom: 0;
+  width: 50em;
+  // align-self: center;
+  // margin: auto;
+  box-shadow: 0 0 2px 0 rgba(184, 178, 184, 1);
+
+  &.sticky {
+    position: relative;
+    box-shadow: none;
+  }
+
+  .week-review-footer {
+    background-color: white;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+    border: 1px ridge;
+  }
+}
+
+.reminder-form {
+  .button-group {
+    button.mat-primary:not(:last-child) {
+      margin-right: 10px;
+    }
+  }
+}
+
+.review-list {
+  .review-container {
+    padding: 0 15px 15px 15px;
+
+    mat-checkbox {
+      margin-left: 15px;
+
+      .heading {
+        padding-bottom: 5px;
+      }
+
+      ::ng-deep .mat-checkbox-inner-container {
+        margin-right: 0;
+      }
+    }
+  }
+}
+
+mat-list, mat-toolbar, .notes-component {
+  background: white;
+  border: 1px ridge;
+  margin: 10px 0;
+  max-width: 50em;
+
+  .mat-list-item {
+    height: auto;
+  }
+
+  form {
+    width: 100%;
+    padding: 0 15px 15px 30px;
+
+    mat-button-toggle-group {
+      margin-bottom: 20px;
+    }
+  }
+}
+

@@ -1,0 +1,16 @@
+<app-dialog-header title="Download Reports">
+</app-dialog-header>
+
+<div mat-dialog-content>
+    <div>
+        <em>Please note you are about to download sensitive and protected patient health data. Please ensure you handle the data in line with your organization's security and privacy policies.</em>
+        <br><br>
+        <div>
+            <mat-checkbox [(ngModel)]="acceptedTerms">Acknowledge</mat-checkbox>
+        </div>
+    </div>
+    <div *ngFor="let link of links | async" style="padding: 10px; width: 400px; display: flex; justify-content: space-between">
+        <label>{{link.file}}</label>
+        <a mat-raised-button target="_blank" [href]="link.url" [disabled]="!acceptedTerms">Download</a>
+    </div>
+</div>

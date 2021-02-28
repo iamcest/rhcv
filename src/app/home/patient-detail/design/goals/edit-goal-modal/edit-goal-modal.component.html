@@ -1,0 +1,86 @@
+
+<app-dialog-header title="[{{activity?.detail?.description || 'Plan'}}] {{goal?.description?.text || 'Edit goal'}}"></app-dialog-header>
+<form [formGroup]="goalEditorForm" (ngSubmit)="saveGoal()">
+
+  <mat-dialog-content style="min-width: 40em">
+    <div class="flexRow flexAlignSpaceBetween">
+      <mat-checkbox formControlName="isEnabled">
+        Enabled for this care plan
+      </mat-checkbox>
+      <mat-checkbox formControlName="repeats">
+        Recurring
+      </mat-checkbox>
+    </div>
+    <div formGroupName="description">
+      <mat-form-field style="width: 100%;">
+        <mat-label>Description</mat-label>
+        <input matInput formControlName="text">
+      </mat-form-field>
+    </div>
+
+    <div *ngIf="isRecurringGoal && isFlexiblePlan && data.carePlan.status === 'draft'" style="padding: 16px; margin: 8px auto" class="mat-elevation-z2">
+      <div class="flexRow flexAlignSpaceBetween">
+        <mat-form-field>
+          <mat-label>Repeat Every</mat-label>
+          <input matInput formControlName="period" type="number" min="1" step="1">
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>Frequency</mat-label>
+          <mat-select formControlName="frequency">
+            <mat-option value="D">Days</mat-option>
+            <mat-option value="W">Weeks</mat-option>
+            <mat-option value="M">Months</mat-option>
+          </mat-select>
+        </mat-form-field>
+        <mat-form-field>
+          <mat-label>At time of day</mat-label>
+          <input matInput type="time" formControlName="at">
+          <button mat-icon-button matSuffix 
+              matTooltip="Time of day only decides order of tasks for the patient app. Defaults to midday, local time, if not set">
+            <mat-icon>help_outline</mat-icon>
+          </button>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-hint>{{hintText}}</mat-hint>
+      </div>
+    </div>
+    <div *ngIf="data.adherence.record_type === 'exercise'" formGroupName="target" class="mat-elevation-z2" style="padding: 16px; margin: 8px auto">
+      <h4>Target</h4>
+      <div stlye="display: flex; justify-content: space-between">
+        <ng-container formGroupName="measure">
+          <ng-container formArrayName="coding">
+            <mat-form-field formGroupName="0">
+              <mat-label>Activity</mat-label>
+              <mat-select [formControl]="activityControl">
+                <mat-option value="walking">Walking</mat-option>
+                <mat-option value="running">Running</mat-option>
+                <mat-option value="cycling">Cycling</mat-option>
+                <mat-option value="swimming">Swimming</mat-option>
+                <mat-option value="gym">Gym</mat-option>
+              </mat-select>
+              <input type="hidden" formControlName="code">
+              <input type="hidden" formControlName="system">
+              <input type="hidden" formControlName="display">
+            </mat-form-field>
+          </ng-container>
+        </ng-container>
+        <ng-container formGroupName="detailRange">
+          <mat-form-field formGroupName="low">
+            <mat-label>Min</mat-label>
+            <input matInput formControlName="value" type="number" min="1" step="1">
+          </mat-form-field>
+          <mat-form-field formGroupName="high">
+            <mat-label>Max</mat-label>
+            <input matInput formControlName="value" type="number" min="1" step="1">
+          </mat-form-field>
+        </ng-container>
+
+      </div>
+    </div>
+  </mat-dialog-content>
+  <mat-dialog-actions align="end">
+    <button mat-button [mat-dialog-close]="false" type="reset">Cancel</button>
+    <button mat-button color="primary" type="submit">Save</button>
+  </mat-dialog-actions>
+</form>

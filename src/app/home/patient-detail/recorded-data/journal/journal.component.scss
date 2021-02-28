@@ -1,0 +1,22 @@
+::ng-deep ngx-datatable.journal-table {
+  height: 100%;
+
+  .datatable-row-wrapper {
+    .datatable-body-row {
+      &:hover {
+        background-color: #dfdfdf;
+      }
+
+      .datatable-row-group {
+        .datatable-body-cell {
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+  }
+}
+
+::ng-deep .datatable-header-cell .md-padding .mat-form-field .mat-form-field-label-wrapper {
+  overflow: visible;
+}

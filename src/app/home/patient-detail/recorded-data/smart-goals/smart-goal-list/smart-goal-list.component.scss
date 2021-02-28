@@ -1,0 +1,64 @@
+@import "../smart-goals.component";
+$cardihab-accent: orangered;
+
+::ng-deep ngx-datatable.smart-goals-table {
+  height: 100%;
+  width: 100%;
+
+  .mat-form-field {
+    .mat-form-field-wrapper {
+      width: 100%;
+    }
+  }
+
+  .mat-form-field.filtered {
+    .mat-form-field-wrapper {
+      .mat-form-field-underline {
+        background-color: $cardihab-accent;
+
+        .mat-form-field-ripple {
+          background-color: $cardihab-accent;
+        }
+      }
+
+      .mat-select-arrow {
+        color: $cardihab-accent;
+      }
+
+      .mat-button-wrapper {
+        color: $cardihab-accent;
+      }
+    }
+  }
+
+  .datatable-row-wrapper {
+    .datatable-body-row {
+      &:hover {
+        background-color: #dfdfdf;
+      }
+
+      .datatable-row-group {
+        .datatable-body-cell {
+          display: flex;
+          align-items: center;
+        }
+      }
+    }
+  }
+
+  .mat-icon {
+    display: block;
+
+    &.chat-bubble {
+      color: #666;
+    }
+  }
+}
+
+::ng-deep .mat-tooltip {
+  white-space: pre-line;
+}
+
+::ng-deep .datatable-header-cell .md-padding .mat-form-field .mat-form-field-label-wrapper {
+  overflow: visible;
+}

@@ -1,0 +1,10 @@
+<mat-chip-list>
+  <mat-chip *ngFor="let measure of availableCharts" 
+      [style.backgroundColor]="selectedMeasure.name === measure.name ? '#003c5b': ''"
+      [style.color]="selectedMeasure.name === measure.name ? 'white': 'black'"
+      (click)="onMeasurementChange(measure)">{{measure.name}}</mat-chip>
+</mat-chip-list>
+<mat-progress-bar *ngIf="loadingChart" mode="buffer"></mat-progress-bar>
+
+<div  style="height: 65vh; width: calc(90vw - 400px); margin:auto" id="line-chart-container"></div>
+

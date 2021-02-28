@@ -1,0 +1,276 @@
+{
+    "entry": [
+        {
+            "request": {
+              "method": "PUT",
+              "url": "MedicationRequest/mr-1"
+            },
+            "resource": {
+              "resourceType": "MedicationRequest",
+              "id": "mr-1",
+              "status": "active",
+              "medicationCodeableConcept": {
+                "coding": [
+                  {
+                    "code": "1125761000168104",
+                    "display": "Aspirin (Priceline Pharmacy) 100 mg enteric tablet",
+                    "system": "http://snomed.info/sct",
+                    "version": "http://snomed.info/sct/32506021000036107/version/20180731"
+                  }
+                ],
+                "text": "Aspirin (Priceline Pharmacy) 100 mg enteric tablet"
+              },
+              "subject": {
+                "reference": "Patient/cardihab-patient-12345"
+              },
+              "dosageInstruction": [
+                {
+                  "text": "1 tablet oral 1 time daily",
+                  "timing": {
+                    "repeat": {
+                      "frequency": 1,
+                      "period": 1,
+                      "periodUnit": "d"
+                    }
+                  },
+                  "route": {
+                    "coding": [
+                      {
+                        "code": "26643006",
+                        "display": "Oral route"
+                      }
+                    ],
+                    "text": "Oral route"
+                  },
+                  "doseQuantity": {
+                    "value": 1,
+                    "unit": "{tbl}"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "request": {
+              "method": "PUT",
+              "url": "MedicationStatement/ms-1234"
+            },
+            "resource": {
+              "resourceType": "MedicationStatement",
+              "id": "ms-1234",
+              "status": "active",
+              "category": [
+                {
+                  "coding": [
+                    {
+                      "system": "http://hl7.org/fhir/medication-statement-category",
+                      "code": "patientspecified"
+                    }
+                  ]
+                }
+              ],
+              "medicationCodeableConcept": {
+                "coding": [
+                  {
+                    "code": "1125761000168104",
+                    "display": "Aspirin (Priceline Pharmacy) 100 mg enteric tablet",
+                    "system": "http://snomed.info/sct",
+                    "version": "http://snomed.info/sct/32506021000036107/version/20180731"
+                  }
+                ],
+                "text": "Aspirin (Priceline Pharmacy) 100 mg enteric tablet"
+              },
+              "dateAsserted": "2018-08-03",
+              "informationSource": {
+                "reference": "Patient/cardihab-patient-12345"
+              },
+              "subject": {
+                "reference": "Patient/cardihab-patient-12345"
+              },
+              "taken": "y",
+              "dosage": [
+                {
+                  "text": "1 tablet oral 1 time daily",
+                  "timing": {
+                    "repeat": {
+                      "frequency": 1,
+                      "period": 1,
+                      "periodUnit": "d"
+                    }
+                  },
+                  "route": {
+                    "coding": [
+                      {
+                        "code": "26643006",
+                        "display": "Oral route"
+                      }
+                    ],
+                    "text": "Oral route"
+                  },
+                  "doseQuantity": {
+                    "value": 1,
+                    "unit": "{tbl}"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "request": {
+              "method": "PUT",
+              "url": "MedicationStatement/ms-5678"
+            },
+            "resource": {
+              "resourceType": "MedicationStatement",
+              "id": "ms-5678",
+              "status": "active",
+              "category": [
+                {
+                  "coding": [
+                    {
+                      "system": "http://hl7.org/fhir/medication-statement-category",
+                      "code": "patientspecified"
+                    }
+                  ]
+                }
+              ],
+              "medicationCodeableConcept": {
+                "coding": [
+                  {
+                    "code": "927635011000036105",
+                    "display": "Bicard 2.5 mg tablet, 28",
+                    "system": "http://snomed.info/sct",
+                    "version": "http://snomed.info/sct/32506021000036107/version/20180731"
+                  }
+                ],
+                "text": "Bicard 2.5 mg tablet, 28"
+              },
+              "dateAsserted": "2018-08-03",
+              "informationSource": {
+                "reference": "Patient/cardihab-patient-12345"
+              },
+              "subject": {
+                "reference": "Patient/cardihab-patient-12345"
+              },
+              "taken": "y",
+              "dosage": [
+                {
+                  "text": "1 tablet oral at 8am every day",
+                  "timing": {
+                    "repeat": {
+                      "frequency": 1,
+                      "period": 1,
+                      "periodUnit": "d",
+                      "timeOfDay": "08:00"
+                    }
+                  },
+                  "route": {
+                    "coding": [
+                      {
+                        "code": "26643006",
+                        "display": "Oral route"
+                      }
+                    ],
+                    "text": "Oral route"
+                  },
+                  "doseQuantity": {
+                    "value": 1,
+                    "unit": "{tbl}"
+                  }
+                },
+                {
+                  "text": "1 tablet oral at 6pm every day",
+                  "timing": {
+                    "repeat": {
+                      "frequency": 1,
+                      "period": 1,
+                      "periodUnit": "d",
+                      "timeOfDay": "18:00"
+                    }
+                  },
+                  "route": {
+                    "coding": [
+                      {
+                        "code": "26643006",
+                        "display": "Oral route"
+                      }
+                    ],
+                    "text": "Oral route"
+                  },
+                  "doseQuantity": {
+                    "value": 1,
+                    "unit": "{tbl}"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "request": {
+              "method": "PUT",
+              "url": "MedicationStatement/ms-91011"
+            },
+            "resource": {
+              "resourceType": "MedicationStatement",
+              "id": "ms-91011",
+              "status": "active",
+              "category": [
+                {
+                  "coding": [
+                    {
+                      "system": "http://hl7.org/fhir/medication-statement-category",
+                      "code": "patientspecified"
+                    }
+                  ]
+                }
+              ],
+              "medicationCodeableConcept": {
+                "coding": [
+                  {
+                    "code": "13703011000036101",
+                    "display": "Plavix 75 mg film-coated tablet, 28",
+                    "system": "http://snomed.info/sct",
+                    "version": "http://snomed.info/sct/32506021000036107/version/20180731"
+                  }
+                ],
+                "text": "Plavix 75 mg film-coated tablet, 28"
+              },
+              "dateAsserted": "2018-08-03",
+              "informationSource": {
+                "reference": "Patient/cardihab-patient-12345"
+              },
+              "subject": {
+                "reference": "Patient/cardihab-patient-12345"
+              },
+              "taken": "y",
+              "dosage": [
+                {
+                  "text": "1 tablet oral 1 time daily",
+                  "timing": {
+                    "repeat": {
+                      "frequency": 1,
+                      "period": 1,
+                      "periodUnit": "d"
+                    }
+                  },
+                  "route": {
+                    "coding": [
+                      {
+                        "code": "26643006",
+                        "display": "Oral route"
+                      }
+                    ],
+                    "text": "Oral route"
+                  },
+                  "doseQuantity": {
+                    "value": 1,
+                    "unit": "{tbl}"
+                  }
+                }
+              ]
+            }
+          }
+    ],
+	"resourceType": "Bundle",
+	"type": "transaction"
+}

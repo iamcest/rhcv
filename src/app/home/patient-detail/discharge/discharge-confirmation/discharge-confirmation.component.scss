@@ -1,0 +1,24 @@
+[mat-dialog-content] {
+    min-width: 50em;
+
+    h4 {
+        font-weight: bold;
+        padding-top: 1em;
+    }
+
+    .margin-left {
+        margin-left: 2em;
+    }
+    
+    .padding {
+        padding-top: 1em;
+    }
+}
+
+
+[mat-dialog-actions] {
+    mat-checkbox {
+        margin-right: 4em;
+    }
+}
+

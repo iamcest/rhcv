@@ -1,0 +1,38 @@
+[
+    {
+        "op": "add",
+        "path": "/member/-",
+        "value": {
+            "entity": {
+                "reference": "Practitioner/cardihab-practitioner-111213"
+            },
+            "period": {
+                "start": "2018-08-14T00:00:00+10:00"
+            }
+        }
+    },
+    {
+        "op": "add",
+        "path": "/member/-",
+        "value": {
+            "entity": {
+                "reference": "Practitioner/cardihab-practitioner-12345"
+            },
+            "period": {
+                "start": "2018-08-14T00:00:00+10:00"
+            }
+        }
+    },
+    {
+        "op": "add",
+        "path": "/member/-",
+        "value": {
+            "entity": {
+                "reference": "Practitioner/cardihab-practitioner-67890"
+            },
+            "period": {
+                "start": "2018-08-14T00:00:00+10:00"
+            }
+        }
+    }
+]

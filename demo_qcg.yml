@@ -1,0 +1,51 @@
+Parameters:
+  Environment:
+    Type: String
+    Description: Name of the environmentL cf, dev, staging, prod
+    Default: cf
+    AllowedValues:
+      - cf  # TODO: remove this
+      - dev
+      - staging
+      - prod
+  Tenant:
+    Type: String
+    Description: The region or company the stack is going to be used for. This will be reflected in the domain name for the services
+    AllowedValues:
+      - au
+      - us
+      - eu
+    Default: au
+
+Resources:
+  CarlasDemoUser:
+    Type: AWS::Cognito::UserPoolUser
+    Properties:
+      DesiredDeliveryMediums: 
+        - EMAIL
+      Username: 'qcgtester-carlas@cardihab.com'
+      UserAttributes: 
+        - 
+          Name: birthdate
+          Value: '1970-01-01'
+        -
+          Name: custom:fhir
+          Value: demo
+        - 
+          Name: given_name
+          Value: Carla
+        - 
+          Name: family_name
+          Value: Smith
+        - 
+          Name: email
+          Value: 'qcgtester-carlas@cardihab.com'
+        - 
+          Name: email_verified
+          Value: True
+        - 
+          Name: gender
+          Value: Female
+      UserPoolId: 
+        Fn::ImportValue:
+          !Sub "${Environment}:${Tenant}:auth:AdminUserPool"

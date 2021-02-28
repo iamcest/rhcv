@@ -1,0 +1,32 @@
+::ng-deep .mat-option.dense {
+    line-height: normal !important;
+}
+
+.title {
+    font-weight: 500;
+}
+
+.description {
+    font-style: italic;
+    font-size: smaller;
+}
+
+input.mat-input-element {
+    height: 21px
+}
+
+input[readonly] {
+    color: lightgray
+}
+
+
+::ng-deep .cancelled-appointment {
+    color: #ccc;
+    .fc-daygrid-event-dot, .fc-list-event-dot {
+        border-color: #ccc;
+    }
+}
+
+full-calendar {
+    max-height: 50vh;   
+}

@@ -1,0 +1,42 @@
+<app-dialog-header [title]="patient.name | fhirUsualName"></app-dialog-header>
+<form [formGroup]="approvalForm">
+  <mat-dialog-content style="min-width: 40em">
+    <mat-grid-list cols="4" rowHeight="3em">
+
+      <mat-grid-tile>Registation Date</mat-grid-tile>
+      <mat-grid-tile colspan="3">{{registrationDate | date:'medium'}}</mat-grid-tile>
+
+      <mat-grid-tile>Gender</mat-grid-tile>
+      <mat-grid-tile colspan="3">{{patient.gender | titlecase}}</mat-grid-tile>
+
+      <mat-grid-tile>Birth Date</mat-grid-tile>
+      <mat-grid-tile colspan="3">{{patient.birthDate | date:'d-MMM-y'}}</mat-grid-tile>
+
+      <mat-grid-tile>Phone Number</mat-grid-tile>
+      <mat-grid-tile colspan="3">{{mobilePhone?.value}}</mat-grid-tile>
+
+      <ng-container *ngIf="email">
+        <mat-grid-tile>Email</mat-grid-tile>
+        <mat-grid-tile colspan="3">{{email?.value}}</mat-grid-tile>
+      </ng-container>
+
+      <mat-grid-tile>Site</mat-grid-tile>
+      <mat-grid-tile colspan="3" style="white-space: nowrap">{{(site | async)?.name}}</mat-grid-tile>
+
+      <mat-grid-tile>Care Plan</mat-grid-tile>
+      <mat-grid-tile colspan="3" style="white-space: nowrap">
+        <mat-form-field>
+          <mat-select formControlName="selected">
+            <mat-option *ngFor="let plan of plans$ | async" [value]="plan">{{plan.resource.title}}</mat-option>
+          </mat-select>
+        </mat-form-field>
+      </mat-grid-tile>
+
+    </mat-grid-list>
+  </mat-dialog-content>
+  <mat-dialog-actions class="flexAlignEnd">
+    <button mat-button [mat-dialog-close]="false" cdkFocusInitial>Cancel</button>
+    <button mat-button color="warn" (click)="setApproval(false)">Reject</button>
+    <button mat-button [disabled]="!approvalForm.valid" color="primary" (click)="setApproval(true)">Approve</button>
+  </mat-dialog-actions>
+</form>

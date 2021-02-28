@@ -1,0 +1,47 @@
+<div class="home-component flexColumn" style="width:100%; height: 100%; overflow-y: auto">
+  <mat-toolbar color="primary">
+    <!-- <span>
+      <a mat-button routerLink="/{{regionConfig.region}}/home/patients" routerLinkActive="hidden">
+        <i class="material-icons">navigate_before</i>
+        Back to Patient List
+      </a>
+    </span> -->
+
+    <nav mat-tab-nav-bar backgroundColor="primary" color="white">
+      <a mat-tab-link routerLink="/{{regionConfig.region}}/home/patients"> Patients </a>
+      <a mat-tab-link routerLink="/{{regionConfig.region}}/home/reports"> Reports </a>
+    </nav>
+
+    <span style="flex-grow: 1; text-align: center">
+      <img src="assets/CardihabLogo.png" height="40px" class="cardihab-logo">
+    </span>
+
+    <button mat-button [matMenuTriggerFor]="menu">
+      <img matListAvatar src="https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp">
+      <p class="username">{{practitioner?.name | fhirUsualName}}</p>
+    </button>
+
+    <mat-menu #menu="matMenu" yPosition="below" xPosition="before" [overlapTrigger]="false">
+      <button type="button" mat-menu-item (click)="openProfile()">
+        <i class="material-icons">account_box</i>
+        Profile
+      </button>
+
+      <button type="button" mat-menu-item (click)="changePassword()">
+        <i class="material-icons">vpn_key</i>
+        Change password
+      </button>
+
+      <button type="button" mat-menu-item (click)="logout()">
+        <i class="material-icons">exit_to_app</i>
+        Logout
+      </button>
+    </mat-menu>
+
+    <button mat-icon-button class="help-button" (click)="openHelp()" title="Cardihab Help Centre" [disabled]="!token">
+      <mat-icon>help_outline</mat-icon>
+    </button>
+
+  </mat-toolbar>
+  <router-outlet></router-outlet>
+</div>

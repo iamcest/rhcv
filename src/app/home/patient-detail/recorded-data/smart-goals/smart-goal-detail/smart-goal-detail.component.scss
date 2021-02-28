@@ -1,0 +1,20 @@
+@import "../smart-goals.component";
+
+h1.heading {
+  app-priority-icon {
+    .mat-icon {
+      vertical-align: middle;
+      font-size: 28px;
+    }
+  }
+}
+
+.start-end-dates {
+  h4 {
+    width: 50%;
+  }
+}
+
+.notes-container {
+  margin-top: 20px;
+}

@@ -1,0 +1,84 @@
+<div class="delivery-container flexColumn">
+  <div class="flexRow" style="max-height: 100%;" *ngIf="deliveryActivities$ | async; let deliveryActivities">
+    <div class="stepper-container" style="height: 100%;">
+      <div style="height:100%">
+        <mat-vertical-stepper #deliveryStepper [selectedIndex]="selectedReview"
+          (selectionChange)="onStepperSelectionChange($event)">
+          <ng-container *ngFor="let activityX of deliveryActivities; let i = index">
+            <mat-step [completed]="activityX.activity.detail.status === 'completed'">
+              <ng-template matStepLabel>
+                {{activityX.activity.detail.description}}
+                <div class="sublabel">
+                  {{activityX.appointment?.start | date:'d-MMM-y h:mm a'}}
+                </div>
+              </ng-template>
+              <div class="flexRow flexAlignCenter" *ngIf="!isProgressReport">
+                <button mat-button color="accent"
+                  *ngIf="(activityX.activity?.detail?.status === undefined || activityX.activity?.detail?.status === 'accepted')"
+                  (click)="startReview()">
+                  Start {{activityX.activity['questionnaireGoal'] ? 'Questionnaire' : 'Review'}}
+                </button>
+                <button mat-button color="accent"
+                  *ngIf="activityX.activity?.detail?.status === 'in-progress' || editingReview"
+                  (click)="completeReview()">
+                  Complete {{activityX.activity['questionnaireGoal'] ? 'Questionnaire' : 'Review'}}
+                </button>
+                <button mat-raised-button color="primary"
+                  *ngIf="activityX.activity?.detail?.status === 'completed' && carePlan.status === 'active' && !editingReview"
+                  (click)="editReview()">
+                  Edit Review
+                </button>
+              </div>
+            </mat-step>
+          </ng-container>
+          <mat-step [completed]="false">
+            <ng-template matStepLabel>
+              {{(carePlan?.status === 'draft' || carePlan?.status === 'active')? "Progress Report" : "Discharge Report"}}
+            </ng-template>
+          </mat-step>
+          <ng-template matStepperIcon="edit">
+            <mat-icon>done</mat-icon>
+          </ng-template>
+          <ng-template matStepperIcon="report">
+            <mat-icon>table_chart</mat-icon>
+          </ng-template>
+        </mat-vertical-stepper>
+        <ng-template class="flexRow" [ngIf]="carePlan?.status === 'active' || carePlan?.status === 'completed'">
+          <button mat-button color="primary" (click)= "progressReport()" >
+            <mat-icon>bar_chart</mat-icon>{{(carePlan?.status === 'draft' || carePlan?.status === 'active') ? "Progress Report" : "Discharge Report" }}
+          </button>
+        </ng-template>
+        <ng-template class="flexRow" [ngIf]="carePlan?.status === 'active'">
+          <button mat-button color="primary" (click)="dischargePatient()" [disabled]="!canDischarge" style="color:red;">
+            <mat-icon>exit_to_app</mat-icon>
+            Discharge Patient
+          </button>
+        </ng-template>
+      </div>
+    </div>
+
+    <app-review class="flexColumn" *ngIf="selectedActivity && !isProgressReport"
+      style="width:100%; height: 100%; overflow-y: auto" [patient]="patient" [carePlan]="carePlan"
+      [activity]="selectedActivity" [activities]="deliveryActivities" [reviewStatus$]="reviewStatus$">
+    </app-review>
+    <ng-template class="flexColumn" [ngIf]="isProgressReport">
+      <mat-card class="mat-elevation-z2" style="margin: 1em;width: 100%;height: 85%;overflow-y:auto;">
+        <mat-card-header class="card-container">
+          <mat-card-title class="card-container-left">{{(carePlan?.status === 'draft' || carePlan?.status === 'active') ? "Progress Report" : "Discharge Report"}}
+          </mat-card-title>
+          <mat-card-title class="card-container-right">
+            <button mat-icon-button fxLayoutAlign="right" (click)="download()">
+              <mat-icon>save_alt</mat-icon>Download
+            </button>
+          </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <app-discharge-report [carePlan]="carePlan" [isProgress]="carePlan?.status === 'draft' || carePlan?.status === 'active'"
+            style="zoom: 0.5"></app-discharge-report>
+        </mat-card-content>
+      </mat-card>
+    </ng-template>
+  </div>
+
+  <app-footer></app-footer>
+</div>

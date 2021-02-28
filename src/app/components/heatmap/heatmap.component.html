@@ -1,0 +1,46 @@
+<ngx-charts-chart
+  [view]="[width, height]"
+  [showLegend]="legend"
+  [animations]="animations"
+  [legendOptions]="legendOptions"
+  (legendLabelClick)="onClick($event)">
+  <svg:g [attr.transform]="transform" class="heat-map chart">
+    <svg:g ngx-charts-x-axis
+           *ngIf="xAxis"
+           [xScale]="xScale"
+           [dims]="xAxisDims"
+           [showLabel]="showXAxisLabel"
+           [labelText]="xAxisLabel"
+           [tickFormatting]="xAxisTickFormatting"
+           [ticks]="xAxisTicks"
+           (dimensionsChanged)="updateXAxisHeight($event)">
+    </svg:g>
+    <svg:g ngx-charts-y-axis
+           [attr.transform]="verticalOffsetTransform"
+           *ngIf="yAxis"
+           [yScale]="yScale"
+           [dims]="dims"
+           [showLabel]="showYAxisLabel"
+           [labelText]="yAxisLabel"
+           [tickFormatting]="yAxisTickFormatting"
+           [ticks]="yAxisTicks"
+           (dimensionsChanged)="updateYAxisWidth($event)">
+    </svg:g>
+    <svg:g app-heatmap-cell-series
+           [attr.transform]="verticalOffsetTransform"
+           [xScale]="xScale"
+           [yScale]="yScale"
+           [colors]="colors"
+           [data]="results"
+           [gradient]="gradient"
+           [rx]="roundedCorners"
+           [animations]="animations"
+           [tooltipDisabled]="tooltipDisabled"
+           [tooltipTemplate]="tooltipTemplate"
+           [tooltipText]="tooltipText"
+           [min]="0"
+           (select)="onClick($event)"
+           [today$]="today$"
+    />
+  </svg:g>
+</ngx-charts-chart>

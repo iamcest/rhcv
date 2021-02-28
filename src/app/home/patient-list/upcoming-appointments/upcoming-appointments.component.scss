@@ -1,0 +1,48 @@
+@import '../../../../styles';
+
+.mat-card {
+  margin: 0 4px 10px;
+
+  .mat-card-content {
+    margin-top: 20px;
+
+    .mat-progress-bar {
+      margin-bottom: 5px;
+    }
+
+    .buttons {
+      margin-bottom: 15px;
+    }
+
+    .more-buttons {
+      margin-top: 10px;
+    }
+
+    .current-date {
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .no-appointments {
+      text-align: center;
+    }
+
+    .mat-list-item.clickable {
+      &:nth-child(2n+1) {
+        background-color: $tableAlternateRowColour;
+      }
+
+      &:hover {
+        cursor: pointer;
+        background-color: $tableRowHoverCover;
+        transition: background .3s linear;
+      }
+
+      .appointment-icon {
+        width: 18px;
+        font-weight: bold;
+        font-size: 10px;
+      }
+    }
+  }
+}

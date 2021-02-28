@@ -1,0 +1,105 @@
+<button mat-button (click)="download()">
+  <mat-icon>save_alt</mat-icon>Export to CSV File
+</button>
+<ngx-datatable style="height: 75vh"
+  #myTable
+    class='material expandable journal-table'
+    [rows]="rows"
+    [columnMode]="'force'"
+    [headerHeight]="85"
+    [footerHeight]="30"
+    [rowHeight]="'100%'"
+    [offset]="page.offset"
+    [limit]="page.limit"
+    [count]="page.total"
+    [scrollbarV]="true"
+    [virtualization]="false"
+    [externalPaging]="true"
+    [loadingIndicator]="loading"
+    (page)='setPage($event)'
+    (sort)='onSort($event)'>
+
+  <ngx-datatable-column prop="code">
+    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+      <span class="datatable-header-cell-wrapper">
+        <span class="datatable-header-cell-label" layout="row">Event</span>
+        <span class="md-padding flexRow" layout="row">
+          <mat-form-field floatLabel="never" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;">
+            <input matInput [(ngModel)]="options['code:text']" placeholder="Search event" (change)="filter()">
+            <button mat-button *ngIf="options['code:text']" matSuffix mat-icon-button aria-label="Clear"
+                    (click)="filter(['code:text'])">
+              <mat-icon>close</mat-icon>
+            </button>
+          </mat-form-field>
+        </span>
+      </span>
+    </ng-template>
+    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+      {{row | fhirCoding}} 
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="Value">
+    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+      {{row | observationValue}}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="Type" prop="resourceType" maxWidth="150">
+    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+        <span class="datatable-header-cell-wrapper">
+          <span class="datatable-header-cell-label" layout="row" (click)="sort()">Type</span>
+          <span class="md-padding flexRow" layout="row">
+            <mat-form-field floatLabel="never" style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;">
+              <mat-select [ngModel]="category" [disabled]="!isFilteredByCategory"
+                          (selectionChange)="filterByCategory($event)" multiple>
+                <mat-option *ngFor="let entry of journalEntryTypes | async" [value]="entry.code">
+                  {{entry.display}}
+                </mat-option>
+              </mat-select>
+            </mat-form-field>
+          </span>
+        </span>
+    </ng-template>
+    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+      {{getCategories(row.category)}}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column prop="effectiveDateTime">
+    <ng-template let-column="column" let-sort="sortFn" ngx-datatable-header-template>
+      <span class="datatable-header-cell-wrapper">
+        <span class="datatable-header-cell-label" layout="row" (click)="sort()">Date/Time</span>
+        <span class="md-padding flexRow" layout="row">
+          <mat-form-field floatLabel="never" style="flex: 1 1 45%; box-sizing: border-box; max-width: 45%;" style="margin-right: 5px">
+            <input matInput [matDatepicker]="fromPicker" placeholder="From" [(ngModel)]="options['dateFrom']"
+                   (dateChange)="dateChange('dateFrom', $event.value)" disabled>
+            <mat-datepicker-toggle matSuffix [for]="fromPicker"></mat-datepicker-toggle>
+            <mat-datepicker #fromPicker disabled="false"></mat-datepicker>
+          </mat-form-field>
+          <mat-form-field floatLabel="never" style="flex: 1 1 45%; box-sizing: border-box; max-width: 45%;">
+            <input matInput [matDatepicker]="toPicker" placeholder="To" [(ngModel)]="options['dateTo']"
+                   (dateChange)="dateChange('dateTo', $event.value)" disabled>
+            <mat-datepicker-toggle matSuffix [for]="toPicker"></mat-datepicker-toggle>
+            <mat-datepicker #toPicker disabled="false"></mat-datepicker>
+          </mat-form-field>
+          <div floatLabel="never" style="flex: 1 1 10%; box-sizing: border-box; max-width: 10%;">
+            <button mat-button *ngIf="options.dateFrom || options.dateTo" matSuffix mat-icon-button aria-label="Clear"
+                    (click)="filter(['dateFrom', 'dateTo'])">
+              <mat-icon>close</mat-icon>
+            </button>
+          </div>
+        </span>
+      </span>
+    </ng-template>
+    <ng-template ngx-datatable-cell-template let-value="value">
+      {{value | date:'dd MMM yyyy h:mm a'}}
+    </ng-template>
+  </ngx-datatable-column>
+
+  <ngx-datatable-column name="Deleted" maxWidth="180">
+    <ng-template ngx-datatable-cell-template let-value="value" let-row="row">
+      <span *ngIf="dateTimeDeleted(row)">{{dateTimeDeleted(row).valueDateTime | date:'dd MMM yyyy h:mm a'}}</span>
+    </ng-template>
+  </ngx-datatable-column>
+</ngx-datatable>

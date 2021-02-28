@@ -1,0 +1,12 @@
+<form [formGroup]="questionnaireForm">
+  <mat-list dense>
+    <app-question *ngFor="let question of questionnaire?.item"
+      [questionnaire]="questionnaire"
+      [question]="question"
+      [context]="context"
+      [disabled]="editable !== true"
+      [group]="questionnaireForm"
+      [answer]="currentAnswer">
+    </app-question>
+  </mat-list>
+</form>

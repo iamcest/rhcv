@@ -1,0 +1,160 @@
+<mat-toolbar>
+  <a mat-button (click)="goBack()">
+    <i class="material-icons">navigate_before</i>
+    Back to List
+  </a>
+</mat-toolbar>
+
+<ng-template #times let-control="control" let-group="group">
+  <div class="take-time-wrapper flexColumn flexAlignSpaceBetween" [formGroup]="group">
+    <div class="take-wrapper flexRow">
+      <mat-form-field style="flex: 1 1 35%; box-sizing: border-box; max-width: 35%;">
+        <input matInput type="number" placeholder="Take" formControlName="amount">
+        <mat-error>
+          Required
+        </mat-error>
+      </mat-form-field>
+      <mat-form-field style="flex: 1 1 60%; box-sizing: border-box; max-width: 60%;">
+        <input matInput type="text" placeholder="Unit" formControlName="unit" >
+      </mat-form-field>
+    </div>
+    <mat-form-field>
+      <input matInput type="time" placeholder="Time" formControlName="time">
+      <mat-error>
+        Time is required and should be unique
+      </mat-error>
+    </mat-form-field>
+  </div>
+</ng-template>
+
+<div class="medicine-container">
+  <form class="prescription-form" [formGroup]="prescriptionForm">
+    <mat-accordion [multi]="true">
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h2 class="panel-title">Medication Details</h2>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <ng-template matExpansionPanelContent>
+          <div class="flexRow">
+            <mat-form-field style="flex: 1 1 100%; box-sizing: border-box; max-width: 100%;">
+              <input matInput type="text" placeholder="Medication" formControlName="name" autocomplete="off"
+                [matAutocomplete]="auto" (keyup)="searchMedication(prescriptionForm.get('name').value)">
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let option of medicationSearchResult$ | async" [value]="option.display"
+                  (onSelectionChange)="selectMedication(option)">
+                  {{option.display}}
+                </mat-option>
+              </mat-autocomplete>
+              <mat-error *ngIf="prescriptionForm.controls['name'].errors?.required">
+                Please select a medicine
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="flexRow flexAlignSpaceBetween">
+            <mat-form-field style="flex: 1 1 48%; box-sizing: border-box; max-width: 48%;">
+              <input matInput [matDatepicker]="startPicker" placeholder="Start Date" formControlName="startDate">
+              <mat-datepicker-toggle matSuffix [for]="startPicker"
+                [disabled]="prescriptionForm.get('startDate').disabled">
+              </mat-datepicker-toggle>
+              <mat-datepicker #startPicker disabled="false"></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field style="flex: 1 1 48%; box-sizing: border-box; max-width: 48%;">
+              <input matInput [matDatepicker]="endPicker" placeholder="End Date" formControlName="endDate">
+              <mat-datepicker-toggle matSuffix [for]="endPicker" [disabled]="prescriptionForm.get('endDate').disabled">
+              </mat-datepicker-toggle>
+              <mat-datepicker #endPicker disabled="false"></mat-datepicker>
+            </mat-form-field>
+          </div>
+          <div class="flexRow flexAlignSpaceBetween">
+            <mat-form-field style="flex: 1 1 48%; box-sizing: border-box; max-width: 48%;">
+              <mat-select placeholder="Frequency" formControlName="frequency">
+                <mat-option *ngFor="let freq of frequencies" [value]="freq.value"  >{{freq.label}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="prescriptionForm.controls['frequency'].errors?.required">
+                Frequency is required
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field style="flex: 1 1 48%; box-sizing: border-box; max-width: 48%;"
+              *ngIf="prescriptionForm.get('frequency').value === 'days'">
+              <mat-select placeholder="Which days?" formControlName="daysOfWeek" multiple>
+                <mat-option *ngFor="let day of daysOfWeek" [value]="day.value">{{day.label}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="prescriptionForm.controls['daysOfWeek'].errors?.required">
+                Weekdays are required
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="flexRow flexAlignSpaceBetween"
+            *ngIf="prescriptionForm.get('frequency').value === 'custom' || prescriptionForm.get('frequency').value === 'days'">
+            <mat-form-field style="flex: 1 1 48%; box-sizing: border-box; max-width: 48%;"
+              *ngIf="prescriptionForm.get('frequency').value === 'custom'">
+              <input matInput type="number" placeholder="Interval" formControlName="interval">
+              <mat-error *ngIf="prescriptionForm.controls['interval'].errors?.required">
+                Interval is required
+              </mat-error>
+              <mat-error *ngIf="prescriptionForm.controls['interval'].errors?.min">
+                Interval must be minimum 2
+              </mat-error>
+            </mat-form-field>
+            <mat-form-field style="flex: 1 1 48%; box-sizing: border-box; max-width: 48%;"
+              *ngIf="prescriptionForm.get('frequency').value === 'custom'">
+              <mat-select placeholder="Period" formControlName="period">
+                <mat-option *ngFor="let per of period" [value]="per.value">{{per.label}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="prescriptionForm.controls['period'].errors?.required">
+                Period is required
+              </mat-error>
+            </mat-form-field>
+          </div>
+          <div class="flexRow flexAlignSpaceBetween" *ngIf="prescriptionForm.get('frequency').value !== 'asneeded'">
+            <mat-form-field style="flex: 1 1 48%; box-sizing: border-box; max-width: 48%;">
+              <mat-select placeholder="How many times?" formControlName="howManyTimes">
+                <mat-option *ngFor="let hwtimes of howManyTimes " [value]="hwtimes.value">{{hwtimes.label}}</mat-option>
+              </mat-select>
+              <mat-error *ngIf="prescriptionForm.controls['howManyTimes'].errors?.required">
+                How Many Times are required
+              </mat-error>
+            </mat-form-field>
+          </div>
+        </ng-template>
+      </mat-expansion-panel>
+      <mat-expansion-panel [expanded]="true">
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <h2 class="panel-title">Schedule</h2>
+          </mat-panel-title>
+          <mat-action-row *ngIf="allowEditing && selectedMedicine && selectedMedicine.request.status !== 'cancelled'">
+          </mat-action-row>
+        </mat-expansion-panel-header>
+        <ng-template matExpansionPanelContent>
+          <div class="field-wrapper flexRowWrap flexAlignFlexStart" formArrayName="times">
+            <div [formGroupName]="i" *ngFor="let control of timesArray.controls; let i = index">
+              <ng-container *ngTemplateOutlet="times; context: {group: timesArray.controls[i], control: i}">
+              </ng-container>
+            </div>
+          </div>
+          <mat-error *ngIf="timesArray?.length === 0">
+            Please add at least one dosage instruction for this medication
+          </mat-error>
+          <mat-error *ngIf="isAlreadyMedicine">
+            Ensure that dosage time is unique for the same medication
+          </mat-error>
+        </ng-template>
+      </mat-expansion-panel>
+    </mat-accordion>
+    <mat-action-row *ngIf="allowEditing && selectedMedicine && selectedMedicine.request.status !== 'cancelled'">
+      <button mat-button type="button" *ngIf="!isNewMedicine" (click)="cancelMedication()">
+        <mat-icon>delete</mat-icon>
+        Cease
+      </button>
+      <button mat-button type="submit" color="primary" [disabled]="prescriptionForm.invalid || isAlreadyMedicine"
+        (click)="saveChanges($event)">
+        <mat-icon>done</mat-icon>
+        <span>Save</span>
+      </button>
+    </mat-action-row>
+  </form>
+</div>
